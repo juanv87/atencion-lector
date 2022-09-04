@@ -1,0 +1,20 @@
+@import "../../../styles/Colors.scss";
+@import "../../../styles/Sizes.scss";
+.header {
+  background-color: $blue;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  &__logo {
+    height: 50px;
+    width: 50px;
+    background-color: #fff;
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    max-width: $widthContainer;
+    margin: 0 auto;
+  }
+}

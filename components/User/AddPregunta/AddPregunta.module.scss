@@ -1,0 +1,63 @@
+@import "../../../styles/Colors.scss";
+@import "../../../styles/Fonts.scss";
+.addPregunta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #f5f5f5;
+
+    border-radius: 10px;
+    background-color: $primary-color;
+    border: 1px solid #000;
+    padding: 10px 20px;
+    box-shadow: $cards-shadow;
+    max-width: 600px;
+
+    textarea {
+      width: 100%;
+      height: 140px;
+      border: none;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+      margin-top: 10px;
+      font-size: 1.5rem;
+      font-family: $secondary-font;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+    &__title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    &__button {
+      width: 100%;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 20px;
+      background-color: $blue;
+      box-shadow: 5px 5px 0 $primary-color;
+      color: #fff;
+      font-family: $primary-font;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      &:disabled {
+        background-color: #000;
+        cursor: default;
+      }
+      &:hover {
+      }
+    }
+  }
+}

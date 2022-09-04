@@ -1,0 +1,26 @@
+.loginWithGoogle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 100%;
+  border-radius: 5px;
+  margin-left: auto;
+  cursor: pointer;
+  background-color: #4286f49b;
+  padding: 5px 0;
+
+  &__icon {
+    width: 25px;
+    background: none;
+  }
+
+  &__button {
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+}

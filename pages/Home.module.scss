@@ -1,0 +1,53 @@
+@import "../styles/Sizes.scss";
+@import "../styles/Colors.scss";
+@import "../styles/BreakPoints.scss";
+
+.homeContainer {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  min-height: 100vh;
+}
+.homeContainer__left {
+  grid-column: span 4;
+  background-color: $gray-light;
+  border-right: 1px solid rgba(0, 0, 0, 0.323);
+}
+.homeContainer__right {
+  grid-column: span 4;
+  background-color: $gray-light;
+  border-left: 1px solid rgba(0, 0, 0, 0.323);
+}
+.homeContainer__main {
+  grid-column: span 4;
+  background-color: #f5f5f5;
+  padding: 0 20px;
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .homeContainer__left {
+    grid-column: span 4;
+    border-right: none;
+  }
+  .homeContainer__right {
+    grid-column: span 0;
+    border-left: none;
+  }
+  .homeContainer__main {
+    grid-column: span 8;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .homeContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .homeContainer__left {
+    grid-column: span 3;
+  }
+  .homeContainer__right {
+    grid-column: span 3;
+  }
+  .homeContainer__main {
+    grid-column: span 3;
+  }
+}

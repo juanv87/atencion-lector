@@ -1,0 +1,29 @@
+@import "../../../styles/Colors.scss";
+@import "../../../styles/Fonts.scss";
+
+.tarjetaPregunta {
+  border-radius: 10px;
+  background-color: $primary-color;
+  border: 1px solid #000;
+  padding: 10px 30px;
+  box-shadow: $cards-shadow;
+  max-width: 600px;
+
+  &__title {
+    font-family: $secondary-font;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    text-align: center;
+    color: $blue;
+    &::selection {
+      background-color: $secondary-color;
+      color: #000;
+    }
+  }
+  &__cuerpo {
+    font-family: $primary-font;
+    font-weight: 400;
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+}
