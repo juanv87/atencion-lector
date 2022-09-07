@@ -9,6 +9,7 @@ import {
   setPreguntas,
   setRespuestas,
   updatePregunta,
+  addNewRespuesta,
   updatingNewPregunta,
 } from "./entriesSlice";
 
@@ -22,10 +23,9 @@ export const startNewPregunta = ({ titlePregunta }) => {
     const newPregunta = {
       id: newDoc.id,
       titulo: titlePregunta,
-      fecha: "",
       autor: "",
-      respuestas: "",
       createdAt: new Date().getTime(),
+      respuestas: [],
     };
     await setDoc(newDoc, newPregunta);
 
@@ -34,15 +34,29 @@ export const startNewPregunta = ({ titlePregunta }) => {
   };
 };
 
-export const startNewRespuesta = ({ titleRespuesta, id }) => {
+export const startNewRespuesta = (
+  titleRespuesta,
+  idPregunta,
+  tituloPregunta
+) => {
   return async (dispatch, getState) => {
     dispatch(updatingNewPregunta());
     const { uid } = getState().auth;
     const newDoc = doc(
-      collection(FirebaseDB, `${uid}/entradas/preguntas/${id}/respuestas`)
+      collection(
+        FirebaseDB,
+        `${uid}/entradas/preguntas/${idPregunta}/respuestas`
+      )
     );
-    await setDoc(newDoc, { titleRespuesta });
-    dispatch(updatePregunta(titleRespuesta));
+    const newRespuesta = {
+      id: newDoc.id,
+      idPregunta,
+      titulo: titleRespuesta,
+      autor: uid,
+      createdAt: new Date().getTime(),
+    };
+    await setDoc(newDoc, newRespuesta);
+    dispatch(addNewRespuesta({ idPregunta, newRespuesta }));
   };
 };
 
@@ -56,11 +70,12 @@ export const startLoadingPreguntas = (id) => {
 };
 
 export const startLoadingRespuestas = (id) => {
-  console.log("startLoadingRespuestas", id);
+  // console.log("startLoadingRespuestas", id);
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
     if (!uid) throw new Error("No hay usuario logueado");
-    const respuestas = await loadRespuestasById({ uid, id });
-    dispatch(setRespuestas(respuestas));
+    const respuestas = await loadRespuestasById(uid, id);
+    // console.log("startLoadingRespuestas", respuestas);
+    dispatch(setRespuestas({ respuestas, idPregunta: id }));
   };
 };

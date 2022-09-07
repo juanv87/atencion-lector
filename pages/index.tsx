@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { ListaPreguntas } from "../components/Elements/ListaPreguntas";
+import { ListaPreguntas } from "../components/Elements/ListaPreguntas/ListaPreguntas";
 import { Header } from "../components/ui/Header";
-import { AddPregunta } from "../components/User/AddPregunta";
+import { AddPregunta } from "../components/User/AddPregunta/AddPregunta";
 import { useAppSelector } from "../hooks";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import styles from "./Home.module.scss";

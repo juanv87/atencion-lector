@@ -2,7 +2,7 @@ import React from "react";
 import { useAppSelector } from "../../../hooks";
 import { IPregunta } from "../../../types/IPregunta";
 import { listaPreguntasMock } from "../../../__mock__/listaPreguntasMock";
-import { Pregunta } from "../Pregunta";
+import { Pregunta } from "../Pregunta/Pregunta";
 import styles from "./ListaPreguntas.module.scss";
 export const ListaPreguntas = () => {
   const { preguntas } = useAppSelector((state) => state.entries);

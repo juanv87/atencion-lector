@@ -4,18 +4,18 @@ import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { startNewRespuesta } from "../../../store/entries";
 
 interface Props {
-  id: string;
+  idPregunta: string;
+  tituloPregunta: string;
 }
 
-export const AddRespuesta = ({ id }: Props) => {
+export const AddRespuesta = ({ idPregunta, tituloPregunta }: Props) => {
   const [titleRespuesta, setTitleRespuesta] = useState({});
   const dispatch = useAppDispatch();
 
   const { isUpdating } = useAppSelector((state) => state.entries);
 
   const handleAddRespuesta = () => {
-    dispatch(startNewRespuesta({ titleRespuesta, id }));
-    console.log(titleRespuesta);
+    dispatch(startNewRespuesta(titleRespuesta, idPregunta, tituloPregunta));
   };
   return (
     <>

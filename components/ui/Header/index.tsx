@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
-import { UserAvatar } from "../../User/UserAvatar";
-import { LoginWithGoogle } from "../../User/UserLogin/LoginWithGoogle";
+import { UserAvatar } from "../../User/UserAvatar/UserAvatar";
+import { LoginWithGoogle } from "../../User/UserLogin/LoginWithGoogle/UserLogin";
 import styles from "./Header.module.scss";
 
 export const Header = () => {

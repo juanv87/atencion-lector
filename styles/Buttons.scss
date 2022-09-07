@@ -1,0 +1,23 @@
+@import "./Colors.scss";
+@import "./Fonts.scss";
+
+@mixin buttonBlue {
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: $blue;
+  box-shadow: 5px 5px 0 $primary-color;
+  color: #fff;
+  font-family: $primary-font;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  &:disabled {
+    background-color: #000;
+    cursor: default;
+  }
+  &:hover {
+  }
+}

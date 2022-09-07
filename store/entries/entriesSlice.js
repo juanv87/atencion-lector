@@ -6,8 +6,15 @@ export const entriesSlice = createSlice({
     isSaving: false,
     isUpdating: false,
     messageSaved: "",
-    preguntas: [],
-    respuestas: [],
+    preguntas: [
+      {
+        id: "",
+        titulo: "",
+        autor: "",
+        createdAt: new Date().getTime(),
+        respuestas: [],
+      },
+    ],
     active: null,
   },
   reducers: {
@@ -19,6 +26,14 @@ export const entriesSlice = createSlice({
       state.preguntas.push(action.payload);
       state.isSaving = false;
     },
+    addNewRespuesta: (state, action) => {
+      console.log("addNewRespuesta", { state }, action);
+      const index = state.preguntas.findIndex(
+        (pregunta) => pregunta.id === action.payload.idPregunta
+      );
+      state.preguntas[index].respuestas.push(action.payload.newRespuesta);
+      state.isUpdating = false;
+    },
     setActivePregunta: (state, action) => {
       state.active = action.payload;
     },
@@ -26,7 +41,10 @@ export const entriesSlice = createSlice({
       state.preguntas = action.payload;
     },
     setRespuestas: (state, action) => {
-      state.respuestas = action.payload;
+      const index = state.preguntas.findIndex(
+        (pregunta) => pregunta.id === action.payload.idPregunta
+      );
+      state.preguntas[index].respuestas = action.payload.respuestas;
     },
     setSaving: (state, action) => {},
     updatingNewPregunta: (state) => {
@@ -44,6 +62,7 @@ export const entriesSlice = createSlice({
 });
 export const {
   addNewEmptyPregunta,
+  addNewRespuesta,
   deletePreguntaById,
   savingNewPregunta,
   setActivePregunta,

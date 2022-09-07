@@ -1,5 +1,6 @@
 @import "../../../styles/Colors.scss";
 @import "../../../styles/Fonts.scss";
+@import "../../../styles/Buttons.scss";
 
 .tarjetaPregunta {
   border-radius: 10px;
@@ -25,5 +26,8 @@
     font-weight: 400;
     font-size: 0.9rem;
     margin-top: 10px;
+  }
+  &__button {
+    @include buttonBlue;
   }
 }

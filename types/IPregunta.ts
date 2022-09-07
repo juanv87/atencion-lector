@@ -3,5 +3,5 @@ export interface IPregunta {
   titulo: string;
   fecha?: string;
   autor?: string;
-  respuestas?: number;
+  respuestas?: Object;
 }
