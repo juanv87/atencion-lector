@@ -46,7 +46,7 @@ export const startNewRespuesta = (
 ) => {
   return async (dispatch, getState) => {
     dispatch(updatingNewPregunta());
-    const { uid } = getState().auth;
+    const { uid, displayName, email, photoURL } = getState().auth;
     const newDoc = doc(
       collection(
         FirebaseDB,
