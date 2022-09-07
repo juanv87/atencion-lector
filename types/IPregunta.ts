@@ -1,7 +1,9 @@
+import { IAutor } from "./IAutor";
+
 export interface IPregunta {
   id: string;
   titulo: string;
-  fecha?: string;
-  autor?: string;
+  createdAt: unknown;
+  autor: IAutor;
   respuestas?: Object;
 }

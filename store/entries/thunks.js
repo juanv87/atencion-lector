@@ -18,12 +18,17 @@ import {
 export const startNewPregunta = ({ titlePregunta }) => {
   return async (dispatch, getState) => {
     dispatch(savingNewPregunta());
-    const { uid } = getState().auth;
+    const { uid, displayName, email, photoURL } = getState().auth;
     const newDoc = doc(collection(FirebaseDB, `${uid}/entradas/preguntas`));
     const newPregunta = {
       id: newDoc.id,
       titulo: titlePregunta,
-      autor: "",
+      autor: {
+        id: uid,
+        displayName,
+        email,
+        photoURL,
+      },
       createdAt: new Date().getTime(),
       respuestas: [],
     };
@@ -52,7 +57,12 @@ export const startNewRespuesta = (
       id: newDoc.id,
       idPregunta,
       titulo: titleRespuesta,
-      autor: uid,
+      autor: {
+        id: uid,
+        displayName,
+        email,
+        photoURL,
+      },
       createdAt: new Date().getTime(),
     };
     await setDoc(newDoc, newRespuesta);

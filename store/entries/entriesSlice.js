@@ -11,8 +11,13 @@ export const entriesSlice = createSlice({
       {
         id: "",
         titulo: "",
-        autor: "",
         createdAt: new Date().getTime(),
+        autor: {
+          id: "",
+          displayName: "",
+          email: "",
+          photoURL: "",
+        },
         respuestas: [],
       },
     ],
@@ -28,7 +33,7 @@ export const entriesSlice = createSlice({
       state.isSaving = false;
     },
     addNewRespuesta: (state, action) => {
-      console.log("addNewRespuesta", { state }, action);
+      // console.log("addNewRespuesta", { state }, action);
       const index = state.preguntas.findIndex(
         (pregunta) => pregunta.id === action.payload.idPregunta
       );

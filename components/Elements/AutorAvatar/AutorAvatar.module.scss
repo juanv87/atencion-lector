@@ -1,0 +1,13 @@
+.autorAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  &__imgAutor {
+    border-radius: 50%;
+  }
+  &__name {
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+}

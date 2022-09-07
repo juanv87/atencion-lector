@@ -9,6 +9,7 @@ import { IPregunta } from "../../../types/IPregunta";
 import { AddRespuesta } from "../../User/AddRespuesta/AddRespuesta";
 import { loadRespuestasById } from "../../../helpers/loadRespuestasById";
 import { Respuesta } from "../Respuesta/Respuesta";
+import { AutorAvatar } from "../AutorAvatar/AutorAvatar";
 
 interface Props {
   pregunta: IPregunta;
@@ -16,10 +17,10 @@ interface Props {
 
 export const Pregunta = ({ pregunta }: Props) => {
   const dispatch = useAppDispatch();
-  const { id, titulo } = pregunta;
+  const { id, titulo, autor } = pregunta;
 
   // Todo: Revisar si es eficiente traer todas las preguntas para obtener el id actual y traer las respuestas del store.
-  const { preguntas, isUpdating, isLoadingRespuestas } = useAppSelector(
+  const { preguntas, isLoadingRespuestas } = useAppSelector(
     (state) => state.entries
   );
   // Busco la posición de la pregunta actual en la lista de preguntas
@@ -38,6 +39,7 @@ export const Pregunta = ({ pregunta }: Props) => {
       <article
         className={`${styles.tarjetaPregunta} animate__fadeInUp animate__animated animate__faster`}
       >
+        <AutorAvatar autor={autor} />
         <h2 className={styles.tarjetaPregunta__title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} tituloPregunta={titulo} />
         <button
