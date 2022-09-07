@@ -5,13 +5,17 @@ import { listaPreguntasMock } from "../../../__mock__/listaPreguntasMock";
 import { Pregunta } from "../Pregunta/Pregunta";
 import styles from "./ListaPreguntas.module.scss";
 export const ListaPreguntas = () => {
-  const { preguntas } = useAppSelector((state) => state.entries);
+  const { preguntas, isLoadingPreguntas } = useAppSelector(
+    (state) => state.entries
+  );
   return (
     <>
+      {isLoadingPreguntas && "Cargando preguntas..."}
       <section className={styles.listaPreguntas}>
-        {preguntas.map((pregunta: IPregunta) => (
-          <Pregunta key={pregunta.id} pregunta={pregunta} />
-        ))}
+        {preguntas.length > 1 &&
+          preguntas.map((pregunta: IPregunta) => (
+            <Pregunta key={pregunta.id} pregunta={pregunta} />
+          ))}
       </section>
     </>
   );

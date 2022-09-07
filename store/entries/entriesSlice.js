@@ -5,6 +5,7 @@ export const entriesSlice = createSlice({
   initialState: {
     isSaving: false,
     isUpdating: false,
+    isLoadingPreguntas: false,
     isLoadingRespuestas: false,
     messageSaved: "",
     preguntas: [
@@ -45,6 +46,7 @@ export const entriesSlice = createSlice({
     },
     setPreguntas: (state, action) => {
       state.preguntas = action.payload;
+      state.isLoadingPreguntas = false;
     },
     setRespuestas: (state, action) => {
       const index = state.preguntas.findIndex(
@@ -55,6 +57,9 @@ export const entriesSlice = createSlice({
     },
     loadingRespuestas: (state, action) => {
       state.isLoadingRespuestas = true;
+    },
+    loadingPreguntas: (state, action) => {
+      state.isLoadingPreguntas = true;
     },
     setSaving: (state, action) => {},
     updatingNewPregunta: (state) => {
@@ -75,6 +80,7 @@ export const {
   addNewRespuesta,
   deletePreguntaById,
   loadingRespuestas,
+  loadingPreguntas,
   savingNewPregunta,
   setActivePregunta,
   setPreguntas,

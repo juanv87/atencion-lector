@@ -1,4 +1,5 @@
 import { collection, doc, setDoc } from "firebase/firestore/lite";
+import { loadFeed } from "../../helpers/loadFeed";
 import { loadPreguntas } from "../../helpers/loadPreguntas";
 import { loadRespuestasById } from "../../helpers/loadRespuestasById";
 import { FirebaseDB } from "../../lib/firebase/firebase";
@@ -11,6 +12,7 @@ import {
   loadingRespuestas,
   addNewRespuesta,
   updatingNewPregunta,
+  loadingPreguntas,
 } from "./entriesSlice";
 
 // Funciones asincronas que modifican el state global de la aplicacion.
@@ -72,6 +74,7 @@ export const startNewRespuesta = (
 
 export const startLoadingPreguntas = (id) => {
   return async (dispatch, getState) => {
+    dispatch(loadingPreguntas());
     const { uid } = getState().auth;
     if (!uid) throw new Error("No hay usuario logueado");
     const preguntas = await loadPreguntas(uid);

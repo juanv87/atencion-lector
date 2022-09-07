@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { ListaPreguntas } from "../components/Elements/ListaPreguntas/ListaPreguntas";
+import { Feed } from "../components/ui/Feed/Feed";
 import { Header } from "../components/ui/Header";
 import { AddPregunta } from "../components/User/AddPregunta/AddPregunta";
 import { useAppSelector } from "../hooks";
@@ -9,9 +10,7 @@ import styles from "./Home.module.scss";
 
 const Home: NextPage = () => {
   const status = useCheckAuth();
-
-  const { active } = useAppSelector((state) => state.entries);
-  console.log("active", active);
+  console.log("Home", status);
   return (
     <div>
       <Head>
@@ -25,6 +24,7 @@ const Home: NextPage = () => {
           <div className={styles.homeContainer__left}></div>
           <div className={styles.homeContainer__main}>
             <AddPregunta />
+            {/* <Feed /> */}
             <ListaPreguntas />
           </div>
           <div className={styles.homeContainer__right}></div>

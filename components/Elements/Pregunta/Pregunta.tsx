@@ -10,25 +10,17 @@ import { AddRespuesta } from "../../User/AddRespuesta/AddRespuesta";
 import { loadRespuestasById } from "../../../helpers/loadRespuestasById";
 import { Respuesta } from "../Respuesta/Respuesta";
 import { AutorAvatar } from "../AutorAvatar/AutorAvatar";
+import { Respuestas } from "../Respuestas/Respuestas";
 
 interface Props {
   pregunta: IPregunta;
 }
 
 export const Pregunta = ({ pregunta }: Props) => {
+  console.log("Pregunta", pregunta);
   const dispatch = useAppDispatch();
   const { id, titulo, autor } = pregunta;
-
-  // Todo: Revisar si es eficiente traer todas las preguntas para obtener el id actual y traer las respuestas del store.
-  const { preguntas, isLoadingRespuestas } = useAppSelector(
-    (state) => state.entries
-  );
-  // Busco la posición de la pregunta actual en la lista de preguntas
-  const index = preguntas.findIndex((preg) => preg.id === pregunta.id);
-  // Traigo las respuestas de la pregunta actual
-  const { respuestas } = useAppSelector(
-    (state) => state.entries.preguntas[index]
-  );
+  const { isLoadingRespuestas } = useAppSelector((state) => state.entries);
 
   const onGetRespuestas = () => {
     dispatch(startLoadingRespuestas(id));
@@ -48,10 +40,7 @@ export const Pregunta = ({ pregunta }: Props) => {
         >
           {isLoadingRespuestas ? "Cargando respuestas..." : "Ver respuestas"}
         </button>
-        {respuestas.length > 0 &&
-          respuestas.map(({ id, titulo }) => (
-            <Respuesta key={id} titulo={titulo} />
-          ))}
+        <Respuestas preguntaId={pregunta.id} />
       </article>
     </>
   );

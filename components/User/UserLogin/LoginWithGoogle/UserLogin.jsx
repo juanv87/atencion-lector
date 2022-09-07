@@ -14,7 +14,7 @@ export const LoginWithGoogle = () => {
   const isAuthenticating = useMemo(() => status === "checking", [status]);
 
   const onGoogleSignIn = () => {
-    console.log("Google Sign In");
+    // console.log("Google Sign In");
     dispatch(startGoogleSignIn());
   };
   return (
