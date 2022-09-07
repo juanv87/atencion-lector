@@ -8,7 +8,7 @@ import {
   setActivePregunta,
   setPreguntas,
   setRespuestas,
-  updatePregunta,
+  loadingRespuestas,
   addNewRespuesta,
   updatingNewPregunta,
 } from "./entriesSlice";
@@ -72,7 +72,7 @@ export const startLoadingPreguntas = (id) => {
 export const startLoadingRespuestas = (id) => {
   // console.log("startLoadingRespuestas", id);
   return async (dispatch, getState) => {
-    dispatch(updatingNewPregunta());
+    dispatch(loadingRespuestas());
     const { uid } = getState().auth;
     if (!uid) throw new Error("No hay usuario logueado");
     const respuestas = await loadRespuestasById(uid, id);

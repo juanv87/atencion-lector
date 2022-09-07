@@ -16,15 +16,18 @@ interface Props {
 
 export const Pregunta = ({ pregunta }: Props) => {
   const dispatch = useAppDispatch();
+  const { id, titulo } = pregunta;
 
-  // Todo: Revisar si es eficiente traer todas las preguntas para obtener el id actual
-  const { preguntas, isUpdating } = useAppSelector((state) => state.entries);
+  // Todo: Revisar si es eficiente traer todas las preguntas para obtener el id actual y traer las respuestas del store.
+  const { preguntas, isUpdating, isLoadingRespuestas } = useAppSelector(
+    (state) => state.entries
+  );
+  // Busco la posición de la pregunta actual en la lista de preguntas
   const index = preguntas.findIndex((preg) => preg.id === pregunta.id);
+  // Traigo las respuestas de la pregunta actual
   const { respuestas } = useAppSelector(
     (state) => state.entries.preguntas[index]
   );
-
-  const { id, titulo } = pregunta;
 
   const onGetRespuestas = () => {
     dispatch(startLoadingRespuestas(id));
@@ -33,20 +36,16 @@ export const Pregunta = ({ pregunta }: Props) => {
   return (
     <>
       <article
-        // onClick={handleClick}
         className={`${styles.tarjetaPregunta} animate__fadeInUp animate__animated animate__faster`}
       >
         <h2 className={styles.tarjetaPregunta__title}>{titulo}</h2>
-        {/* <p className={styles.tarjetaPregunta__cuerpo}>{cuerpo}</p> */}
         <AddRespuesta idPregunta={id} tituloPregunta={titulo} />
-        {respuestas.length > 0 && (
-          <button
-            className={styles.tarjetaPregunta__button}
-            onClick={onGetRespuestas}
-          >
-            {isUpdating ? "Cargando respuestas..." : "Ver respuestas"}
-          </button>
-        )}
+        <button
+          className={styles.tarjetaPregunta__button}
+          onClick={onGetRespuestas}
+        >
+          {isLoadingRespuestas ? "Cargando respuestas..." : "Ver respuestas"}
+        </button>
         {respuestas.length > 0 &&
           respuestas.map(({ id, titulo }) => (
             <Respuesta key={id} titulo={titulo} />
