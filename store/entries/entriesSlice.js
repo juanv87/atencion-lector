@@ -45,6 +45,7 @@ export const entriesSlice = createSlice({
         (pregunta) => pregunta.id === action.payload.idPregunta
       );
       state.preguntas[index].respuestas = action.payload.respuestas;
+      state.isUpdating = false;
     },
     setSaving: (state, action) => {},
     updatingNewPregunta: (state) => {

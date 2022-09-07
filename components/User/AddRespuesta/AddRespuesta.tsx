@@ -9,13 +9,14 @@ interface Props {
 }
 
 export const AddRespuesta = ({ idPregunta, tituloPregunta }: Props) => {
-  const [titleRespuesta, setTitleRespuesta] = useState({});
+  const [titleRespuesta, setTitleRespuesta] = useState("");
   const dispatch = useAppDispatch();
 
   const { isUpdating } = useAppSelector((state) => state.entries);
 
   const handleAddRespuesta = () => {
-    dispatch(startNewRespuesta(titleRespuesta, idPregunta, tituloPregunta));
+    titleRespuesta.length > 0 &&
+      dispatch(startNewRespuesta(titleRespuesta, idPregunta, tituloPregunta));
   };
   return (
     <>

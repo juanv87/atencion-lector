@@ -18,7 +18,7 @@ export const Pregunta = ({ pregunta }: Props) => {
   const dispatch = useAppDispatch();
 
   // Todo: Revisar si es eficiente traer todas las preguntas para obtener el id actual
-  const { preguntas } = useAppSelector((state) => state.entries);
+  const { preguntas, isUpdating } = useAppSelector((state) => state.entries);
   const index = preguntas.findIndex((preg) => preg.id === pregunta.id);
   const { respuestas } = useAppSelector(
     (state) => state.entries.preguntas[index]
@@ -39,12 +39,14 @@ export const Pregunta = ({ pregunta }: Props) => {
         <h2 className={styles.tarjetaPregunta__title}>{titulo}</h2>
         {/* <p className={styles.tarjetaPregunta__cuerpo}>{cuerpo}</p> */}
         <AddRespuesta idPregunta={id} tituloPregunta={titulo} />
-        <button
-          className={styles.tarjetaPregunta__button}
-          onClick={onGetRespuestas}
-        >
-          Mostrar respuestas
-        </button>
+        {respuestas.length > 0 && (
+          <button
+            className={styles.tarjetaPregunta__button}
+            onClick={onGetRespuestas}
+          >
+            {isUpdating ? "Cargando respuestas..." : "Ver respuestas"}
+          </button>
+        )}
         {respuestas.length > 0 &&
           respuestas.map(({ id, titulo }) => (
             <Respuesta key={id} titulo={titulo} />
