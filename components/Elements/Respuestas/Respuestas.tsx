@@ -14,8 +14,8 @@ export const Respuestas = ({ preguntaId = "" }) => {
   return (
     <>
       {respuestas.length > 0 &&
-        respuestas.map(({ id, titulo }) => (
-          <Respuesta key={id} titulo={titulo} />
+        respuestas.map(({ id, titulo, autor }) => (
+          <Respuesta key={id} titulo={titulo} autor={autor} />
         ))}
     </>
   );

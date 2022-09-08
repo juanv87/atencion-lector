@@ -1,5 +1,4 @@
 import { collection, doc, setDoc } from "firebase/firestore/lite";
-import { loadFeed } from "../../helpers/loadFeed";
 import { loadPreguntas } from "../../helpers/loadPreguntas";
 import { loadRespuestasById } from "../../helpers/loadRespuestasById";
 import { FirebaseDB } from "../../lib/firebase/firebase";
@@ -18,10 +17,13 @@ import {
 // Funciones asincronas que modifican el state global de la aplicacion.
 
 export const startNewPregunta = ({ titlePregunta }) => {
+  const titlePreguntaSlug =
+    titlePregunta.toLowerCase().replace(/ /g, "-") + "-" + Date.now();
   return async (dispatch, getState) => {
     dispatch(savingNewPregunta());
     const { uid, displayName, email, photoURL } = getState().auth;
-    const newDoc = doc(collection(FirebaseDB, `${uid}/entradas/preguntas`));
+    // Todo: guardarla en una coleccion de preguntas generales para el Feed.
+    const newDoc = doc(collection(FirebaseDB, `preguntas`));
     const newPregunta = {
       id: newDoc.id,
       titulo: titlePregunta,
@@ -41,19 +43,13 @@ export const startNewPregunta = ({ titlePregunta }) => {
   };
 };
 
-export const startNewRespuesta = (
-  titleRespuesta,
-  idPregunta,
-  tituloPregunta
-) => {
+export const startNewRespuesta = (titleRespuesta, idPregunta) => {
+  console.log("startNewRespuesta", titleRespuesta, idPregunta);
   return async (dispatch, getState) => {
     dispatch(updatingNewPregunta());
     const { uid, displayName, email, photoURL } = getState().auth;
     const newDoc = doc(
-      collection(
-        FirebaseDB,
-        `${uid}/entradas/preguntas/${idPregunta}/respuestas`
-      )
+      collection(FirebaseDB, `preguntas/${idPregunta}/respuestas`)
     );
     const newRespuesta = {
       id: newDoc.id,
@@ -75,9 +71,9 @@ export const startNewRespuesta = (
 export const startLoadingPreguntas = (id) => {
   return async (dispatch, getState) => {
     dispatch(loadingPreguntas());
-    const { uid } = getState().auth;
+    const { uid, email } = getState().auth;
     if (!uid) throw new Error("No hay usuario logueado");
-    const preguntas = await loadPreguntas(uid);
+    const preguntas = await loadPreguntas(email);
     dispatch(setPreguntas(preguntas));
   };
 };

@@ -1,7 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
 import { IPregunta } from "../../../types/IPregunta";
-import { listaPreguntasMock } from "../../../__mock__/listaPreguntasMock";
 import { Pregunta } from "../Pregunta/Pregunta";
 import styles from "./ListaPreguntas.module.scss";
 export const ListaPreguntas = () => {
@@ -10,9 +9,9 @@ export const ListaPreguntas = () => {
   );
   return (
     <>
-      {isLoadingPreguntas && "Cargando preguntas..."}
       <section className={styles.listaPreguntas}>
-        {preguntas.length > 1 &&
+        {isLoadingPreguntas && "Cargando preguntas..."}
+        {preguntas.length > 0 &&
           preguntas.map((pregunta: IPregunta) => (
             <Pregunta key={pregunta.id} pregunta={pregunta} />
           ))}

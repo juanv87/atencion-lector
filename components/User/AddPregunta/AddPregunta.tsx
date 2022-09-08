@@ -10,6 +10,7 @@ export const AddPregunta = () => {
 
   const onClickNewPregunta = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    // titlePregunta.length > 0 && dispatch(startNewPregunta({ titlePregunta }));
     titlePregunta.length > 0 && dispatch(startNewPregunta({ titlePregunta }));
   };
   return (

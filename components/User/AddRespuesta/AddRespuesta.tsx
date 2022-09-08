@@ -5,10 +5,9 @@ import { startNewRespuesta } from "../../../store/entries";
 
 interface Props {
   idPregunta: string;
-  tituloPregunta: string;
 }
 
-export const AddRespuesta = ({ idPregunta, tituloPregunta }: Props) => {
+export const AddRespuesta = ({ idPregunta }: Props) => {
   const [titleRespuesta, setTitleRespuesta] = useState("");
   const dispatch = useAppDispatch();
 
@@ -16,7 +15,7 @@ export const AddRespuesta = ({ idPregunta, tituloPregunta }: Props) => {
 
   const handleAddRespuesta = () => {
     titleRespuesta.length > 0 &&
-      dispatch(startNewRespuesta(titleRespuesta, idPregunta, tituloPregunta));
+      dispatch(startNewRespuesta(titleRespuesta, idPregunta));
   };
   return (
     <>
