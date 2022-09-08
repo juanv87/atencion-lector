@@ -24,16 +24,17 @@
 }
 
 @media (max-width: $breakpoint-tablet) {
+  .homeContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
   .homeContainer__left {
-    grid-column: span 4;
-    border-right: none;
+    grid-column: span 3;
   }
   .homeContainer__right {
-    grid-column: span 0;
-    border-left: none;
+    grid-column: span 3;
   }
   .homeContainer__main {
-    grid-column: span 8;
+    grid-column: span 3;
   }
 }
 

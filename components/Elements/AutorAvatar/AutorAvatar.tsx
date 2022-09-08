@@ -12,7 +12,7 @@ export const AutorAvatar = ({ autor }: Props) => {
   return (
     <>
       <section className={styles.autorAvatar}>
-        <picture>
+        <picture className={styles.autorAvatar__picture}>
           <img
             className={styles.autorAvatar__imgAutor}
             width="25"

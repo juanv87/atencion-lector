@@ -3,11 +3,16 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
+  &__picture {
+    display: flex;
+    align-items: center;
+  }
   &__imgAutor {
     border-radius: 50%;
   }
   &__name {
     font-size: 0.8rem;
+    line-height: 1rem;
     font-weight: 500;
     color: #000;
   }

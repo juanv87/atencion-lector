@@ -1,33 +1,58 @@
 @import "../../../styles/Colors.scss";
 @import "../../../styles/Fonts.scss";
 @import "../../../styles/Buttons.scss";
+@import "../../../styles/BreakPoints.scss";
 
 .tarjetaPregunta {
+  background-color: $secondary-color;
   border-radius: 10px;
-  background-color: $primary-color;
+  background: linear-gradient(
+    50deg,
+    $secondary-color 0%,
+    $secondary-color 50%,
+    mix($secondary-color, $primary-color, 30%) 100%
+  );
   border: 1px solid #000;
-  padding: 10px 30px;
   box-shadow: $cards-shadow;
   max-width: 600px;
+  padding: 20px 30px 10px 30px;
 
   &__title {
-    font-family: $secondary-font;
-    font-size: 1.5rem;
-    line-height: 1.6;
-    text-align: center;
     color: $blue;
+    font-family: $secondary-font;
+    font-size: 2rem;
+    line-height: 1.3em;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
     &::selection {
-      background-color: $secondary-color;
-      color: #000;
+      background-color: $primary-color;
+      color: darken($blue, 10%);
     }
   }
   &__cuerpo {
     font-family: $primary-font;
-    font-weight: 400;
     font-size: 0.9rem;
+    font-weight: 400;
     margin-top: 10px;
   }
   &__button {
-    @include buttonBlue;
+    background: none;
+    border: none;
+    color: darken($primary-color, 80%);
+    margin: 0 auto 20px auto;
+    font-size: 1rem;
+    border-bottom: 1px solid $blue;
+    padding: 2px 0;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .tarjetaPregunta {
+    padding: 20px 10px;
+    &__title {
+      font-size: 1.5rem;
+    }
   }
 }

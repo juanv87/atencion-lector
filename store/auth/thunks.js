@@ -28,35 +28,6 @@ export const startGoogleSignIn = () => {
   };
 };
 
-// export const setFirstData = (email) => {
-//   console.log("setFirstData()", email);
-//   return async (dispatch) => {
-//     // get current user
-//     if (FirebaseAuth._isInitialized) {
-//       try {
-//         await setDoc(doc(FirebaseDB, "usuarios", email), {
-//           name: email,
-//           email: "user.email",
-//           password: "user.password",
-//           createdAt: new Date(),
-//           avatar: "",
-//         });
-//         await addDoc(collection(FirebaseDB, "usuarios", email, "lists"), {
-//           title: "",
-//           slugTitleValue: "",
-//           createdAt: "",
-//           status: "",
-//           pinned: "",
-//         });
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     } else {
-//       console.log("User already exists");
-//       console.log(FirebaseAuth);
-//     }
-//   };
-// };
 export const startLogout = () => {
   return async (dispatch) => {
     await logoutFirebase();
