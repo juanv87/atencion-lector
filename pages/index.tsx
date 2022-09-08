@@ -1,14 +1,19 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useEffect } from "react";
 import { ListaPreguntas } from "../components/Elements/ListaPreguntas/ListaPreguntas";
 import { Header } from "../components/ui/Header/Header";
 import { AddPregunta } from "../components/User/AddPregunta/AddPregunta";
+import { useAppDispatch } from "../hooks";
 import { useCheckAuth } from "../hooks/useCheckAuth";
+import { startLoadingPreguntas } from "../store/entries";
 import styles from "./Home.module.scss";
 
 const Home: NextPage = () => {
-  const status = useCheckAuth();
-  console.log("Home", status);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(startLoadingPreguntas());
+  }, []);
   return (
     <div>
       <Head>

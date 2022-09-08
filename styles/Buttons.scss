@@ -10,11 +10,11 @@
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 10px 15px;
   text-align: center;
   cursor: pointer;
   &:disabled {
-    background-color: #000;
+    background-color: mix($blue, $primary-color, 30%);
     cursor: default;
   }
   &:hover {

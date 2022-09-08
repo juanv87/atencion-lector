@@ -11,7 +11,7 @@ export const ListaPreguntas = () => {
     <>
       <section className={styles.listaPreguntas}>
         {isLoadingPreguntas && "Cargando preguntas..."}
-        {preguntas.length > 0 &&
+        {preguntas.length > 1 &&
           preguntas.map((pregunta: IPregunta) => (
             <Pregunta key={pregunta.id} pregunta={pregunta} />
           ))}

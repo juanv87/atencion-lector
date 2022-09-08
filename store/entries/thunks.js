@@ -71,9 +71,7 @@ export const startNewRespuesta = (titleRespuesta, idPregunta) => {
 export const startLoadingPreguntas = (id) => {
   return async (dispatch, getState) => {
     dispatch(loadingPreguntas());
-    const { uid, email } = getState().auth;
-    if (!uid) throw new Error("No hay usuario logueado");
-    const preguntas = await loadPreguntas(email);
+    const preguntas = await loadPreguntas();
     dispatch(setPreguntas(preguntas));
   };
 };
