@@ -44,7 +44,6 @@ export const startNewPregunta = ({ titlePregunta }) => {
 };
 
 export const startNewRespuesta = (titleRespuesta, idPregunta) => {
-  console.log("startNewRespuesta", titleRespuesta, idPregunta);
   return async (dispatch, getState) => {
     dispatch(updatingNewPregunta());
     const { uid, displayName, email, photoURL } = getState().auth;
@@ -57,7 +56,7 @@ export const startNewRespuesta = (titleRespuesta, idPregunta) => {
       titulo: titleRespuesta,
       autor: {
         id: uid,
-        displayName,
+        displayName: displayName || "Lector/a anónimo/a",
         email,
         photoURL,
       },
@@ -80,9 +79,7 @@ export const startLoadingRespuestas = (id) => {
   // console.log("startLoadingRespuestas", id);
   return async (dispatch, getState) => {
     dispatch(loadingRespuestas());
-    const { uid } = getState().auth;
-    if (!uid) throw new Error("No hay usuario logueado");
-    const respuestas = await loadRespuestasById(uid, id);
+    const respuestas = await loadRespuestasById(id);
     // console.log("startLoadingRespuestas", respuestas);
     dispatch(setRespuestas({ respuestas, idPregunta: id }));
   };
