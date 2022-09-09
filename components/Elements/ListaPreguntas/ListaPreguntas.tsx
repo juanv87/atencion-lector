@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
 import { IPregunta } from "../../../types/IPregunta";
+import LoadingSpinner from "../../Loaders/LoadingSpinner/LoadingSpinner";
 import { Pregunta } from "../Pregunta/Pregunta";
 import styles from "./ListaPreguntas.module.scss";
 export const ListaPreguntas = () => {
@@ -10,7 +11,7 @@ export const ListaPreguntas = () => {
   return (
     <>
       <section className={styles.listaPreguntas}>
-        {isLoadingPreguntas && "Cargando preguntas..."}
+        {isLoadingPreguntas && <LoadingSpinner />}
         {preguntas.length > 1 &&
           preguntas.map((pregunta: IPregunta) => (
             <Pregunta key={pregunta.id} pregunta={pregunta} />

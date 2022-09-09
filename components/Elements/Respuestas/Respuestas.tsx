@@ -3,6 +3,8 @@ import { loadRespuestasById } from "../../../helpers/loadRespuestasById";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { startLoadingRespuestas } from "../../../store/entries";
 import { Respuesta } from "../Respuesta/Respuesta";
+import LoadingSpinner from "../../Loaders/LoadingSpinner/LoadingSpinner";
+import styles from "./Respuestas.module.scss";
 
 export const Respuestas = ({ preguntaId = "" }) => {
   // Todo: Revisar si es eficiente traer todas las preguntas para obtener el id actual y traer las respuestas del store.
@@ -31,12 +33,12 @@ export const Respuestas = ({ preguntaId = "" }) => {
     dispatch(startLoadingRespuestas(preguntaId));
   }, []);
   return (
-    <>
-      {isLoadingRespuestas && "Cargando respuestas..."}
+    <section className={styles.respuestasContainer}>
+      {isLoadingRespuestas && <LoadingSpinner />}
       {respuestas.length > 0 &&
         respuestas.map(({ id, titulo, autor }) => (
           <Respuesta key={id} titulo={titulo} autor={autor} />
         ))}
-    </>
+    </section>
   );
 };
