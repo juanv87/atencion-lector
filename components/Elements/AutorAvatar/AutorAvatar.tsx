@@ -14,7 +14,7 @@ export const AutorAvatar = ({ autor }: Props) => {
     <>
       <section className={styles.autorAvatar}>
         <Link href={`${userName}`}>
-          <a>
+          <a className={styles.autorAvatar__autorLink}>
             <picture className={styles.autorAvatar__picture}>
               <img
                 className={styles.autorAvatar__imgAutor}

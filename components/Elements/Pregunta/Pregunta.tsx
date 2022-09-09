@@ -11,13 +11,12 @@ interface Props {
 }
 
 export const Pregunta = ({ pregunta }: Props) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const { id, titulo, autor } = pregunta;
-  const { isLoadingRespuestas } = useAppSelector((state) => state.entries);
-
-  const onGetRespuestas = () => {
-    dispatch(startLoadingRespuestas(id));
-  };
+  // const { isLoadingRespuestas } = useAppSelector((state) => state.entries);
+  // const onGetRespuestas = () => {
+  //   dispatch(startLoadingRespuestas(id));
+  // };
 
   return (
     <>
@@ -27,12 +26,12 @@ export const Pregunta = ({ pregunta }: Props) => {
         <AutorAvatar autor={autor} />
         <h2 className={styles.tarjetaPregunta__title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} />
-        <button
+        {/* <button
           className={styles.tarjetaPregunta__button}
           onClick={onGetRespuestas}
         >
           {isLoadingRespuestas ? "Cargando respuestas..." : "Ver respuestas"}
-        </button>
+        </button> */}
         <Respuestas preguntaId={pregunta.id} />
       </article>
     </>
