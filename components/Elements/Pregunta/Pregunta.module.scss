@@ -13,7 +13,7 @@
   );
   border: 1px solid #000;
   box-shadow: $cards-shadow;
-  max-width: 600px;
+  max-width: 500px;
   padding: 20px 30px 10px 30px;
 
   &__title {
@@ -24,6 +24,7 @@
     text-align: center;
     margin-top: 20px;
     margin-bottom: 10px;
+    word-break: break-word;
     &::selection {
       background-color: $primary-color;
       color: darken($blue, 10%);
