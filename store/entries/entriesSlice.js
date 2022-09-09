@@ -72,15 +72,21 @@ export const entriesSlice = createSlice({
       );
       state.preguntas[index] = action.payload;
     },
+    clearEntriesLogout: (state) => {
+      state.isSaving = false;
+      state.preguntas = [];
+      state.active = null;
+    },
     deletePreguntaById: (state, action) => {},
   },
 });
 export const {
   addNewEmptyPregunta,
   addNewRespuesta,
+  clearEntriesLogout,
   deletePreguntaById,
-  loadingRespuestas,
   loadingPreguntas,
+  loadingRespuestas,
   savingNewPregunta,
   setActivePregunta,
   setPreguntas,

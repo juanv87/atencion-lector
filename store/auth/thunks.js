@@ -12,6 +12,7 @@
 
 import { signInWithGoogle, logoutFirebase } from "../../lib/firebase/providers";
 import { checkingCredentials, logout, login } from ".";
+import { clearEntriesLogout } from "../entries";
 
 export const checkingAuthentication = () => {
   return async (dispatch) => {
@@ -31,6 +32,7 @@ export const startGoogleSignIn = () => {
 export const startLogout = () => {
   return async (dispatch) => {
     await logoutFirebase();
+    dispatch(clearEntriesLogout());
     dispatch(logout());
   };
 };
