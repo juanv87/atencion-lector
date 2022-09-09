@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { useAppSelector } from "../../../hooks";
 import { UserAvatar } from "../../User/UserAvatar/UserAvatar";
@@ -11,7 +12,11 @@ export const Header = () => {
       <div
         className={`${styles.header__container} animate__animated animate__fadeInDown animate__faster`}
       >
-        <div className={styles.header__logo}></div>
+        <div className={styles.header__logo}>
+          <Link href="/">
+            <a>Inicio</a>
+          </Link>
+        </div>
         {status === "authenticated" ? <UserAvatar /> : <LoginWithGoogle />}
       </div>
     </header>

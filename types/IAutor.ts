@@ -3,4 +3,5 @@ export interface IAutor {
   displayName: string;
   email: string;
   photoURL: string;
+  userName?: string;
 }

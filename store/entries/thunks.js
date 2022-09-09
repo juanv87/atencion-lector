@@ -1,5 +1,6 @@
 import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { loadPreguntas } from "../../helpers/loadPreguntas";
+import { loadPreguntasByUserName } from "../../helpers/loadPreguntasByUserName";
 import { loadRespuestasById } from "../../helpers/loadRespuestasById";
 import { FirebaseDB } from "../../lib/firebase/firebase";
 import {
@@ -30,6 +31,7 @@ export const startNewPregunta = ({ titlePregunta }) => {
       autor: {
         id: uid,
         displayName,
+        userName: email.split("@")[0],
         email,
         photoURL,
       },
@@ -57,6 +59,7 @@ export const startNewRespuesta = (titleRespuesta, idPregunta) => {
       autor: {
         id: uid,
         displayName: displayName || "Lector/a anónimo/a",
+        userName: email.split("@")[0],
         email,
         photoURL,
       },
@@ -82,5 +85,13 @@ export const startLoadingRespuestas = (id) => {
     const respuestas = await loadRespuestasById(id);
     // console.log("startLoadingRespuestas", respuestas);
     dispatch(setRespuestas({ respuestas, idPregunta: id }));
+  };
+};
+
+export const startLoadingPreguntasByUserName = ({ name }) => {
+  return async (dispatch, getState) => {
+    dispatch(loadingPreguntas());
+    const preguntas = await loadPreguntasByUserName({ name });
+    dispatch(setPreguntas(preguntas));
   };
 };

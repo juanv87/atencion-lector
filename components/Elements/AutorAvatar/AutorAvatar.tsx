@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { IAutor } from "../../../types/IAutor";
 
@@ -8,19 +9,23 @@ interface Props {
 }
 
 export const AutorAvatar = ({ autor }: Props) => {
-  const { displayName, photoURL } = autor;
+  const { displayName, photoURL, userName } = autor;
   return (
     <>
       <section className={styles.autorAvatar}>
-        <picture className={styles.autorAvatar__picture}>
-          <img
-            className={styles.autorAvatar__imgAutor}
-            width="25"
-            src={photoURL}
-            alt={displayName}
-          />
-        </picture>
-        <span className={styles.autorAvatar__name}>{displayName}</span>
+        <Link href={`${userName}`}>
+          <a>
+            <picture className={styles.autorAvatar__picture}>
+              <img
+                className={styles.autorAvatar__imgAutor}
+                width="25"
+                src={photoURL}
+                alt={displayName}
+              />
+            </picture>
+            <span className={styles.autorAvatar__name}>{displayName}</span>
+          </a>
+        </Link>
       </section>
     </>
   );
