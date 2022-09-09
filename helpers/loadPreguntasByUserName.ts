@@ -6,7 +6,6 @@ interface Props {
 }
 
 export const loadPreguntasByUserName = async ({ name }: Props) => {
-  console.log("loadPreguntasByUserName", name);
   const collectionQuery = query(
     collection(FirebaseDB, "preguntas"),
     where("autor.userName", "==", name)

@@ -12,12 +12,14 @@ export const AddPregunta = () => {
     e.preventDefault();
     // titlePregunta.length > 0 && dispatch(startNewPregunta({ titlePregunta }));
     titlePregunta.length > 0 && dispatch(startNewPregunta({ titlePregunta }));
+    setTitlePregunta("");
   };
   return (
     <>
       <div className={styles.addPregunta}>
         <form className={styles.addPregunta__form}>
           <textarea
+            value={titlePregunta}
             onChange={(e) => setTitlePregunta(e.target.value)}
             rows={10}
             placeholder="Escribí acá tu pregunta"

@@ -16,11 +16,13 @@ export const AddRespuesta = ({ idPregunta }: Props) => {
   const handleAddRespuesta = () => {
     titleRespuesta.length > 0 &&
       dispatch(startNewRespuesta(titleRespuesta, idPregunta));
+    setTitleRespuesta("");
   };
   return (
     <>
       <div className={styles.addRespuesta}>
         <textarea
+          value={titleRespuesta}
           onChange={(e) => setTitleRespuesta(e.target.value)}
           rows={10}
           placeholder="Escribí acá tu respuesta"

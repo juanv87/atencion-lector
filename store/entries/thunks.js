@@ -31,7 +31,7 @@ export const startNewPregunta = ({ titlePregunta }) => {
       autor: {
         id: uid,
         displayName,
-        userName: email.split("@")[0] || "",
+        userName: email?.split("@")[0] || "",
         email,
         photoURL,
       },
@@ -59,7 +59,7 @@ export const startNewRespuesta = (titleRespuesta, idPregunta) => {
       autor: {
         id: uid,
         displayName: displayName || "Lector/a anónimo/a",
-        userName: email.split("@")[0] || "",
+        userName: email?.split("@")[0] || "",
         email,
         photoURL,
       },
