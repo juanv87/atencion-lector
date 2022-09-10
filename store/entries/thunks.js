@@ -81,14 +81,18 @@ export const startLoadingRespuestas = (id) => {
   // console.log("startLoadingRespuestas", id);
   return async (dispatch, getState) => {
     try {
-      dispatch(setRespuestas(respuestas));
       dispatch(loadingRespuestas());
       const respuestas = await loadRespuestasById(id);
-      // console.log("startLoadingRespuestas", respuestas);
+      console.log(
+        "🚀 ~ file: thunks.js ~ line 91 ~ return ~ respuestas",
+        respuestas
+      );
+
       dispatch(setRespuestas({ respuestas, idPregunta: id }));
     } catch (error) {
       console.log("startLoadingRespuestas", error);
     }
+    // console.log("startLoadingRespuestas", respuestas);
   };
 };
 

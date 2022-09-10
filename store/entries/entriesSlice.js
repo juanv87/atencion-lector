@@ -33,7 +33,7 @@ export const entriesSlice = createSlice({
       state.isSaving = true;
     },
     addNewEmptyPregunta: (state, action) => {
-      state.preguntas.push(action.payload);
+      state.preguntas = [...state.preguntas, action.payload];
       state.isSaving = false;
     },
     addNewRespuesta: (state, action) => {
@@ -42,6 +42,7 @@ export const entriesSlice = createSlice({
         (pregunta) => pregunta.id === action.payload.idPregunta
       );
       state.preguntas[index].respuestas.push(action.payload.newRespuesta);
+      // state.preguntas[index] = { ...state.preguntas[index] };
       state.isUpdating = false;
     },
     setActivePregunta: (state, action) => {
