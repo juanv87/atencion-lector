@@ -22,6 +22,9 @@ export const entriesSlice = createSlice({
         respuestas: [],
       },
     ],
+    preguntasByUserName: [
+      { id: "", titulo: "", createdAt: new Date().getTime() },
+    ],
     active: null,
   },
   reducers: {

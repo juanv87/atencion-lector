@@ -30,8 +30,8 @@ export const Respuestas = ({ preguntaId = "" }) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     // handleGetRespuestas();
-    dispatch(startLoadingRespuestas(preguntaId));
-  }, []);
+    preguntaId && dispatch(startLoadingRespuestas(preguntaId));
+  }, [preguntaId]);
   return (
     <section className={styles.respuestasContainer}>
       {isLoadingRespuestas && <LoadingSpinner />}

@@ -80,10 +80,15 @@ export const startLoadingPreguntas = (id) => {
 export const startLoadingRespuestas = (id) => {
   // console.log("startLoadingRespuestas", id);
   return async (dispatch, getState) => {
-    dispatch(loadingRespuestas());
-    const respuestas = await loadRespuestasById(id);
-    // console.log("startLoadingRespuestas", respuestas);
-    dispatch(setRespuestas({ respuestas, idPregunta: id }));
+    try {
+      dispatch(setRespuestas(respuestas));
+      dispatch(loadingRespuestas());
+      const respuestas = await loadRespuestasById(id);
+      // console.log("startLoadingRespuestas", respuestas);
+      dispatch(setRespuestas({ respuestas, idPregunta: id }));
+    } catch (error) {
+      console.log("startLoadingRespuestas", error);
+    }
   };
 };
 
