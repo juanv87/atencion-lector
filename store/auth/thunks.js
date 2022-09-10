@@ -9,10 +9,12 @@
 // La propiedad type es un string que indica el tipo de acción que se está ejecutando.
 // La propiedad payload es un objeto que contiene la información que se va a utilizar para actualizar el estado de la aplicación.
 // En este caso, la propiedad payload es el objeto de usuario que se recibe como parámetro en la función que se exporta.
+import { collection, doc, setDoc } from "firebase/firestore/lite";
 
 import { signInWithGoogle, logoutFirebase } from "../../lib/firebase/providers";
 import { checkingCredentials, logout, login } from ".";
 import { clearEntriesLogout } from "../entries";
+import { FirebaseDB } from "../../lib/firebase/firebase";
 
 export const checkingAuthentication = () => {
   return async (dispatch) => {
@@ -25,6 +27,19 @@ export const startGoogleSignIn = () => {
     dispatch(checkingCredentials());
     const result = await signInWithGoogle();
     if (!result.ok) return dispatch(logout(result.errorMessage));
+
+    // if (metadata.creationTime === metadata.lastSignInTime) {
+    //   console.log("Nuevo usuario");
+    //   const newDoc = doc(collection(FirebaseDB, `usuarios`));
+    //   const user = {
+    //     id: newDoc.id,
+    //     displayName,
+    //     userName: email?.split("@")[0] || "",
+    //     email,
+    //     photoURL,
+    //   };
+    //   await setDoc(newDoc, user);
+    // }
     dispatch(login(result));
   };
 };

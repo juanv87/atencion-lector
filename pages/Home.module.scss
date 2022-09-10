@@ -23,6 +23,21 @@
   padding: 0 20px;
 }
 
+@media (max-width: $breakpoint-laptop) {
+  .homeContainer {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .homeContainer__left {
+    grid-column: span 3;
+  }
+  .homeContainer__right {
+    grid-column: span 3;
+  }
+  .homeContainer__main {
+    grid-column: span 6;
+  }
+}
+
 @media (max-width: $breakpoint-tablet) {
   .homeContainer {
     grid-template-columns: repeat(3, 1fr);

@@ -23,7 +23,6 @@ export const startNewPregunta = ({ titlePregunta }) => {
   return async (dispatch, getState) => {
     dispatch(savingNewPregunta());
     const { uid, displayName, email, photoURL } = getState().auth;
-    // Todo: guardarla en una coleccion de preguntas generales para el Feed.
     const newDoc = doc(collection(FirebaseDB, `preguntas`));
     const newPregunta = {
       id: newDoc.id,
@@ -93,5 +92,16 @@ export const startLoadingPreguntasByUserName = ({ name }) => {
     dispatch(loadingPreguntas());
     const preguntas = await loadPreguntasByUserName({ name });
     dispatch(setPreguntas(preguntas));
+  };
+};
+
+export const startSavingPregunta = ({ pregunta }) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    const newDoc = doc(
+      collection(FirebaseDB, "usuarios", uid, "preguntas"),
+      pregunta.id
+    );
+    await setDoc(newDoc, pregunta);
   };
 };
