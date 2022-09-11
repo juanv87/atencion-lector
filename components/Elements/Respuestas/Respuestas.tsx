@@ -6,13 +6,17 @@ import { Respuesta } from "../Respuesta/Respuesta";
 import LoadingSpinner from "../../Loaders/LoadingSpinner/LoadingSpinner";
 import styles from "./Respuestas.module.scss";
 
-export const Respuestas = ({ preguntaId = "" }) => {
+interface Props {
+  idPregunta: string;
+}
+
+export const Respuestas = ({ idPregunta }: Props) => {
   // Todo: Revisar si es eficiente traer todas las preguntas para obtener el id actual y traer las respuestas del store.
   const { preguntas, isLoadingRespuestas } = useAppSelector(
     (state) => state.entries
   );
   // Busco la posición de la pregunta actual en la lista de preguntas
-  const index = preguntas.findIndex((preg) => preg.id === preguntaId);
+  const index = preguntas.findIndex((preg) => preg.id === idPregunta);
   // Traigo las respuestas de la pregunta actual
   const { respuestas } = useAppSelector(
     (state) => state.entries.preguntas[index]
@@ -30,12 +34,12 @@ export const Respuestas = ({ preguntaId = "" }) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     // handleGetRespuestas();
-    preguntaId && dispatch(startLoadingRespuestas(preguntaId));
-  }, [preguntaId]);
+    idPregunta && dispatch(startLoadingRespuestas(idPregunta));
+  }, [idPregunta]);
   return (
     <section className={styles.respuestasContainer}>
       {isLoadingRespuestas && <LoadingSpinner />}
-      {respuestas.length > 0 &&
+      {respuestas &&
         respuestas.map(({ id, titulo, autor }) => (
           <Respuesta key={id} titulo={titulo} autor={autor} />
         ))}

@@ -6,6 +6,8 @@ interface Props {
 }
 
 export const loadPreguntasByUserName = async ({ name }: Props) => {
+  // * El problema aca es que trae las preguntas de firebase pero ahi no tiene las respuestas. Las respuestas estan en el store.
+
   const collectionQuery = query(
     collection(FirebaseDB, "preguntas"),
     where("autor.userName", "==", name)

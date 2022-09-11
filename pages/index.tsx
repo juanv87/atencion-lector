@@ -11,7 +11,7 @@ import styles from "./Home.module.scss";
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch();
-  const status = useCheckAuth();
+  useCheckAuth();
   useEffect(() => {
     dispatch(startLoadingPreguntas());
   }, []);

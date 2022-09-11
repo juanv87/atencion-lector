@@ -47,7 +47,7 @@ export const startGoogleSignIn = () => {
 export const startLogout = () => {
   return async (dispatch) => {
     await logoutFirebase();
-    dispatch(clearEntriesLogout());
+    // dispatch(clearEntriesLogout());
     dispatch(logout());
   };
 };

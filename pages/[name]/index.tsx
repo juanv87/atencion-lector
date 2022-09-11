@@ -15,14 +15,16 @@ import {
 } from "../../store/entries";
 import { loadPreguntasByUserName } from "../../helpers/loadPreguntasByUserName";
 import { Pregunta } from "../../components/Elements/Pregunta/Pregunta";
+import { useCheckAuth } from "../../hooks/useCheckAuth";
 
 const UserNickName: FC<AppProps> = ({ name }: any) => {
   const dispatch = useAppDispatch();
-  const { preguntas } = useAppSelector((state) => state.entries);
+  useCheckAuth();
   useEffect(() => {
     dispatch(startLoadingPreguntasByUserName({ name }));
   }, []);
 
+  const { preguntasByUserName } = useAppSelector((state) => state.entries);
   return (
     <>
       <Head>
@@ -31,9 +33,19 @@ const UserNickName: FC<AppProps> = ({ name }: any) => {
       </Head>
       <Header />
       <main className={styles.nameContainer}>
-        {preguntas.map((pregunta: any) => {
-          return <Pregunta key={pregunta.id} pregunta={pregunta} />;
-        })}
+        {preguntasByUserName &&
+          preguntasByUserName.map((pregunta: any) => {
+            return <Pregunta key={pregunta.id} pregunta={pregunta} />;
+          })}
+
+        {/* {preguntasByUserName &&
+          preguntasByUserName.map((pregunta) => {
+            console.log(
+              "🚀 ~ file: index.tsx ~ line 48 ~ preguntasByUserName.map ~ pregunta",
+              pregunta
+            );
+            return pregunta.titulo;
+          })} */}
       </main>
     </>
   );
