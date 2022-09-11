@@ -8,17 +8,14 @@ import { IPregunta } from "../../../types/IPregunta";
 import { AddRespuesta } from "../../User/AddRespuesta/AddRespuesta";
 import { AutorAvatar } from "../AutorAvatar/AutorAvatar";
 import { Respuestas } from "../Respuestas/Respuestas";
-import { MouseEvent, MouseEventHandler } from "react";
+import { MouseEvent, MouseEventHandler, useState } from "react";
 
 interface Props {
   pregunta: IPregunta;
 }
 
 export const Pregunta = ({ pregunta }: Props) => {
-  console.log(
-    "🚀 ~ file: Pregunta.tsx ~ line 18 ~ Pregunta ~ pregunta",
-    pregunta
-  );
+  const [showRespuestas, setShowRespuestas] = useState(false);
 
   const { id, titulo, autor } = pregunta;
   const dispatch = useAppDispatch();
@@ -26,6 +23,11 @@ export const Pregunta = ({ pregunta }: Props) => {
   const onSavePregunta = (e: MouseEvent) => {
     e.preventDefault();
     dispatch(startSavingPregunta({ pregunta }));
+  };
+
+  const onShowRespuestas = (e: MouseEvent) => {
+    e.preventDefault();
+    setShowRespuestas(!showRespuestas);
   };
 
   return (
@@ -37,7 +39,8 @@ export const Pregunta = ({ pregunta }: Props) => {
         <h2 className={styles.tarjetaPregunta__title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} />
         <button onClick={onSavePregunta}>Guardar</button>
-        <Respuestas preguntaId={pregunta.id} />
+        <button onClick={onShowRespuestas}>Ver respuestas</button>
+        {showRespuestas && id && <Respuestas idPregunta={id} />}
       </article>
     </>
   );

@@ -12,7 +12,8 @@ export const ListaPreguntas = () => {
     <>
       <section className={styles.listaPreguntas}>
         {isLoadingPreguntas && <LoadingSpinner />}
-        {preguntas.length > 1 &&
+        {preguntas &&
+          preguntas.length > 1 &&
           preguntas.map((pregunta: IPregunta) => (
             <Pregunta key={pregunta.id} pregunta={pregunta} />
           ))}

@@ -19,16 +19,12 @@ import { useCheckAuth } from "../../hooks/useCheckAuth";
 
 const UserNickName: FC<AppProps> = ({ name }: any) => {
   const dispatch = useAppDispatch();
-  const status = useCheckAuth();
-  const { preguntasByUserName } = useAppSelector((state) => state.entries);
-  console.log(
-    "🚀 ~ file: index.tsx ~ line 22 ~ preguntasByUserName",
-    preguntasByUserName
-  );
+  useCheckAuth();
   useEffect(() => {
     dispatch(startLoadingPreguntasByUserName({ name }));
   }, []);
 
+  const { preguntasByUserName } = useAppSelector((state) => state.entries);
   return (
     <>
       <Head>
