@@ -18,7 +18,11 @@ import { Pregunta } from "../../components/Elements/Pregunta/Pregunta";
 
 const UserNickName: FC<AppProps> = ({ name }: any) => {
   const dispatch = useAppDispatch();
-  const { preguntas } = useAppSelector((state) => state.entries);
+  const { preguntasByUserName } = useAppSelector((state) => state.entries);
+  console.log(
+    "🚀 ~ file: index.tsx ~ line 22 ~ preguntasByUserName",
+    preguntasByUserName
+  );
   useEffect(() => {
     dispatch(startLoadingPreguntasByUserName({ name }));
   }, []);
@@ -31,9 +35,19 @@ const UserNickName: FC<AppProps> = ({ name }: any) => {
       </Head>
       <Header />
       <main className={styles.nameContainer}>
-        {preguntas.map((pregunta: any) => {
-          return <Pregunta key={pregunta.id} pregunta={pregunta} />;
-        })}
+        {preguntasByUserName &&
+          preguntasByUserName.map((pregunta: any) => {
+            return <Pregunta key={pregunta.id} pregunta={pregunta} />;
+          })}
+
+        {/* {preguntasByUserName &&
+          preguntasByUserName.map((pregunta) => {
+            console.log(
+              "🚀 ~ file: index.tsx ~ line 48 ~ preguntasByUserName.map ~ pregunta",
+              pregunta
+            );
+            return pregunta.titulo;
+          })} */}
       </main>
     </>
   );

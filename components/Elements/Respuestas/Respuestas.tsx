@@ -6,16 +6,20 @@ import { Respuesta } from "../Respuesta/Respuesta";
 import LoadingSpinner from "../../Loaders/LoadingSpinner/LoadingSpinner";
 import styles from "./Respuestas.module.scss";
 
-export const Respuestas = ({ preguntaId = "" }) => {
+interface Props {
+  preguntaId: string;
+}
+
+export const Respuestas = ({ preguntaId }: Props) => {
   // Todo: Revisar si es eficiente traer todas las preguntas para obtener el id actual y traer las respuestas del store.
-  const { preguntas, isLoadingRespuestas } = useAppSelector(
+  const { preguntasByUserName, isLoadingRespuestas } = useAppSelector(
     (state) => state.entries
   );
   // Busco la posición de la pregunta actual en la lista de preguntas
-  const index = preguntas.findIndex((preg) => preg.id === preguntaId);
+  const index = preguntasByUserName.findIndex((preg) => preg.id === preguntaId);
   // Traigo las respuestas de la pregunta actual
   const { respuestas } = useAppSelector(
-    (state) => state.entries.preguntas[index]
+    (state) => state.entries.preguntasByUserName[index]
   );
 
   // * O traer las respuestas de la pregunta actual. Esto no actualiza el componente.

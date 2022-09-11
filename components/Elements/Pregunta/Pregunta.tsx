@@ -15,6 +15,11 @@ interface Props {
 }
 
 export const Pregunta = ({ pregunta }: Props) => {
+  console.log(
+    "🚀 ~ file: Pregunta.tsx ~ line 18 ~ Pregunta ~ pregunta",
+    pregunta
+  );
+
   const { id, titulo, autor } = pregunta;
   const dispatch = useAppDispatch();
 

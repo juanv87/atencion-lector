@@ -23,7 +23,18 @@ export const entriesSlice = createSlice({
       },
     ],
     preguntasByUserName: [
-      { id: "", titulo: "", createdAt: new Date().getTime() },
+      {
+        id: "",
+        titulo: "",
+        createdAt: new Date().getTime(),
+        autor: {
+          id: "",
+          displayName: "",
+          email: "",
+          photoURL: "",
+        },
+        respuestas: [],
+      },
     ],
     active: null,
   },
@@ -50,6 +61,10 @@ export const entriesSlice = createSlice({
     },
     setPreguntas: (state, action) => {
       state.preguntas = action.payload;
+      state.isLoadingPreguntas = false;
+    },
+    setPreguntasByUserName: (state, action) => {
+      state.preguntasByUserName = action.payload;
       state.isLoadingPreguntas = false;
     },
     setRespuestas: (state, action) => {
@@ -98,4 +113,5 @@ export const {
   setSaving,
   updatePregunta,
   updatingNewPregunta,
+  setPreguntasByUserName,
 } = entriesSlice.actions;

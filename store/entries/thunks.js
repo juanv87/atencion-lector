@@ -13,6 +13,7 @@ import {
   addNewRespuesta,
   updatingNewPregunta,
   loadingPreguntas,
+  setPreguntasByUserName,
 } from "./entriesSlice";
 
 // Funciones asincronas que modifican el state global de la aplicacion.
@@ -99,8 +100,13 @@ export const startLoadingRespuestas = (id) => {
 export const startLoadingPreguntasByUserName = ({ name }) => {
   return async (dispatch, getState) => {
     dispatch(loadingPreguntas());
+    dispatch(startLoadingPreguntas({ name }));
     const preguntas = await loadPreguntasByUserName({ name });
-    dispatch(setPreguntas(preguntas));
+    console.log(
+      "🚀 ~ file: thunks.js ~ line 104 ~ return ~ preguntas",
+      preguntas
+    );
+    dispatch(setPreguntasByUserName(preguntas));
   };
 };
 
