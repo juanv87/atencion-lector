@@ -12,14 +12,15 @@ interface Props {
 
 export const Respuestas = ({ preguntaId }: Props) => {
   // Todo: Revisar si es eficiente traer todas las preguntas para obtener el id actual y traer las respuestas del store.
-  const { preguntasByUserName, isLoadingRespuestas } = useAppSelector(
+  const { preguntas, isLoadingRespuestas } = useAppSelector(
     (state) => state.entries
   );
   // Busco la posición de la pregunta actual en la lista de preguntas
-  const index = preguntasByUserName.findIndex((preg) => preg.id === preguntaId);
+  // * No esta funcionando este index
+  const index = preguntas.findIndex((preg) => preg.id === preguntaId);
   // Traigo las respuestas de la pregunta actual
   const { respuestas } = useAppSelector(
-    (state) => state.entries.preguntasByUserName[index]
+    (state) => state.entries.preguntas[index]
   );
 
   // * O traer las respuestas de la pregunta actual. Esto no actualiza el componente.
@@ -39,7 +40,7 @@ export const Respuestas = ({ preguntaId }: Props) => {
   return (
     <section className={styles.respuestasContainer}>
       {isLoadingRespuestas && <LoadingSpinner />}
-      {respuestas.length > 0 &&
+      {respuestas &&
         respuestas.map(({ id, titulo, autor }) => (
           <Respuesta key={id} titulo={titulo} autor={autor} />
         ))}

@@ -15,9 +15,11 @@ import {
 } from "../../store/entries";
 import { loadPreguntasByUserName } from "../../helpers/loadPreguntasByUserName";
 import { Pregunta } from "../../components/Elements/Pregunta/Pregunta";
+import { useCheckAuth } from "../../hooks/useCheckAuth";
 
 const UserNickName: FC<AppProps> = ({ name }: any) => {
   const dispatch = useAppDispatch();
+  const status = useCheckAuth();
   const { preguntasByUserName } = useAppSelector((state) => state.entries);
   console.log(
     "🚀 ~ file: index.tsx ~ line 22 ~ preguntasByUserName",
