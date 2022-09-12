@@ -9,6 +9,8 @@ import { AddRespuesta } from "../../User/AddRespuesta/AddRespuesta";
 import { AutorAvatar } from "../AutorAvatar/AutorAvatar";
 import { Respuestas } from "../Respuestas/Respuestas";
 import { MouseEvent, MouseEventHandler, useState } from "react";
+import { IconBtnSave } from "../../Icons/IconBtnSave";
+import { IconShowRespuestas } from "../../Icons/IconShowRespuestas";
 
 interface Props {
   pregunta: IPregunta;
@@ -38,8 +40,26 @@ export const Pregunta = ({ pregunta }: Props) => {
         <AutorAvatar autor={autor} />
         <h2 className={styles.tarjetaPregunta__title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} />
-        <button onClick={onSavePregunta}>Guardar</button>
-        <button onClick={onShowRespuestas}>Ver respuestas</button>
+        <button
+          className={styles.tarjetaPregunta__buttonSave}
+          onClick={onSavePregunta}
+        >
+          <IconBtnSave size="15" color="black" />
+        </button>
+        <button
+          className={styles.tarjetaPregunta__buttonShowRespuestas}
+          onClick={onShowRespuestas}
+        >
+          {showRespuestas ? (
+            <>
+              <IconShowRespuestas /> <span>Ocultar respuestas</span>
+            </>
+          ) : (
+            <>
+              <IconShowRespuestas /> <span>Ver respuestas</span>
+            </>
+          )}
+        </button>
         {showRespuestas && id && <Respuestas idPregunta={id} />}
       </article>
     </>

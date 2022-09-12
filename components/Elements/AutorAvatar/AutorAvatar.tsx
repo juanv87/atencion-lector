@@ -18,12 +18,14 @@ export const AutorAvatar = ({ autor }: Props) => {
             <picture className={styles.autorAvatar__picture}>
               <img
                 className={styles.autorAvatar__imgAutor}
-                width="25"
-                src={photoURL}
-                alt={displayName}
+                width="30"
+                src={photoURL || "https://i.pravatar.cc/80"}
+                alt={displayName || "Lector/a anónimo/a"}
               />
             </picture>
-            <span className={styles.autorAvatar__name}>{displayName}</span>
+            <span className={styles.autorAvatar__name}>
+              {displayName || "Lector/a anónimo/a"}
+            </span>
           </a>
         </Link>
       </section>

@@ -4,12 +4,11 @@
 @mixin buttonBlue {
   // box-shadow: 5px 5px 0 $primary-color;
   background-color: $blue;
-  border-radius: 5px;
+  border-radius: 20px;
   color: #fff;
   font-family: $primary-font;
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
   padding: 10px 15px;
   text-align: center;
   cursor: pointer;

@@ -4,24 +4,33 @@
 .addRespuesta {
   display: flex;
   flex-direction: column;
+  position: relative;
+  opacity: 0.5;
+  transition: opacity 0.1s ease-in-out;
+  &:hover {
+    opacity: 1;
+  }
   &__button {
-    @include buttonBlue;
+    position: absolute;
+    right: 10px;
+    top: 8px;
     margin-left: auto;
+    cursor: pointer;
   }
   textarea {
-    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
-    border: none;
+    border: 1px solid rgba(0, 0, 0, 1);
     color: $blue;
-    font-family: $secondary-font;
-    font-size: 1rem;
-    height: 50px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    padding: 15px;
+    font-family: $primary-font;
+    font-size: 0.8rem;
+    height: 40px;
+    padding: 10px 15px;
     width: 100%;
     &:focus-visible {
       outline: mix($primary-color, $blue, 50%) auto 1px;
+    }
+    &::placeholder {
+      color: #000;
     }
   }
 }
