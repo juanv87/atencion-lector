@@ -10,6 +10,7 @@ interface Props {
 
 export const AddRespuesta = ({ idPregunta }: Props) => {
   const [titleRespuesta, setTitleRespuesta] = useState("");
+  const [active, setActive] = useState(false);
   const dispatch = useAppDispatch();
 
   const { isUpdating } = useAppSelector((state) => state.entries);
@@ -21,7 +22,7 @@ export const AddRespuesta = ({ idPregunta }: Props) => {
   };
   return (
     <>
-      <div className={styles.addRespuesta}>
+      <div className={`${styles.addRespuesta} ${active && styles.active}`}>
         <textarea
           maxLength={100}
           value={titleRespuesta}
