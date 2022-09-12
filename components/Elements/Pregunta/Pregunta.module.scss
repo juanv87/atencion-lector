@@ -43,6 +43,7 @@
     align-items: center;
     margin-top: 30px;
     gap: 5px;
+    color: #000;
     span {
       font-size: 0.9rem;
     }
@@ -54,6 +55,10 @@
     padding: 20px 10px;
     &__title {
       font-size: 1.5rem;
+    }
+    &__buttonSave {
+      top: 20px;
+      right: 10px;
     }
   }
 }
