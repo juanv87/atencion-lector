@@ -17,6 +17,7 @@
 }
 .homeContainer__main {
   grid-column: span 4;
+  background-color: #fff;
 }
 
 @media (max-width: $breakpoint-laptop) {
