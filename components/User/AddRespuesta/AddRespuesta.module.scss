@@ -1,6 +1,11 @@
 @import "../../../styles/Fonts.scss";
 @import "../../../styles/Colors.scss";
 @import "../../../styles/Buttons.scss";
+.active {
+  textarea {
+    height: 100px !important;
+  }
+}
 .addRespuesta {
   display: flex;
   flex-direction: column;
