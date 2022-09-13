@@ -1,6 +1,66 @@
 @import "../../styles/Sizes.scss";
+@import "../../styles/Colors.scss";
+@import "../../styles/BreakPoints.scss";
 
 .nameContainer {
-  max-width: $widthContainer;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  min-height: 100vh;
+}
+.nameContainer__left {
+  grid-column: span 4;
+  background-color: $gray-light;
+}
+.nameContainer__right {
+  grid-column: span 4;
+  background-color: $gray-light;
+}
+.nameContainer__main {
+  grid-column: span 4;
+  background-color: #fff;
+}
+
+@media (max-width: $breakpoint-laptop) {
+  .nameContainer {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .nameContainer__left {
+    grid-column: span 3;
+  }
+  .nameContainer__right {
+    grid-column: span 3;
+  }
+  .nameContainer__main {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .nameContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .nameContainer__left {
+    grid-column: span 3;
+  }
+  .nameContainer__right {
+    grid-column: span 3;
+  }
+  .nameContainer__main {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .nameContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .nameContainer__left {
+    grid-column: span 3;
+  }
+  .nameContainer__right {
+    grid-column: span 3;
+  }
+  .nameContainer__main {
+    grid-column: span 3;
+  }
 }
