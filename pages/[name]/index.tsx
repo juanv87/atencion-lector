@@ -33,10 +33,14 @@ const UserNickName: FC<AppProps> = ({ name }: any) => {
       </Head>
       <Header />
       <main className={styles.nameContainer}>
-        {preguntasByUserName &&
-          preguntasByUserName.map((pregunta: any) => {
-            return <Pregunta key={pregunta.id} pregunta={pregunta} />;
-          })}
+        <div className={styles.nameContainer__left}></div>
+        <div className={styles.nameContainer__main}>
+          {preguntasByUserName &&
+            preguntasByUserName.map((pregunta: any) => {
+              return <Pregunta key={pregunta.id} pregunta={pregunta} />;
+            })}
+        </div>
+        <div className={styles.nameContainer__right}></div>
 
         {/* {preguntasByUserName &&
           preguntasByUserName.map((pregunta) => {
