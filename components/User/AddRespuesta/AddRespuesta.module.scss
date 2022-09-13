@@ -32,6 +32,7 @@
     padding: 10px 15px;
     width: 100%;
     background-color: #fff;
+    transition: height 0.1s ease;
     &:focus-visible {
       outline: mix($primary-color, $blue, 50%) auto 1px;
     }
