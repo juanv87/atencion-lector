@@ -3,6 +3,7 @@ import { loadPreguntas } from "../../helpers/loadPreguntas";
 import { loadPreguntasByUserName } from "../../helpers/loadPreguntasByUserName";
 import { loadRespuestasById } from "../../helpers/loadRespuestasById";
 import { FirebaseDB } from "../../lib/firebase/firebase";
+import { loadSavedPreguntasByUser } from "../../services/loadSavedPreguntasByUser";
 import {
   addNewEmptyPregunta,
   savingNewPregunta,
@@ -14,6 +15,7 @@ import {
   updatingNewPregunta,
   loadingPreguntas,
   setPreguntasByUserName,
+  setSavedPreguntasByUser,
 } from "./entriesSlice";
 
 // Funciones asincronas que modifican el state global de la aplicacion.
@@ -84,11 +86,6 @@ export const startLoadingRespuestas = (id) => {
     try {
       dispatch(loadingRespuestas());
       const respuestas = await loadRespuestasById(id);
-      console.log(
-        "🚀 ~ file: thunks.js ~ line 91 ~ return ~ respuestas",
-        respuestas
-      );
-
       dispatch(setRespuestas({ respuestas, idPregunta: id }));
     } catch (error) {
       console.log("startLoadingRespuestas", error);
@@ -107,6 +104,19 @@ export const startLoadingPreguntasByUserName = ({ name }) => {
       preguntas
     );
     dispatch(setPreguntasByUserName(preguntas));
+  };
+};
+
+export const startLoadingSavedPreguntasByUser = ({ name, uid }) => {
+  return async (dispatch, getState) => {
+    try {
+      // dispatch(loadingPreguntas());
+      // dispatch(startLoadingPreguntas({ name }));
+      const savedPreguntas = await loadSavedPreguntasByUser({ uid });
+      dispatch(setSavedPreguntasByUser(savedPreguntas));
+    } catch (error) {
+      console.log("startLoadingSavedPreguntasByUser", error);
+    }
   };
 };
 
