@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./AddRespuesta.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { startNewRespuesta } from "../../../store/entries";
@@ -27,6 +27,7 @@ export const AddRespuesta = ({ idPregunta }: Props) => {
           maxLength={100}
           value={titleRespuesta}
           onChange={(e) => setTitleRespuesta(e.target.value)}
+          onClick={() => setActive(true)}
           rows={10}
           placeholder="Escribí acá tu respuesta"
         />
