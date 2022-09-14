@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect } from "react";
 import { ListaPreguntas } from "../components/Elements/ListaPreguntas/ListaPreguntas";
+import { ListaSavedPreguntas } from "../components/Elements/ListaSavedPreguntas/ListaSavedPreguntas";
 import { Header } from "../components/ui/Header/Header";
 import { AddPregunta } from "../components/User/AddPregunta/AddPregunta";
 import { useAppDispatch } from "../hooks";
@@ -11,7 +12,7 @@ import styles from "./Home.module.scss";
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch();
-  useCheckAuth();
+  const status = useCheckAuth();
   useEffect(() => {
     dispatch(startLoadingPreguntas());
   }, []);
@@ -30,7 +31,9 @@ const Home: NextPage = () => {
             <AddPregunta />
             <ListaPreguntas />
           </div>
-          <div className={styles.homeContainer__right}></div>
+          <div className={styles.homeContainer__right}>
+            <ListaSavedPreguntas status={status} />
+          </div>
         </div>
       </main>
     </>

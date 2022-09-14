@@ -107,8 +107,11 @@ export const startLoadingPreguntasByUserName = ({ name }) => {
   };
 };
 
-export const startLoadingSavedPreguntasByUser = ({ name, uid }) => {
+export const startLoadingSavedPreguntasByUser = () => {
   return async (dispatch, getState) => {
+    const { uid, status } = getState().auth;
+    console.log("🚀 ~ file: thunks.js ~ line 113 ~ return ~ status", status);
+    console.log("🚀 ~ file: thunks.js ~ line 113 ~ return ~ uid", uid);
     try {
       // dispatch(loadingPreguntas());
       // dispatch(startLoadingPreguntas({ name }));
@@ -116,6 +119,7 @@ export const startLoadingSavedPreguntasByUser = ({ name, uid }) => {
       dispatch(setSavedPreguntasByUser(savedPreguntas));
     } catch (error) {
       console.log("startLoadingSavedPreguntasByUser", error);
+      throw error;
     }
   };
 };
