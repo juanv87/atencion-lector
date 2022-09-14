@@ -36,6 +36,20 @@ export const entriesSlice = createSlice({
         respuestas: [],
       },
     ],
+    savedPreguntasByUser: [
+      {
+        id: "",
+        titulo: "",
+        createdAt: new Date().getTime(),
+        autor: {
+          id: "",
+          displayName: "",
+          email: "",
+          photoURL: "",
+        },
+        respuestas: [],
+      },
+    ],
     active: null,
   },
   reducers: {
@@ -66,6 +80,10 @@ export const entriesSlice = createSlice({
     setPreguntasByUserName: (state, action) => {
       state.preguntasByUserName = action.payload;
       state.isLoadingPreguntas = false;
+    },
+    setSavedPreguntasByUser: (state, action) => {
+      state.savedPreguntasByUser = action.payload;
+      // state.isLoadingPreguntas = false;
     },
     setRespuestas: (state, action) => {
       const index = state.preguntas.findIndex(
@@ -114,4 +132,5 @@ export const {
   updatePregunta,
   updatingNewPregunta,
   setPreguntasByUserName,
+  setSavedPreguntasByUser,
 } = entriesSlice.actions;
