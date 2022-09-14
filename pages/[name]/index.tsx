@@ -1,25 +1,26 @@
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 import { GetServerSideProps } from "next";
-import { AppProps } from "next/app";
 import { Header } from "../../components/ui/Header/Header";
 import Head from "next/head";
 
 import styles from "./Name.module.scss";
 
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { FirebaseDB } from "../../lib/firebase/firebase";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import {
-  startLoadingPreguntas,
-  startLoadingPreguntasByUserName,
-} from "../../store/entries";
-import { loadPreguntasByUserName } from "../../helpers/loadPreguntasByUserName";
+import { startLoadingPreguntasByUserName } from "../../store/entries";
 import { Pregunta } from "../../components/Elements/Pregunta/Pregunta";
 import { useCheckAuth } from "../../hooks/useCheckAuth";
+import { ListaSavedPreguntas } from "../../components/Elements/ListaSavedPreguntas/ListaSavedPreguntas";
+import { IPregunta } from "../../types/IPregunta";
 
-const UserNickName: FC<AppProps> = ({ name }: any) => {
+interface Props {
+  name: string;
+}
+
+const UserNickName = ({ name }: Props) => {
   const dispatch = useAppDispatch();
+  const status = useCheckAuth();
   useCheckAuth();
+  console.log("🚀 ~ file: index.tsx ~ line 22 ~ UserNickName ~ status", status);
   useEffect(() => {
     dispatch(startLoadingPreguntasByUserName({ name }));
   }, []);
@@ -36,20 +37,13 @@ const UserNickName: FC<AppProps> = ({ name }: any) => {
         <div className={styles.nameContainer__left}></div>
         <div className={styles.nameContainer__main}>
           {preguntasByUserName &&
-            preguntasByUserName.map((pregunta: any) => {
+            preguntasByUserName.map((pregunta: IPregunta) => {
               return <Pregunta key={pregunta.id} pregunta={pregunta} />;
             })}
         </div>
-        <div className={styles.nameContainer__right}></div>
-
-        {/* {preguntasByUserName &&
-          preguntasByUserName.map((pregunta) => {
-            console.log(
-              "🚀 ~ file: index.tsx ~ line 48 ~ preguntasByUserName.map ~ pregunta",
-              pregunta
-            );
-            return pregunta.titulo;
-          })} */}
+        <div className={styles.nameContainer__right}>
+          <ListaSavedPreguntas status={status} />
+        </div>
       </main>
     </>
   );
