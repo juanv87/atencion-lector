@@ -8,7 +8,7 @@ import { IPregunta } from "../../../types/IPregunta";
 import { AddRespuesta } from "../../User/AddRespuesta/AddRespuesta";
 import { AutorAvatar } from "../AutorAvatar/AutorAvatar";
 import { Respuestas } from "../Respuestas/Respuestas";
-import { MouseEvent, MouseEventHandler, useState } from "react";
+import { MouseEvent, MouseEventHandler, useEffect, useState } from "react";
 import { IconBtnSave } from "../../Icons/IconBtnSave";
 import { IconShowRespuestas } from "../../Icons/IconShowRespuestas";
 
@@ -17,6 +17,7 @@ interface Props {
 }
 
 export const Pregunta = ({ pregunta }: Props) => {
+  const { status } = useAppSelector((state) => state.auth);
   const [showRespuestas, setShowRespuestas] = useState(false);
 
   const { id, titulo, autor } = pregunta;
@@ -31,6 +32,10 @@ export const Pregunta = ({ pregunta }: Props) => {
     e.preventDefault();
     setShowRespuestas(!showRespuestas);
   };
+
+  useEffect(() => {
+    setShowRespuestas(true);
+  }, []);
 
   return (
     <>
