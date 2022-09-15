@@ -17,10 +17,13 @@ interface Props {
 }
 
 export const Pregunta = ({ pregunta }: Props) => {
-  const { status } = useAppSelector((state) => state.auth);
   const [showRespuestas, setShowRespuestas] = useState(false);
 
-  const { id, titulo, autor } = pregunta;
+  const { id, titulo, autor, respuestas } = pregunta;
+  console.log(
+    "🚀 ~ file: Pregunta.tsx ~ line 27 ~ Pregunta ~ respuestas",
+    respuestas
+  );
   const dispatch = useAppDispatch();
 
   const onSavePregunta = (e: MouseEvent) => {
@@ -43,28 +46,27 @@ export const Pregunta = ({ pregunta }: Props) => {
         className={`${styles.tarjetaPregunta} animate__fadeInUp animate__animated animate__faster`}
       >
         <AutorAvatar autor={autor} />
-        <h2 className={styles.tarjetaPregunta__title}>{titulo}</h2>
+        <h2 className={styles.title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} />
-        <button
-          className={styles.tarjetaPregunta__buttonSave}
-          onClick={onSavePregunta}
-        >
+        <button className={styles.buttonSave} onClick={onSavePregunta}>
           <IconBtnSave size="15" color="black" />
         </button>
-        <button
-          className={styles.tarjetaPregunta__buttonShowRespuestas}
-          onClick={onShowRespuestas}
-        >
-          {showRespuestas ? (
-            <>
-              <IconShowRespuestas /> <span>Ocultar respuestas</span>
-            </>
-          ) : (
-            <>
-              <IconShowRespuestas /> <span>Ver respuestas</span>
-            </>
-          )}
-        </button>
+        {respuestas.length > 0 ? (
+          <button
+            className={styles.buttonShowRespuestas}
+            onClick={onShowRespuestas}
+          >
+            <IconShowRespuestas />
+            <span>
+              {showRespuestas
+                ? "Ocultar respuestas"
+                : `Ver respuestas (${respuestas?.length})`}
+            </span>
+          </button>
+        ) : (
+          <p className={styles.sinRespuestas}>Todavía no hay respuestas</p>
+        )}
+
         {showRespuestas && id && <Respuestas idPregunta={id} />}
       </article>
     </>

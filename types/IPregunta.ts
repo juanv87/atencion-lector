@@ -5,5 +5,5 @@ export interface IPregunta {
   titulo: string;
   createdAt: unknown;
   autor: IAutor;
-  respuestas?: Object;
+  respuestas: Object[];
 }
