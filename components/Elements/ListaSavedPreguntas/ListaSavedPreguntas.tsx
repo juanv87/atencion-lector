@@ -20,7 +20,7 @@ export const ListaSavedPreguntas = ({ status }: Props) => {
     <>
       <section className={styles.listaSavedPreguntas}>
         <h2>Tus preguntas guardadas:</h2>
-        {savedPreguntasByUser && savedPreguntasByUser.length > 0 ? (
+        {savedPreguntasByUser && savedPreguntasByUser[0].id.length > 0 ? (
           savedPreguntasByUser.map((pregunta) => {
             return <SavedPregunta key={pregunta.id} pregunta={pregunta} />;
           })
