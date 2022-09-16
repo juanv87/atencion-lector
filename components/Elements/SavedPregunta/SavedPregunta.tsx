@@ -16,7 +16,7 @@ export const SavedPregunta = ({ pregunta }: Props) => {
   return (
     <>
       <article className={styles.savedPregunta}>
-        <AutorAvatar autor={autor} />
+        <AutorAvatar avatarSize="20" autor={autor} />
         <h3>{titulo}</h3>
       </article>
     </>

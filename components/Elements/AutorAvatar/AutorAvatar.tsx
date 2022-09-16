@@ -6,9 +6,10 @@ import styles from "./AutorAvatar.module.scss";
 
 interface Props {
   autor: IAutor;
+  avatarSize?: string;
 }
 
-export const AutorAvatar = ({ autor }: Props) => {
+export const AutorAvatar = ({ autor, avatarSize = "30" }: Props) => {
   const { displayName, photoURL, userName } = autor;
   return (
     <>
@@ -18,7 +19,7 @@ export const AutorAvatar = ({ autor }: Props) => {
             <picture className={styles.autorAvatar__picture}>
               <img
                 className={styles.autorAvatar__imgAutor}
-                width="30"
+                width={avatarSize}
                 src={photoURL || "https://i.pravatar.cc/80"}
                 alt={displayName || "Lector/a anónimo/a"}
               />
