@@ -39,7 +39,7 @@ export const Respuestas = ({ idPregunta }: Props) => {
   return (
     <section className={styles.respuestasContainer}>
       {isLoadingRespuestas && <LoadingSpinner />}
-      {respuestas &&
+      {respuestas && !isLoadingRespuestas &&
         respuestas.map(({ id, titulo, autor }) => (
           <Respuesta key={id} titulo={titulo} autor={autor} />
         ))}
