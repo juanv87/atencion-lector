@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { startLoadingSavedPreguntasByUser } from "../../../store/entries";
-import { Pregunta } from "../Pregunta/Pregunta";
+import { PreguntaCard } from "../PreguntaCard/PreguntaCard";
 import { SavedPregunta } from "../SavedPregunta/SavedPregunta";
 import styles from "./ListaSavedPreguntas.module.scss";
 

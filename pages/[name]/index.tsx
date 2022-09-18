@@ -7,7 +7,7 @@ import styles from "./Name.module.scss";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { startLoadingPreguntasByUserName } from "../../store/entries";
-import { Pregunta } from "../../components/Elements/Pregunta/Pregunta";
+import { PreguntaCard } from "../../components/Elements/PreguntaCard/PreguntaCard";
 import { useCheckAuth } from "../../hooks/useCheckAuth";
 import { ListaSavedPreguntas } from "../../components/Elements/ListaSavedPreguntas/ListaSavedPreguntas";
 import { IPregunta } from "../../types/IPregunta";
@@ -20,7 +20,7 @@ const UserNickName = ({ name }: Props) => {
   const dispatch = useAppDispatch();
   const status = useCheckAuth();
   useCheckAuth();
-  console.log("🚀 ~ file: index.tsx ~ line 22 ~ UserNickName ~ status", status);
+  // console.log("🚀 ~ file: index.tsx ~ line 22 ~ UserNickName ~ status", status);
   useEffect(() => {
     dispatch(startLoadingPreguntasByUserName({ name }));
   }, []);
@@ -38,7 +38,7 @@ const UserNickName = ({ name }: Props) => {
         <div className={styles.nameContainer__main}>
           {preguntasByUserName &&
             preguntasByUserName.map((pregunta: IPregunta) => {
-              return <Pregunta key={pregunta.id} pregunta={pregunta} />;
+              return <PreguntaCard key={pregunta.id} pregunta={pregunta} />;
             })}
         </div>
         <div className={styles.nameContainer__right}>

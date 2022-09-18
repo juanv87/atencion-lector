@@ -31,9 +31,9 @@ const Home: NextPage = () => {
             <AddPregunta />
             <ListaPreguntas />
           </div>
-          <div className={styles.homeContainer__right}>
+          {/* <div className={styles.homeContainer__right}>
             <ListaSavedPreguntas status={status} />
-          </div>
+          </div> */}
         </div>
       </main>
     </>

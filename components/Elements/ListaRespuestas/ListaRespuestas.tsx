@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { loadRespuestasById } from "../../../helpers/loadRespuestasById";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { startLoadingRespuestas } from "../../../store/entries";
-import { Respuesta } from "../Respuesta/Respuesta";
+import { Respuesta } from "../RespuestaCard/RespuestaCard";
 import LoadingSpinner from "../../Loaders/LoadingSpinner/LoadingSpinner";
 import styles from "./Respuestas.module.scss";
 
@@ -10,11 +10,11 @@ interface Props {
   idPregunta: string;
 }
 
-export const Respuestas = ({ idPregunta }: Props) => {
+export const ListaRespuestas = ({ idPregunta }: Props) => {
   // Todo: Revisar si es eficiente traer todas las preguntas para obtener el id actual y traer las respuestas del store.
   const { preguntas, isLoadingRespuestas } = useAppSelector(
     (state) => state.entries
-  );
+    );
   // Busco la posición de la pregunta actual en la lista de preguntas
   const index = preguntas.findIndex((preg) => preg.id === idPregunta);
   // Traigo las respuestas de la pregunta actual

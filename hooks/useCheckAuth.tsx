@@ -14,7 +14,6 @@ export const useCheckAuth = () => {
       if (!user) return dispatch(logout(user));
       const { displayName, email, photoURL, uid } = user;
       dispatch(login({ displayName, email, photoURL, uid }));
-      dispatch(startLoadingPreguntas());
     });
   }, []);
   return status;
