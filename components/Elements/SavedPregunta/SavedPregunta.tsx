@@ -8,10 +8,10 @@ interface Props {
 }
 
 export const SavedPregunta = ({ pregunta }: Props) => {
-  console.log(
-    "🚀 ~ file: SavedPregunta.tsx ~ line 10 ~ SavedPregunta ~ pregunta",
-    pregunta
-  );
+  // console.log(
+  //   "🚀 ~ file: SavedPregunta.tsx ~ line 10 ~ SavedPregunta ~ pregunta",
+  //   pregunta
+  // );
   const { autor, titulo } = pregunta;
   return (
     <>

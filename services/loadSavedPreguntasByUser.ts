@@ -6,10 +6,10 @@ interface Props {
 }
 
 export const loadSavedPreguntasByUser = async ({ uid }: Props) => {
-  console.log(
-    "🚀 ~ file: loadSavedPreguntasByUser.ts ~ line 9 ~ loadSavedPreguntasByUser ~ uid",
-    uid
-  );
+  // console.log(
+  //   "🚀 ~ file: loadSavedPreguntasByUser.ts ~ line 9 ~ loadSavedPreguntasByUser ~ uid",
+  //   uid
+  // );
 
   const collectionRef = collection(FirebaseDB, "usuarios", uid, "preguntas");
 
@@ -18,6 +18,6 @@ export const loadSavedPreguntasByUser = async ({ uid }: Props) => {
   docs.forEach((doc) => {
     savedPreguntas.push({ id: doc.id, ...doc.data() });
   });
-  console.log("loadPreguntasByUserName", savedPreguntas);
+  // console.log("loadPreguntasByUserName", savedPreguntas);
   return savedPreguntas;
 };

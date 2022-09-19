@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { startLoadingSavedPreguntasByUser } from "../../../store/entries";
-import { Pregunta } from "../Pregunta/Pregunta";
+import { PreguntaCard } from "../PreguntaCard/PreguntaCard";
 import { SavedPregunta } from "../SavedPregunta/SavedPregunta";
 import styles from "./ListaSavedPreguntas.module.scss";
 
@@ -20,7 +20,7 @@ export const ListaSavedPreguntas = ({ status }: Props) => {
     <>
       <section className={styles.listaSavedPreguntas}>
         <h2>Tus preguntas guardadas:</h2>
-        {savedPreguntasByUser && savedPreguntasByUser[0].id.length > 0 ? (
+        {savedPreguntasByUser && savedPreguntasByUser[0]?.id.length > 0 ? (
           savedPreguntasByUser.map((pregunta) => {
             return <SavedPregunta key={pregunta.id} pregunta={pregunta} />;
           })
