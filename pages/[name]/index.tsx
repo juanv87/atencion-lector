@@ -20,10 +20,9 @@ const UserNickName = ({ name }: Props) => {
   const dispatch = useAppDispatch();
   const status = useCheckAuth();
   useCheckAuth();
-  // console.log("🚀 ~ file: index.tsx ~ line 22 ~ UserNickName ~ status", status);
   useEffect(() => {
     dispatch(startLoadingPreguntasByUserName({ name }));
-  }, []);
+  }, [name]);
 
   const { preguntasByUserName } = useAppSelector((state) => state.entries);
   return (

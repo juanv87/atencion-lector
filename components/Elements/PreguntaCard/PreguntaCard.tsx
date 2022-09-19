@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import {
-  startLoadingRespuestas,
   startSavingPregunta,
 } from "../../../store/entries";
 import styles from "./Pregunta.module.scss";
@@ -19,17 +18,8 @@ interface Props {
 export const PreguntaCard = ({ pregunta }: Props) => {
   const [showRespuestas, setShowRespuestas] = useState(false);
 
-  const { isLoadingPreguntas } = useAppSelector(
-    (state) => state.entries
-    );
-  console.log("🚀 ~ file: PreguntaCard.tsx ~ line 23 ~ PreguntaCard ~ isLoadingPreguntas", isLoadingPreguntas)
-
-
   const { id, titulo, autor, respuestas } = pregunta;
-  // console.log(
-  //   "🚀 ~ file: Pregunta.tsx ~ line 27 ~ Pregunta ~ respuestas",
-  //   respuestas
-  // );
+
   const dispatch = useAppDispatch();
 
   const onSavePregunta = (e: MouseEvent) => {
@@ -45,9 +35,6 @@ export const PreguntaCard = ({ pregunta }: Props) => {
   useEffect(() => {
     setShowRespuestas(true);
   }, []);
-
-  console.log('Respuestas desde PreguntaCard', respuestas)
-  console.log('Preguntas desde PreguntaCard', pregunta)
 
   return (
     <>
@@ -76,7 +63,7 @@ export const PreguntaCard = ({ pregunta }: Props) => {
           <p className={styles.sinRespuestas}>Todavía no hay respuestas</p>
         )}
 
-        {showRespuestas && id && <ListaRespuestas idPregunta={id} />}
+        {showRespuestas && id && <ListaRespuestas respuestas={respuestas} />}
       </article>
     </>
   );
