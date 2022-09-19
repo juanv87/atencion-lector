@@ -1,7 +1,14 @@
-import { collection, doc, setDoc } from "firebase/firestore/lite";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  query,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore/lite";
 import { loadPreguntas } from "../../helpers/loadPreguntas";
 import { loadPreguntasByUserName } from "../../helpers/loadPreguntasByUserName";
-import { loadRespuestasById } from "../../helpers/loadRespuestasById";
 import { FirebaseDB } from "../../lib/firebase/firebase";
 import { loadSavedPreguntasByUser } from "../../services/loadSavedPreguntasByUser";
 import {
@@ -9,8 +16,6 @@ import {
   savingNewPregunta,
   setActivePregunta,
   setPreguntas,
-  setRespuestas,
-  loadingRespuestas,
   addNewRespuesta,
   updatingNewPregunta,
   loadingPreguntas,
@@ -51,11 +56,18 @@ export const startNewRespuesta = (titleRespuesta, idPregunta) => {
   return async (dispatch, getState) => {
     dispatch(updatingNewPregunta());
     const { uid, displayName, email, photoURL } = getState().auth;
-    const newDoc = doc(
-      collection(FirebaseDB, `preguntas/${idPregunta}/respuestas`)
-    );
+
+    const docRef = doc(FirebaseDB, "preguntas", idPregunta);
+
+    // const collectionQuery = query(
+    //   collection(FirebaseDB, "preguntas"),
+    //   where("id", "==", idPregunta)
+    // );
+
+    // const newDoc = doc(
+    //   collection(FirebaseDB, `preguntas/${idPregunta}/respuestas`)
+    // );
     const newRespuesta = {
-      id: newDoc.id,
       idPregunta,
       titulo: titleRespuesta,
       autor: {
@@ -67,7 +79,8 @@ export const startNewRespuesta = (titleRespuesta, idPregunta) => {
       },
       createdAt: new Date().getTime(),
     };
-    await setDoc(newDoc, newRespuesta);
+    await updateDoc(docRef, { respuestas: arrayUnion(newRespuesta) });
+
     dispatch(addNewRespuesta({ idPregunta, newRespuesta }));
   };
 };
@@ -80,29 +93,15 @@ export const startLoadingPreguntas = (id) => {
   };
 };
 
-export const startLoadingRespuestas = (id) => {
-  // console.log("startLoadingRespuestas", id);
-  return async (dispatch, getState) => {
-    try {
-      dispatch(loadingRespuestas());
-      const respuestas = await loadRespuestasById(id);
-      dispatch(setRespuestas({ respuestas, idPregunta: id }));
-    } catch (error) {
-      console.log("startLoadingRespuestas", error);
-    }
-    // console.log("startLoadingRespuestas", respuestas);
-  };
-};
-
 export const startLoadingPreguntasByUserName = ({ name }) => {
   return async (dispatch, getState) => {
     dispatch(loadingPreguntas());
     dispatch(startLoadingPreguntas({ name }));
     const preguntas = await loadPreguntasByUserName({ name });
-    console.log(
-      "🚀 ~ file: thunks.js ~ line 104 ~ return ~ preguntas",
-      preguntas
-    );
+    // console.log(
+    //   "🚀 ~ file: thunks.js ~ line 104 ~ return ~ preguntas",
+    //   preguntas
+    // );
     dispatch(setPreguntasByUserName(preguntas));
   };
 };
@@ -110,15 +109,10 @@ export const startLoadingPreguntasByUserName = ({ name }) => {
 export const startLoadingSavedPreguntasByUser = () => {
   return async (dispatch, getState) => {
     const { uid, status } = getState().auth;
-    console.log("🚀 ~ file: thunks.js ~ line 113 ~ return ~ status", status);
-    console.log("🚀 ~ file: thunks.js ~ line 113 ~ return ~ uid", uid);
     try {
-      // dispatch(loadingPreguntas());
-      // dispatch(startLoadingPreguntas({ name }));
       const savedPreguntas = await loadSavedPreguntasByUser({ uid });
       dispatch(setSavedPreguntasByUser(savedPreguntas));
     } catch (error) {
-      console.log("startLoadingSavedPreguntasByUser", error);
       throw error;
     }
   };
@@ -127,10 +121,7 @@ export const startLoadingSavedPreguntasByUser = () => {
 export const startSavingPregunta = ({ pregunta }) => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
-    const newDoc = doc(
-      collection(FirebaseDB, "usuarios", uid, "preguntas"),
-      pregunta.id
-    );
-    await setDoc(newDoc, pregunta);
+    const newDoc = doc(collection(FirebaseDB, "usuarios"), uid);
+    await updateDoc(newDoc, { preguntasGuardadas: arrayUnion(pregunta) })
   };
 };
