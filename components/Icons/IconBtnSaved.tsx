@@ -1,19 +1,17 @@
 import React from "react";
 
-export const IconBtnSaved = ({ size = "25", color = "black" }) => {
-  // Convert the size to a number
-  const sizeNumber = Number(size);
+export const IconBtnSaved = ({ size = "16", color = "black" }) => {
   return (
     <svg
-      width={sizeNumber}
-      height={`${sizeNumber + 5}`}
-      viewBox="0 0 22 28"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 16 16"
     >
       <path
-        d="M6 21a1 1 0 0 1-.49-.13A1 1 0 0 1 5 20V5.33A2.28 2.28 0 0 1 7.2 3h9.6A2.28 2.28 0 0 1 19 5.33V20a1 1 0 0 1-.5.86a1 1 0 0 1-1 0l-5.67-3.21l-5.33 3.2A1 1 0 0 1 6 21Z"
         fill={color}
+        d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"
       />
     </svg>
   );

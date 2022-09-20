@@ -30,7 +30,7 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     e.preventDefault();
     setSavingPregunta(true);
     await dispatch(startSavingPregunta({ pregunta }));
-    setSavingPregunta(false);
+    setSavedPregunta(true);
   };
 
   const onShowRespuestas = (e: MouseEvent) => {
