@@ -111,6 +111,8 @@ export const startLoadingSavedPreguntasByUser = () => {
     const { uid, status } = getState().auth;
     try {
       const savedPreguntas = await loadSavedPreguntasByUser({ uid });
+      console.log("loadPreguntasByUserName desde thunk", savedPreguntas);
+
       dispatch(setSavedPreguntasByUser(savedPreguntas));
     } catch (error) {
       throw error;
@@ -122,6 +124,10 @@ export const startSavingPregunta = ({ pregunta }) => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
     const newDoc = doc(collection(FirebaseDB, "usuarios"), uid);
-    await updateDoc(newDoc, { preguntasGuardadas: arrayUnion(pregunta) })
+    try {
+      await updateDoc(newDoc, { preguntasGuardadas: arrayUnion(pregunta) })      
+    } catch (error) {
+      console.log('error desde savingPregunta', error)
+    }
   };
 };

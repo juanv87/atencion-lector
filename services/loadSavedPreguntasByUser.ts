@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore/lite";
+import { collection, getDocs, query, where , doc, getDoc} from "firebase/firestore/lite";
 import { FirebaseDB } from "../lib/firebase/firebase";
 
 interface Props {
@@ -6,18 +6,14 @@ interface Props {
 }
 
 export const loadSavedPreguntasByUser = async ({ uid }: Props) => {
-  // console.log(
-  //   "🚀 ~ file: loadSavedPreguntasByUser.ts ~ line 9 ~ loadSavedPreguntasByUser ~ uid",
-  //   uid
-  // );
+  
+  const collectionRef = doc(FirebaseDB, "usuarios", uid);
 
-  const collectionRef = collection(FirebaseDB, "usuarios", uid, "preguntas");
-
-  const docs = await getDocs(collectionRef);
-  const savedPreguntas = [] as Array<{}>;
-  docs.forEach((doc) => {
-    savedPreguntas.push({ id: doc.id, ...doc.data() });
-  });
-  // console.log("loadPreguntasByUserName", savedPreguntas);
+  const docs = await getDoc(collectionRef);
+  console.log("🚀 ~ file: loadSavedPreguntasByUser.ts ~ line 17 ~ loadSavedPreguntasByUser ~ docs", docs.data())
+  
+  // const savedPreguntas = [] as Array<{}>;
+  const userInfo = docs.data()
+  const savedPreguntas = userInfo?.preguntasGuardadas  
   return savedPreguntas;
 };
