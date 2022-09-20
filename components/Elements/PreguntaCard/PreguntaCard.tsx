@@ -1,13 +1,11 @@
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import {
-  startSavingPregunta,
-} from "../../../store/entries";
+import { startSavingPregunta } from "../../../store/entries";
 import styles from "./Pregunta.module.scss";
 import { IPregunta } from "../../../types/IPregunta";
 import { AddRespuesta } from "../../User/AddRespuesta/AddRespuesta";
 import { AutorAvatar } from "../AutorAvatar/AutorAvatar";
 import { ListaRespuestas } from "../ListaRespuestas/ListaRespuestas";
-import { MouseEvent, MouseEventHandler, useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { IconBtnSave } from "../../Icons/IconBtnSave";
 import { IconShowRespuestas } from "../../Icons/IconShowRespuestas";
 
@@ -17,14 +15,17 @@ interface Props {
 
 export const PreguntaCard = ({ pregunta }: Props) => {
   const [showRespuestas, setShowRespuestas] = useState(false);
+  const [savingPregunta, setSavingPregunta] = useState(false);
 
   const { id, titulo, autor, respuestas } = pregunta;
 
   const dispatch = useAppDispatch();
 
-  const onSavePregunta = (e: MouseEvent) => {
+  const onSavePregunta = async (e: MouseEvent) => {
     e.preventDefault();
-    dispatch(startSavingPregunta({ pregunta }));
+    setSavingPregunta(true);
+    await dispatch(startSavingPregunta({ pregunta }));
+    setSavingPregunta(false);
   };
 
   const onShowRespuestas = (e: MouseEvent) => {
@@ -45,7 +46,7 @@ export const PreguntaCard = ({ pregunta }: Props) => {
         <h2 className={styles.title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} />
         <button className={styles.buttonSave} onClick={onSavePregunta}>
-          <IconBtnSave size="15" color="black" />
+          {savingPregunta ? <IconBtnSave color={"red"} /> : <IconBtnSave />}
         </button>
         {respuestas.length > 0 ? (
           <button

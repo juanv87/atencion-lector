@@ -124,10 +124,6 @@ export const startSavingPregunta = ({ pregunta }) => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
     const newDoc = doc(collection(FirebaseDB, "usuarios"), uid);
-    try {
-      await updateDoc(newDoc, { preguntasGuardadas: arrayUnion(pregunta) })      
-    } catch (error) {
-      console.log('error desde savingPregunta', error)
-    }
+    await updateDoc(newDoc, { preguntasGuardadas: arrayUnion(pregunta) });
   };
 };
