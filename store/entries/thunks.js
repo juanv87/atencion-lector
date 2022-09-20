@@ -122,6 +122,6 @@ export const startSavingPregunta = ({ pregunta }) => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
     const newDoc = doc(collection(FirebaseDB, "usuarios"), uid);
-    await updateDoc(newDoc, { preguntasGuardadas: arrayUnion(pregunta) })
+    await updateDoc(newDoc, { preguntasGuardadas: arrayUnion(pregunta) });
   };
 };
