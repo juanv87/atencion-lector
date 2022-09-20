@@ -8,6 +8,8 @@ import { ListaRespuestas } from "../ListaRespuestas/ListaRespuestas";
 import { MouseEvent, useEffect, useState } from "react";
 import { IconBtnSave } from "../../Icons/IconBtnSave";
 import { IconShowRespuestas } from "../../Icons/IconShowRespuestas";
+import { checkSavedPregunta } from "../../../helpers/checkSavedPregunta";
+import { IconBtnSaved } from "../../Icons/IconBtnSaved";
 
 interface Props {
   pregunta: IPregunta;
@@ -16,6 +18,9 @@ interface Props {
 export const PreguntaCard = ({ pregunta }: Props) => {
   const [showRespuestas, setShowRespuestas] = useState(false);
   const [savingPregunta, setSavingPregunta] = useState(false);
+  const [savedPregunta, setSavedPregunta] = useState(false);
+
+  const { uid } = useAppSelector((state) => state.auth);
 
   const { id, titulo, autor, respuestas } = pregunta;
 
@@ -25,7 +30,7 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     e.preventDefault();
     setSavingPregunta(true);
     await dispatch(startSavingPregunta({ pregunta }));
-    setSavingPregunta(false);
+    setSavedPregunta(true);
   };
 
   const onShowRespuestas = (e: MouseEvent) => {
@@ -33,7 +38,13 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     setShowRespuestas(!showRespuestas);
   };
 
+  const checkIfSaved = async () => {
+    const isSaved = await checkSavedPregunta({ id, uid });
+    setSavedPregunta(isSaved);
+  };
+
   useEffect(() => {
+    checkIfSaved();
     setShowRespuestas(true);
   }, []);
 
@@ -46,7 +57,7 @@ export const PreguntaCard = ({ pregunta }: Props) => {
         <h2 className={styles.title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} />
         <button className={styles.buttonSave} onClick={onSavePregunta}>
-          {savingPregunta ? <IconBtnSave color={"red"} /> : <IconBtnSave />}
+          {savedPregunta ? <IconBtnSaved /> : <IconBtnSave />}
         </button>
         {respuestas.length > 0 ? (
           <button
