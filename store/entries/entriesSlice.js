@@ -98,7 +98,6 @@ export const entriesSlice = createSlice({
     loadingPreguntas: (state, action) => {
       state.isLoadingPreguntas = true;
     },
-    setSaving: (state, action) => {},
     updatingNewPregunta: (state) => {
       state.isUpdating = true;
     },
@@ -127,10 +126,10 @@ export const {
   savingNewPregunta,
   setActivePregunta,
   setPreguntas,
+  setPreguntasByUserName,
   setRespuestas,
+  setSavedPreguntasByUser,
   setSaving,
   updatePregunta,
   updatingNewPregunta,
-  setPreguntasByUserName,
-  setSavedPreguntasByUser,
 } = entriesSlice.actions;
