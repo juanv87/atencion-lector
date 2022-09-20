@@ -1,6 +1,6 @@
 import React from "react";
 
-export const IconBtnSave = ({ size = "15", color = "black" }) => {
+export const IconBtnSaved = ({ size = "25", color = "black" }) => {
   // Convert the size to a number
   const sizeNumber = Number(size);
   return (
@@ -12,7 +12,7 @@ export const IconBtnSave = ({ size = "15", color = "black" }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M18.5 0.5H3.5C1.85 0.5 0.5 1.85 0.5 3.5V27.5L11 23L21.5 27.5V3.5C21.5 1.85 20.15 0.5 18.5 0.5ZM18.5 23L11 19.73L3.5 23V3.5H18.5V23Z"
+        d="M6 21a1 1 0 0 1-.49-.13A1 1 0 0 1 5 20V5.33A2.28 2.28 0 0 1 7.2 3h9.6A2.28 2.28 0 0 1 19 5.33V20a1 1 0 0 1-.5.86a1 1 0 0 1-1 0l-5.67-3.21l-5.33 3.2A1 1 0 0 1 6 21Z"
         fill={color}
       />
     </svg>
