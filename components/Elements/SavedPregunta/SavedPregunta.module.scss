@@ -11,4 +11,8 @@
     margin-bottom: 0.5rem;
     margin-top: 10px;
   }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
 }

@@ -20,8 +20,9 @@ import {
   updatingNewPregunta,
   loadingPreguntas,
   setPreguntasByUserName,
-  setSavedPreguntasByUser,
+  // setSavedPreguntasByUser,
 } from "./entriesSlice";
+import { setSavedPreguntasByUser } from '../savedByUser/savedByUserSlice'
 
 // Funciones asincronas que modifican el state global de la aplicacion.
 
