@@ -20,8 +20,9 @@ import {
   updatingNewPregunta,
   loadingPreguntas,
   setPreguntasByUserName,
-  setSavedPreguntasByUser,
+  // setSavedPreguntasByUser,
 } from "./entriesSlice";
+import { setSavedPreguntasByUser } from '../savedByUser/savedByUserSlice'
 
 // Funciones asincronas que modifican el state global de la aplicacion.
 
@@ -111,6 +112,8 @@ export const startLoadingSavedPreguntasByUser = () => {
     const { uid, status } = getState().auth;
     try {
       const savedPreguntas = await loadSavedPreguntasByUser({ uid });
+      console.log("loadPreguntasByUserName desde thunk", savedPreguntas);
+
       dispatch(setSavedPreguntasByUser(savedPreguntas));
     } catch (error) {
       throw error;

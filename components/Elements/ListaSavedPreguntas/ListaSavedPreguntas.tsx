@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { startLoadingSavedPreguntasByUser } from "../../../store/entries";
 import { PreguntaCard } from "../PreguntaCard/PreguntaCard";
 import { SavedPregunta } from "../SavedPregunta/SavedPregunta";
 import styles from "./ListaSavedPreguntas.module.scss";
+import {loadSavedPreguntasByUser} from '../../../services/loadSavedPreguntasByUser'
+import { setUpdatedSaved } from "../../../store/savedByUser/savedByUserSlice";
 
 interface Props {
   status: string;
@@ -11,11 +13,15 @@ interface Props {
 
 export const ListaSavedPreguntas = ({ status }: Props) => {
   const dispatch = useAppDispatch();
-  const { savedPreguntasByUser } = useAppSelector((state) => state.entries);
-
+  const { savedPreguntasByUser , updatedSaved } = useAppSelector((state) => state.savedByUser);
+  const { uid, email } = useAppSelector((state) => state.auth);
+  
   useEffect(() => {
     status === "authenticated" && dispatch(startLoadingSavedPreguntasByUser());
-  }, [status]);
+    updatedSaved && dispatch(setUpdatedSaved(false))
+  }, [status, updatedSaved]);  
+  
+
   return (
     <>
       <section className={styles.listaSavedPreguntas}>
