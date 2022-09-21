@@ -32,7 +32,7 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     setSavingPregunta(true);
     await dispatch(startSavingPregunta({ pregunta }));
     setSavedPregunta(true);
-    dispatch(setUpdatedSaved(true))
+    dispatch(setUpdatedSaved(true));
   };
 
   const onShowRespuestas = (e: MouseEvent) => {
@@ -59,7 +59,11 @@ export const PreguntaCard = ({ pregunta }: Props) => {
         <h2 className={styles.title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} />
         <button className={styles.buttonSave} onClick={onSavePregunta}>
-          {savedPregunta ? <IconBtnSaved /> : <IconBtnSave />}
+          {savedPregunta ? (
+            <IconBtnSaved />
+          ) : (
+            <IconBtnSave color={savingPregunta ? "red" : "black"} />
+          )}
         </button>
         {respuestas.length > 0 ? (
           <button
