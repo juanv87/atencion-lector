@@ -20,8 +20,9 @@ import {
   updatingNewPregunta,
   loadingPreguntas,
   setPreguntasByUserName,
-  setSavedPreguntasByUser,
+  // setSavedPreguntasByUser,
 } from "./entriesSlice";
+import { setSavedPreguntasByUser } from '../savedByUser/savedByUserSlice'
 
 // Funciones asincronas que modifican el state global de la aplicacion.
 
@@ -124,10 +125,6 @@ export const startSavingPregunta = ({ pregunta }) => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
     const newDoc = doc(collection(FirebaseDB, "usuarios"), uid);
-    try {
-      await updateDoc(newDoc, { preguntasGuardadas: arrayUnion(pregunta) })      
-    } catch (error) {
-      console.log('error desde savingPregunta', error)
-    }
+    await updateDoc(newDoc, { preguntasGuardadas: arrayUnion(pregunta) });
   };
 };

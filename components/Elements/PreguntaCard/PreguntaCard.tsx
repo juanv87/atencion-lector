@@ -10,6 +10,7 @@ import { IconBtnSave } from "../../Icons/IconBtnSave";
 import { IconShowRespuestas } from "../../Icons/IconShowRespuestas";
 import { checkSavedPregunta } from "../../../helpers/checkSavedPregunta";
 import { IconBtnSaved } from "../../Icons/IconBtnSaved";
+import { setUpdatedSaved } from "../../../store/savedByUser/savedByUserSlice";
 
 interface Props {
   pregunta: IPregunta;
@@ -31,6 +32,7 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     setSavingPregunta(true);
     await dispatch(startSavingPregunta({ pregunta }));
     setSavedPregunta(true);
+    dispatch(setUpdatedSaved(true))
   };
 
   const onShowRespuestas = (e: MouseEvent) => {

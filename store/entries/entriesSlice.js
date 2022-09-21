@@ -81,10 +81,10 @@ export const entriesSlice = createSlice({
       state.preguntasByUserName = action.payload;
       state.isLoadingPreguntas = false;
     },
-    setSavedPreguntasByUser: (state, action) => {
-      state.savedPreguntasByUser = action.payload;
-      // state.isLoadingPreguntas = false;
-    },
+    // setSavedPreguntasByUser: (state, action) => {
+    //   state.savedPreguntasByUser = action.payload;
+    //   // state.isLoadingPreguntas = false;
+    // },
     setRespuestas: (state, action) => {
       const index = state.preguntas.findIndex(
         (pregunta) => pregunta.id === action.payload.idPregunta
@@ -128,7 +128,7 @@ export const {
   setPreguntas,
   setPreguntasByUserName,
   setRespuestas,
-  setSavedPreguntasByUser,
+  // setSavedPreguntasByUser,
   setSaving,
   updatePregunta,
   updatingNewPregunta,
