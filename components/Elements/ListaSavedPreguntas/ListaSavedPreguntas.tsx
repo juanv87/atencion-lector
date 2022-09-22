@@ -4,7 +4,7 @@ import { startLoadingSavedPreguntasByUser } from "../../../store/entries";
 import { PreguntaCard } from "../PreguntaCard/PreguntaCard";
 import { SavedPregunta } from "../SavedPregunta/SavedPregunta";
 import styles from "./ListaSavedPreguntas.module.scss";
-import {loadSavedPreguntasByUser} from '../../../services/loadSavedPreguntasByUser'
+import { loadSavedPreguntasByUser } from "../../../services/loadSavedPreguntasByUser";
 import { setUpdatedSaved } from "../../../store/savedByUser/savedByUserSlice";
 
 interface Props {
@@ -13,14 +13,15 @@ interface Props {
 
 export const ListaSavedPreguntas = ({ status }: Props) => {
   const dispatch = useAppDispatch();
-  const { savedPreguntasByUser , updatedSaved } = useAppSelector((state) => state.savedByUser);
+  const { savedPreguntasByUser, updatedSaved } = useAppSelector(
+    (state) => state.savedByUser
+  );
   const { uid, email } = useAppSelector((state) => state.auth);
-  
+
   useEffect(() => {
     status === "authenticated" && dispatch(startLoadingSavedPreguntasByUser());
-    updatedSaved && dispatch(setUpdatedSaved(false))
-  }, [status, updatedSaved]);  
-  
+    updatedSaved && dispatch(setUpdatedSaved(updatedSaved));
+  }, [status, updatedSaved]);
 
   return (
     <>
