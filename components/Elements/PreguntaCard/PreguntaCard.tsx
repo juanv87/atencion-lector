@@ -1,5 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { startSavingPregunta } from "../../../store/entries";
+import {
+  startRemovingSavedPregunta,
+  startSavingPregunta,
+} from "../../../store/entries";
 import styles from "./Pregunta.module.scss";
 import { IPregunta } from "../../../types/IPregunta";
 import { AddRespuesta } from "../../User/AddRespuesta/AddRespuesta";
@@ -11,12 +14,15 @@ import { IconShowRespuestas } from "../../Icons/IconShowRespuestas";
 import { checkSavedPregunta } from "../../../helpers/checkSavedPregunta";
 import { IconBtnSaved } from "../../Icons/IconBtnSaved";
 import { setUpdatedSaved } from "../../../store/savedByUser/savedByUserSlice";
+import { loadSavedPreguntasByUser } from "../../../services/loadSavedPreguntasByUser";
 
 interface Props {
   pregunta: IPregunta;
 }
 
 export const PreguntaCard = ({ pregunta }: Props) => {
+  const { updatedSaved } = useAppSelector((state) => state.savedByUser);
+
   const [showRespuestas, setShowRespuestas] = useState(false);
   const [savingPregunta, setSavingPregunta] = useState(false);
   const [savedPregunta, setSavedPregunta] = useState(false);
@@ -31,8 +37,15 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     e.preventDefault();
     setSavingPregunta(true);
     await dispatch(startSavingPregunta({ pregunta }));
+    setSavingPregunta(false);
     setSavedPregunta(true);
-    dispatch(setUpdatedSaved(true));
+    dispatch(setUpdatedSaved(!updatedSaved));
+  };
+
+  const onDeleteSavedPregunta = async () => {
+    await dispatch(startRemovingSavedPregunta({ pregunta }));
+    setSavedPregunta(false);
+    dispatch(setUpdatedSaved(!updatedSaved));
   };
 
   const onShowRespuestas = (e: MouseEvent) => {
@@ -41,12 +54,12 @@ export const PreguntaCard = ({ pregunta }: Props) => {
   };
 
   const checkIfSaved = async () => {
-    const isSaved = await checkSavedPregunta({ id, uid });
-    setSavedPregunta(isSaved);
+    const isSaved = uid && (await checkSavedPregunta({ id, uid }));
+    setSavedPregunta(isSaved ? true : false);
   };
 
   useEffect(() => {
-    checkIfSaved();
+    uid && checkIfSaved();
     setShowRespuestas(true);
   }, []);
 
@@ -58,13 +71,19 @@ export const PreguntaCard = ({ pregunta }: Props) => {
         <AutorAvatar autor={autor} />
         <h2 className={styles.title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} />
-        <button className={styles.buttonSave} onClick={onSavePregunta}>
-          {savedPregunta ? (
-            <IconBtnSaved />
-          ) : (
-            <IconBtnSave color={savingPregunta ? "red" : "black"} />
-          )}
-        </button>
+        {uid && (
+          <button
+            className={styles.buttonSave}
+            onClick={!savedPregunta ? onSavePregunta : onDeleteSavedPregunta}
+          >
+            {savedPregunta ? (
+              <IconBtnSaved />
+            ) : (
+              <IconBtnSave color={savingPregunta ? "red" : "black"} />
+            )}
+          </button>
+        )}
+
         {respuestas.length > 0 ? (
           <button
             className={styles.buttonShowRespuestas}

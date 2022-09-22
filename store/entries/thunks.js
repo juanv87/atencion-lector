@@ -1,4 +1,5 @@
 import {
+  arrayRemove,
   arrayUnion,
   collection,
   doc,
@@ -22,7 +23,7 @@ import {
   setPreguntasByUserName,
   // setSavedPreguntasByUser,
 } from "./entriesSlice";
-import { setSavedPreguntasByUser } from '../savedByUser/savedByUserSlice'
+import { setSavedPreguntasByUser } from "../savedByUser/savedByUserSlice";
 
 // Funciones asincronas que modifican el state global de la aplicacion.
 
@@ -126,5 +127,17 @@ export const startSavingPregunta = ({ pregunta }) => {
     const { uid } = getState().auth;
     const newDoc = doc(collection(FirebaseDB, "usuarios"), uid);
     await updateDoc(newDoc, { preguntasGuardadas: arrayUnion(pregunta) });
+  };
+};
+
+export const startRemovingSavedPregunta = ({ pregunta }) => {
+  console.log(
+    "🚀 ~ file: thunks.js ~ line 134 ~ startRemovingSavedPregunta ~ pregunta",
+    pregunta
+  );
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    const docRef = doc(collection(FirebaseDB, "usuarios"), uid);
+    await updateDoc(docRef, { preguntasGuardadas: arrayRemove(pregunta) });
   };
 };
