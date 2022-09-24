@@ -36,20 +36,20 @@ export const entriesSlice = createSlice({
         respuestas: [],
       },
     ],
-    savedPreguntasByUser: [
-      {
-        id: "",
-        titulo: "",
-        createdAt: new Date().getTime(),
-        autor: {
-          id: "",
-          displayName: "",
-          email: "",
-          photoURL: "",
-        },
-        respuestas: [],
-      },
-    ],
+    // savedPreguntasByUser: [
+    //   {
+    //     id: "",
+    //     titulo: "",
+    //     createdAt: new Date().getTime(),
+    //     autor: {
+    //       id: "",
+    //       displayName: "",
+    //       email: "",
+    //       photoURL: "",
+    //     },
+    //     respuestas: [],
+    //   },
+    // ],
     active: null,
   },
   reducers: {
