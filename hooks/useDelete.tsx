@@ -7,7 +7,7 @@ interface Props {
   pregunta: IPregunta;
   setSavedPregunta: Function;
   setUpdatedSaved: Function;
-  updatedSaved: Boolean;
+  updatedSaved?: Boolean;
 }
 
 const useDelete = ({pregunta, setSavedPregunta, setUpdatedSaved, updatedSaved}: Props) => {
