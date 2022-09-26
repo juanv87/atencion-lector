@@ -16,6 +16,7 @@ import { IconBtnSaved } from "../../Icons/IconBtnSaved";
 import { setUpdatedSaved } from "../../../store/savedByUser/savedByUserSlice";
 import { loadSavedPreguntasByUser } from "../../../services/loadSavedPreguntasByUser";
 import useDelete from "../../../hooks/useDelete";
+import useSave from "../../../hooks/useSave";
 
 interface Props {
   pregunta: IPregunta;
@@ -32,18 +33,18 @@ export const PreguntaCard = ({ pregunta }: Props) => {
 
   const { id, titulo, autor, respuestas } = pregunta;
 
-  const dispatch = useAppDispatch();
-
-  const onSavePregunta = async (e: MouseEvent) => {
-    e.preventDefault();
-    setSavingPregunta(true);
-    await dispatch(startSavingPregunta({ pregunta }));
-    setSavingPregunta(false);
-    setSavedPregunta(true);
-    dispatch(setUpdatedSaved(!updatedSaved));
-  };  
-
-  const { onDeleteSavedPregunta } = useDelete({pregunta, setSavedPregunta, setUpdatedSaved, updatedSaved})
+  const { onDeleteSavedPregunta } = useDelete({
+    pregunta,
+    setSavedPregunta,
+    setUpdatedSaved,
+    updatedSaved,
+  });
+  const { onSavePregunta } = useSave({
+    pregunta,
+    setSavingPregunta,
+    setSavedPregunta,
+    updatedSaved,
+  });
 
   const onShowRespuestas = (e: MouseEvent) => {
     e.preventDefault();
