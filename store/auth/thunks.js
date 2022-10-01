@@ -20,7 +20,10 @@ export const startGoogleSignIn = () => {
     const auth = getAuth();
     const { creationTime, lastSignInTime } = auth.currentUser.metadata;
     creationTime === lastSignInTime &&
-      (await setDoc(doc(FirebaseDB, "usuarios", result.uid), { ...result }));
+      (await setDoc(doc(FirebaseDB, "usuarios", result.uid), {
+        ...result,
+        nickName: result.email.split("@")[0],
+      }));
     dispatch(login(result));
   };
 };
