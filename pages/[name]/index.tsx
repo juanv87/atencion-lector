@@ -19,7 +19,6 @@ interface Props {
 const UserNickName = ({ name }: Props) => {
   const dispatch = useAppDispatch();
   const status = useCheckAuth();
-  useCheckAuth();
   useEffect(() => {
     dispatch(startLoadingPreguntasByUserName({ name }));
   }, [name]);
