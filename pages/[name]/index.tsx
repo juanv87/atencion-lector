@@ -11,19 +11,14 @@ import { PreguntaCard } from "../../components/Elements/PreguntaCard/PreguntaCar
 import { useCheckAuth } from "../../hooks/useCheckAuth";
 import { ListaSavedPreguntas } from "../../components/Elements/ListaSavedPreguntas/ListaSavedPreguntas";
 import { IPregunta } from "../../types/IPregunta";
+import { ListaPreguntasByUserName } from "../../components/Elements/ListaPreguntasByUserName/ListaPreguntasByUserName";
 
 interface Props {
   name: string;
 }
 
 const UserNickName = ({ name }: Props) => {
-  const dispatch = useAppDispatch();
   const status = useCheckAuth();
-  useEffect(() => {
-    dispatch(startLoadingPreguntasByUserName({ name }));
-  }, [name]);
-
-  const { preguntasByUserName } = useAppSelector((state) => state.entries);
   return (
     <>
       <Head>
@@ -34,10 +29,7 @@ const UserNickName = ({ name }: Props) => {
       <main className={styles.nameContainer}>
         <div className={styles.nameContainer__left}></div>
         <div className={styles.nameContainer__main}>
-          {preguntasByUserName &&
-            preguntasByUserName.map((pregunta: IPregunta) => {
-              return <PreguntaCard key={pregunta.id} pregunta={pregunta} />;
-            })}
+          <ListaPreguntasByUserName />
         </div>
         <div className={styles.nameContainer__right}>
           <ListaSavedPreguntas status={status} />

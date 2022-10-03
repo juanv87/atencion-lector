@@ -1,0 +1,32 @@
+@import "../../../../styles/Colors.scss";
+@import "../../../../styles/Sizes.scss";
+.portada {
+  height: 200px;
+  background: $primary-color
+    linear-gradient(lighten($blue, 10%) 0%, rgba(0, 0, 0, 1) 120%);
+  margin-bottom: 30px;
+  .container_portada {
+    width: $widthContainer;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    .avatar {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      img {
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid $secondary-color;
+      }
+      span {
+        font-size: 2rem;
+        font-weight: 500;
+        color: #fff;
+      }
+    }
+  }
+}
