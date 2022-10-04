@@ -8,14 +8,15 @@ interface Props {
   setSavedPregunta: Function;
   setUpdatedSaved: Function;
   updatedSaved?: Boolean;
+  savedPregunta: Boolean
 }
 
-const useDelete = ({pregunta, setSavedPregunta, setUpdatedSaved, updatedSaved}: Props) => {
+const useDelete = ({pregunta, setSavedPregunta, setUpdatedSaved, updatedSaved, savedPregunta }: Props) => {
     
     const dispatch = useAppDispatch()
     const onDeleteSavedPregunta = async () => {
         await dispatch(startRemovingSavedPregunta({ pregunta }));
-        setSavedPregunta(false);
+        setSavedPregunta(!savedPregunta);
         dispatch(setUpdatedSaved(!updatedSaved));
       };
   return {

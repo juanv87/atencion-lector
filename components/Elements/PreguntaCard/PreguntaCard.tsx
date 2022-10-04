@@ -23,7 +23,7 @@ interface Props {
 }
 
 export const PreguntaCard = ({ pregunta }: Props) => {
-  const { updatedSaved } = useAppSelector((state) => state.savedByUser);
+  const { updatedSaved , savedPreguntasByUser } = useAppSelector((state) => state.savedByUser);
 
   const [showRespuestas, setShowRespuestas] = useState(false);
   const [savingPregunta, setSavingPregunta] = useState(false);
@@ -38,6 +38,7 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     setSavedPregunta,
     setUpdatedSaved,
     updatedSaved,
+    savedPregunta
   });
   const { onSavePregunta } = useSave({
     pregunta,
@@ -59,7 +60,8 @@ export const PreguntaCard = ({ pregunta }: Props) => {
   useEffect(() => {
     uid && checkIfSaved();
     setShowRespuestas(true);
-  }, []);
+  }, [savedPreguntasByUser]);
+  
 
   return (
     <>

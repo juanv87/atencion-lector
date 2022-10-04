@@ -20,7 +20,7 @@ export const SavedPregunta = ({ pregunta }: Props) => {
   const [savedPregunta, setSavedPregunta] = useState(false);
   const { updatedSaved } = useAppSelector((state) => state.savedByUser);
 
-  const { onDeleteSavedPregunta } = useDelete({pregunta, setSavedPregunta, setUpdatedSaved, updatedSaved})
+  const { onDeleteSavedPregunta } = useDelete({pregunta, setSavedPregunta, setUpdatedSaved, updatedSaved, savedPregunta})
 
  
   return (
