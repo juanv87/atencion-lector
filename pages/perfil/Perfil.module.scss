@@ -1,0 +1,18 @@
+@import "../../styles/Sizes.scss";
+@import "../../styles/Colors.scss";
+
+.container_dashboard {
+  width: $widthContainer;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  aside {
+    grid-column: span 3;
+    background-color: $gray-light;
+    min-height: 100vh;
+    border-radius: 20px;
+  }
+  .dashboard {
+    grid-column: span 7;
+  }
+}

@@ -1,0 +1,19 @@
+@import "../../../../styles/Colors.scss";
+.nav {
+  ul {
+    padding: 20px;
+    li {
+      a {
+        color: $blue;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0.5rem 0;
+        display: block;
+        &:hover {
+          color: darken($blue, 50%);
+        }
+      }
+    }
+  }
+}
