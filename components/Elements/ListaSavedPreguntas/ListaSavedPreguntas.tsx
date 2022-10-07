@@ -13,14 +13,13 @@ interface Props {
 
 export const ListaSavedPreguntas = ({ status }: Props) => {
   const dispatch = useAppDispatch();
-  const { savedPreguntasByUser, updatedSaved } = useAppSelector(
-    (state) => state.savedByUser
-  );
+  const { savedPreguntasByUser, updatedSaved } = useAppSelector((state) => state.savedByUser);
   const { uid, email } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     status === "authenticated" && dispatch(startLoadingSavedPreguntasByUser());
     updatedSaved && dispatch(setUpdatedSaved(updatedSaved));
+    console.log('updatedSaved', updatedSaved)
   }, [status, updatedSaved]);
 
   return (
