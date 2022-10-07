@@ -5,8 +5,12 @@ import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { startLogout } from "../../../store/auth";
 import styles from "./UserAvatar.module.scss";
 
-export const UserAvatar = ({ showName = true, showLogOut = true }) => {
-  const { displayName, email, photoURL, status } = useAppSelector(
+export const UserAvatar = ({
+  size = "40",
+  showName = true,
+  showLogOut = true,
+}) => {
+  const { displayName, email, nickName, photoURL, status } = useAppSelector(
     (state) => state.auth
   );
 
@@ -20,11 +24,12 @@ export const UserAvatar = ({ showName = true, showLogOut = true }) => {
     <section className={styles.userAvatar}>
       {showName && (
         <div className={styles.userAvatar__name}>
-          <p>{email}</p>
+          <p>{nickName}</p>
         </div>
       )}
       <div className={styles.userAvatar__image}>
         <img
+          width={size}
           src={photoURL || "https://i.pravatar.cc/80"}
           alt={displayName !== null ? displayName : ""}
         />
