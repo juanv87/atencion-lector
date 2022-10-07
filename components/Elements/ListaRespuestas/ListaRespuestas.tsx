@@ -11,12 +11,39 @@ interface Props {
 }
 
 export const ListaRespuestas = ({ respuestas }: Props) => {
+
+  const [ paginate, setPaginate ] = useState(3)
+
+  const handlePaginatePlus = () => {
+    setPaginate( prev => prev + 3)
+  }
+  const handlePaginateMinus = () => {
+    setPaginate( prev => prev - 3)
+  }
   return (
     <section className={styles.respuestasContainer}>
       {respuestas &&
-        respuestas.map(({ id, titulo, autor }) => (
+        respuestas.slice(0,paginate).map(({ id, titulo, autor }) => (
           <RespuestaCard key={id} titulo={titulo} autor={autor} />
         ))}
+        <div className={styles.verMasMenos}>
+          {
+            paginate <= respuestas.length && (
+              <button 
+              className="respuestasContainer__button--mas"
+              onClick={handlePaginatePlus}
+              >Ver Más</button>
+            )
+          }
+          {
+            paginate > 3 &&
+          <button 
+          className="respuestasContainer__button--menos"
+          onClick={handlePaginateMinus}
+          >Ver Menos</button>
+          }
+
+        </div>
     </section>
   );
 };

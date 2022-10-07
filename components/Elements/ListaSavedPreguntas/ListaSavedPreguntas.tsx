@@ -28,6 +28,7 @@ export const ListaSavedPreguntas = ({ status }: Props) => {
         <h2>Tus preguntas guardadas:</h2>
         {savedPreguntasByUser && savedPreguntasByUser[0]?.id.length > 0 ? (
           savedPreguntasByUser.map((pregunta) => {
+            console.log('pregunta', pregunta)
             return <SavedPregunta key={pregunta.id} pregunta={pregunta} />;
           })
         ) : (
