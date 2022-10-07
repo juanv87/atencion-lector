@@ -14,16 +14,19 @@
     justify-content: center;
     .avatar {
       margin-bottom: 20px;
-      display: flex;
-      align-items: center;
       gap: 20px;
+      a {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
       img {
         object-fit: cover;
         border-radius: 50%;
         border: 3px solid $secondary-color;
       }
       span {
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 500;
         color: #fff;
       }

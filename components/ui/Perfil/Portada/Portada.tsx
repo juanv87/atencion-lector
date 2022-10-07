@@ -19,7 +19,8 @@ export const Portada = () => {
           <Link href="/perfil">
             <a>
               <img
-                width="100"
+                height="80"
+                width="80"
                 src={photoURL || "https://i.pravatar.cc/80"}
                 alt={displayName !== null ? displayName : ""}
               />

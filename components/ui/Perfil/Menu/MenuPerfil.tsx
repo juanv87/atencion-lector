@@ -7,6 +7,11 @@ export const MenuPerfil = () => {
   return (
     <nav className={styles.nav}>
       <ul>
+        <li className={router.pathname == "/perfil/mis-datos" ? "active" : ""}>
+          <Link href="/perfil/mis-preguntas">
+            <a>Mis datos</a>
+          </Link>
+        </li>
         <li
           className={router.pathname == "/perfil/mis-preguntas" ? "active" : ""}
         >
@@ -23,8 +28,14 @@ export const MenuPerfil = () => {
             <a>Mis respuestas</a>
           </Link>
         </li>
-        <li className={router.pathname == "/" ? "active" : ""}>
-          <a href="#">Mis favoritos</a>
+        <li
+          className={
+            router.pathname == "/perfil/preguntas-guardadas" ? "active" : ""
+          }
+        >
+          <Link href="/perfil/preguntas-guardadas">
+            <a>Preguntas guardadas</a>
+          </Link>
         </li>
       </ul>
     </nav>
