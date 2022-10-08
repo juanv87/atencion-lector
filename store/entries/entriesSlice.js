@@ -13,6 +13,7 @@ export const entriesSlice = createSlice({
         id: "",
         titulo: "",
         createdAt: new Date().getTime(),
+        validada: false,
         autor: {
           id: "",
           displayName: "",
@@ -27,6 +28,7 @@ export const entriesSlice = createSlice({
         id: "",
         titulo: "",
         createdAt: new Date().getTime(),
+        validada: false,
         autor: {
           id: "",
           displayName: "",
