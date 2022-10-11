@@ -16,14 +16,13 @@ export const ListaPreguntas = () => {
   useEffect(()=>{
     uid && dispatch(getLikedByUser(uid))
   }, [uid])
-  console.log("🚀 ~ file: ListaPreguntas.tsx ~ line 9 ~ ListaPreguntas ~ isLoadingPreguntas", isLoadingPreguntas)
   return (
     <>
       <section className={styles.listaPreguntas}>
         {isLoadingPreguntas && <LoadingSpinner />}
         {preguntas &&
           preguntas.length > 1 &&
-          preguntas.map((pregunta: IPregunta) => (
+          preguntas.filter((pregunta) => pregunta.validada === true).map((pregunta: IPregunta) => (
             <PreguntaCard key={pregunta.id} pregunta={pregunta} />
           ))}
       </section>

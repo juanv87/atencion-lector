@@ -6,6 +6,7 @@ import {
   startRemovingSavedPregunta,
   startSavingPregunta,
   updateLikes,
+  updateValidada,
 } from "../../../store/entries";
 import styles from "./Pregunta.module.scss";
 import { IPregunta } from "../../../types/IPregunta";
@@ -23,6 +24,8 @@ import useDelete from "../../../hooks/useDelete";
 import useSave from "../../../hooks/useSave";
 import IconLike from "../../Icons/IconLike";
 import { addToLiked } from "../../../store/likedByUser/likedByUser";
+import { IconValidateOn } from "../../Icons/IconValidateOn";
+import { IconValidateOf } from "../../Icons/IconValidateOf";
 
 interface Props {
   pregunta: IPregunta;
@@ -33,16 +36,14 @@ export const PreguntaCard = ({ pregunta }: Props) => {
   const { updatedSaved , savedPreguntasByUser } = useAppSelector((state) => state.savedByUser);
   const { user: {likedPreguntas} } = useAppSelector((state) => state.likedByUser);
 
-  console.log('likedPreguntas', likedPreguntas)
-
   const [showRespuestas, setShowRespuestas] = useState(false);
   const [savingPregunta, setSavingPregunta] = useState(false);
   const [savedPregunta, setSavedPregunta] = useState(false);
   const [ activeLike, setActiveLike ] = useState(false)
 
-  const { uid } = useAppSelector((state) => state.auth);
+  const { uid, admin } = useAppSelector((state) => state.auth);
 
-  const { id, titulo, autor, respuestas } = pregunta;  
+  const { id, titulo, autor, respuestas, validada } = pregunta;  
 
   const { onDeleteSavedPregunta } = useDelete({
     pregunta,
@@ -78,6 +79,10 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     }
   }
 
+  const handleValidar = () => {
+    dispatch(updateValidada(pregunta.id, !validada))
+  }
+
   useEffect(() => {
     uid && checkIfSaved();
     setShowRespuestas(true);
@@ -88,12 +93,18 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     alreadyLiked && setActiveLike(true)
   }, [likedPreguntas])
   
-
   return (
     <>
       <article
         className={`${styles.tarjetaPregunta} animate__fadeInUp animate__animated animate__faster`}
       >
+          {
+            admin && (
+              <div onClick={handleValidar} className={styles.validada}>
+                {validada ? <IconValidateOn /> : <IconValidateOf />}
+              </div> 
+            )
+          }
         <AutorAvatar autor={autor} />
         <h2 className={styles.title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} />

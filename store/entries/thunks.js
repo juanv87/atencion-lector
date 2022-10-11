@@ -24,6 +24,7 @@ import {
   updatingNewPregunta,
   loadingPreguntas,
   setPreguntasByUserName,
+  setValidarPregunta,
   // setSavedPreguntasByUser,
 } from "./entriesSlice";
 import { setSavedPreguntasByUser } from "../savedByUser/savedByUserSlice";
@@ -119,8 +120,6 @@ export const startLoadingSavedPreguntasByUser = () => {
     const { uid, status } = getState().auth;
     try {
       const savedPreguntas = await loadSavedPreguntasByUser({ uid });
-      console.log("loadPreguntasByUserName desde thunk", savedPreguntas);
-
       dispatch(setSavedPreguntasByUser(savedPreguntas));
     } catch (error) {
       throw error;
@@ -137,14 +136,19 @@ export const startSavingPregunta = ({ pregunta }) => {
 };
 
 export const startRemovingSavedPregunta = ({ pregunta }) => {
-  console.log(
-    "🚀 ~ file: thunks.js ~ line 134 ~ startRemovingSavedPregunta ~ pregunta",
-    pregunta
-  );
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
     const docRef = doc(collection(FirebaseDB, "usuarios"), uid);
     await updateDoc(docRef, { preguntasGuardadas: arrayRemove(pregunta) });
+  };
+};
+
+export const updateValidada = (id, validar) => {
+  console.log("🚀 ~ file: thunks.js ~ validar", validar);
+  return async (dispatch, getState) => {
+    dispatch(setValidarPregunta({ id, validar }));
+    const docRef = doc(collection(FirebaseDB, "preguntas"), id);
+    await updateDoc(docRef, { validada: validar });
   };
 };
 
@@ -169,7 +173,6 @@ export const getLikedByUser = (id) => {
     const newDoc = doc(collection(FirebaseDB, "usuarios"), id);
     const data = await getDoc(newDoc);
     const preguntasLikeadas = data.data().preguntasLikeadas;
-    console.log("preguntasLikeadas", preguntasLikeadas);
     preguntasLikeadas?.map((liked) => {
       dispatch(addToLiked(liked));
     });
