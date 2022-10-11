@@ -10,6 +10,8 @@ export const authSlice = createSlice({
     nickName: null,
     photoURL: null,
     errorMessage: null,
+    preguntasGuardadas: [],
+    preguntasLikeadas: []
   },
   reducers: {
     login: (state, { payload }) => {
@@ -20,6 +22,8 @@ export const authSlice = createSlice({
       state.nickName = payload.email.split("@")[0];
       state.photoURL = payload.photoURL;
       state.errorMessage = null;
+      state.preguntasGuardadas = payload.preguntasGuardadas;
+      state.preguntasLikeadas = payload.preguntasLikeadas;
     },
     logout: (state, { payload }) => {
       state.status = "not-authenticated";
@@ -29,6 +33,8 @@ export const authSlice = createSlice({
       state.nickName = null;
       state.photoURL = null;
       state.errorMessage = payload?.errorMessage;
+      state.preguntasGuardadas = [];
+      state.preguntasLikeadas = [];
     },
     checkingCredentials: (state) => {
       state.status = "checking";

@@ -7,4 +7,6 @@ export interface IPregunta {
   createdAt: unknown;
   autor: IAutor;
   respuestas: IRespuesta[];
+  validada?:boolean,
+  likes?:number
 }

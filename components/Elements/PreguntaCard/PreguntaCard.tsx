@@ -1,7 +1,11 @@
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import {
+  addToLikedByUser,
+  getLikedByUser,
+  likePregunta,
   startRemovingSavedPregunta,
   startSavingPregunta,
+  updateLikes,
 } from "../../../store/entries";
 import styles from "./Pregunta.module.scss";
 import { IPregunta } from "../../../types/IPregunta";
@@ -17,21 +21,28 @@ import { setUpdatedSaved } from "../../../store/savedByUser/savedByUserSlice";
 import { loadSavedPreguntasByUser } from "../../../services/loadSavedPreguntasByUser";
 import useDelete from "../../../hooks/useDelete";
 import useSave from "../../../hooks/useSave";
+import IconLike from "../../Icons/IconLike";
+import { addToLiked } from "../../../store/likedByUser/likedByUser";
 
 interface Props {
   pregunta: IPregunta;
 }
 
 export const PreguntaCard = ({ pregunta }: Props) => {
+  const dispatch = useAppDispatch()
   const { updatedSaved , savedPreguntasByUser } = useAppSelector((state) => state.savedByUser);
+  const { user: {likedPreguntas} } = useAppSelector((state) => state.likedByUser);
+
+  console.log('likedPreguntas', likedPreguntas)
 
   const [showRespuestas, setShowRespuestas] = useState(false);
   const [savingPregunta, setSavingPregunta] = useState(false);
   const [savedPregunta, setSavedPregunta] = useState(false);
+  const [ activeLike, setActiveLike ] = useState(false)
 
   const { uid } = useAppSelector((state) => state.auth);
 
-  const { id, titulo, autor, respuestas } = pregunta;
+  const { id, titulo, autor, respuestas } = pregunta;  
 
   const { onDeleteSavedPregunta } = useDelete({
     pregunta,
@@ -57,10 +68,25 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     setSavedPregunta(isSaved ? true : false);
   };
 
+  const handleLike = () => {
+    // setActiveLike(!activeLike)
+    let alreadyLiked = likedPreguntas.filter( liked => liked === pregunta.id).length > 0
+    if(!alreadyLiked){
+      dispatch(likePregunta(pregunta.id)) // Agrega los likes de la preg. al store de Redux
+      dispatch(updateLikes(pregunta.id)) // Agrega los likes de la preg. a Firestore
+      dispatch(addToLikedByUser(uid, pregunta.id))
+    }
+  }
+
   useEffect(() => {
     uid && checkIfSaved();
     setShowRespuestas(true);
   }, [savedPreguntasByUser]);
+
+  useEffect(()=>{
+    let alreadyLiked = likedPreguntas.filter( liked => liked === pregunta.id).length > 0
+    alreadyLiked && setActiveLike(true)
+  }, [likedPreguntas])
   
 
   return (
@@ -71,6 +97,10 @@ export const PreguntaCard = ({ pregunta }: Props) => {
         <AutorAvatar autor={autor} />
         <h2 className={styles.title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} />
+        <button onClick={handleLike}>
+          <IconLike size={18} activeLike={activeLike}/>
+        </button>
+        <span>{pregunta.likes}</span>
         {uid && (
           <button
             className={styles.buttonSave}
