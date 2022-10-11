@@ -7,10 +7,6 @@ interface Props {
 }
 
 export const RespuestaCard = ({ titulo, autor }: Props) => {
-  console.log(
-    "🚀 ~ file: RespuestaCard.tsx ~ line 10 ~ Respuesta ~ titulo",
-    titulo
-  );
   const { displayName } = autor as Object as { displayName: string };
 
   return (

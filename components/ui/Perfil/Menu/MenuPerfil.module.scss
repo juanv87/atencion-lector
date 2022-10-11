@@ -1,17 +1,26 @@
 @import "../../../../styles/Colors.scss";
 .nav {
+  margin-top: 20px;
   ul {
-    padding: 20px;
+    padding: 1rem 0;
     li {
+      padding: 0.5rem 1.5rem;
       a {
         color: $blue;
         font-size: 1.2rem;
         font-weight: 600;
         text-decoration: none;
-        padding: 0.5rem 0;
         display: block;
+        padding-bottom: 3px;
+        border-bottom: 1px solid transparent;
         &:hover {
           color: darken($blue, 50%);
+        }
+      }
+      &.active {
+        a {
+          color: darken($blue, 25%);
+          border-bottom: 1px solid darken($blue, 25%);
         }
       }
     }

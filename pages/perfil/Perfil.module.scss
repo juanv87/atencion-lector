@@ -10,9 +10,10 @@
     grid-column: span 3;
     background-color: $gray-light;
     min-height: 100vh;
-    border-radius: 20px;
   }
   .dashboard {
+    margin-top: 20px;
     grid-column: span 7;
+    padding: 0 2rem;
   }
 }

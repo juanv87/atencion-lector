@@ -3,4 +3,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  & button {
+    cursor: pointer;    
+  }
+  & button.respuestasContainer__button--menos {
+    padding: 1% 2%;
+    border-radius: 20px;
+    background-color: yellow;
+  }
+  .verMasMenos {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+  }
 }

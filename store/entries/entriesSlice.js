@@ -13,6 +13,8 @@ export const entriesSlice = createSlice({
         id: "",
         titulo: "",
         createdAt: new Date().getTime(),
+        validada: false,
+        likes: 0,
         autor: {
           id: "",
           displayName: "",
@@ -27,6 +29,8 @@ export const entriesSlice = createSlice({
         id: "",
         titulo: "",
         createdAt: new Date().getTime(),
+        validada: false,
+        likes: 0,
         autor: {
           id: "",
           displayName: "",
@@ -36,20 +40,7 @@ export const entriesSlice = createSlice({
         respuestas: [],
       },
     ],
-    // savedPreguntasByUser: [
-    //   {
-    //     id: "",
-    //     titulo: "",
-    //     createdAt: new Date().getTime(),
-    //     autor: {
-    //       id: "",
-    //       displayName: "",
-    //       email: "",
-    //       photoURL: "",
-    //     },
-    //     respuestas: [],
-    //   },
-    // ],
+    
     active: null,
   },
   reducers: {
@@ -113,7 +104,15 @@ export const entriesSlice = createSlice({
       state.preguntas = [];
       state.active = null;
     },
+
     deletePreguntaById: (state, action) => {},
+
+    likePregunta: (state, action) => {
+      const index = state.preguntas.findIndex(
+        (pregunta) => pregunta.id === action.payload
+      );
+      state.preguntas[index].likes += 1;
+    }
   },
 });
 export const {
@@ -132,4 +131,5 @@ export const {
   setSaving,
   updatePregunta,
   updatingNewPregunta,
+  likePregunta
 } = entriesSlice.actions;

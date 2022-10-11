@@ -1,7 +1,7 @@
 import { collection, doc, setDoc } from "firebase/firestore/lite";
 
 import { signInWithGoogle, logoutFirebase } from "../../lib/firebase/providers";
-import { checkingCredentials, logout, login } from ".";
+import { checkingCredentials, logout, login, newNickname } from ".";
 import { clearEntriesLogout } from "../entries";
 import { FirebaseDB } from "../../lib/firebase/firebase";
 import { getAdditionalUserInfo, getAuth } from "firebase/auth";
@@ -9,6 +9,14 @@ import { getAdditionalUserInfo, getAuth } from "firebase/auth";
 export const checkingAuthentication = () => {
   return async (dispatch) => {
     dispatch(checkingCredentials());
+  };
+};
+
+export const startChangeNickName = (newNickName) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    const docRef = doc(FirebaseDB, "usuarios", uid);
+    await setDoc(docRef, { nickName: newNickName }, { merge: true });
   };
 };
 
