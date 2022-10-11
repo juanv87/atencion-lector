@@ -11,12 +11,9 @@ export const authSlice = createSlice({
     photoURL: null,
     errorMessage: null,
     preguntasGuardadas: [],
-    preguntasLikeadas: []
+    preguntasLikeadas: [],
   },
   reducers: {
-    newNickname: (state, action) => {
-      state.nickName = action.payload || state.email.split("@")[0];
-    },
     login: (state, { payload }) => {
       state.status = "authenticated";
       state.uid = payload.uid;
@@ -46,9 +43,4 @@ export const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const {
-  login,
-  logout,
-  checkingCredentials,
-  newNickname,
-} = authSlice.actions;
+export const { login, logout, checkingCredentials } = authSlice.actions;
