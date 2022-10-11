@@ -4,7 +4,6 @@
   height: 200px;
   background: $primary-color
     linear-gradient(lighten($blue, 10%) 0%, rgba(0, 0, 0, 1) 120%);
-  margin-bottom: 30px;
   .container_portada {
     width: $widthContainer;
     margin: 0 auto;
@@ -23,7 +22,7 @@
       img {
         object-fit: cover;
         border-radius: 50%;
-        border: 3px solid $secondary-color;
+        border: 3px solid white;
       }
       span {
         font-size: 1.8rem;

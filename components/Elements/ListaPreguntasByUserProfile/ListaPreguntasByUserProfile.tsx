@@ -4,11 +4,11 @@ import { startLoadingPreguntasByUserName } from "../../../store/entries";
 import { IPregunta } from "../../../types/IPregunta";
 import { PreguntaCard } from "../PreguntaCard/PreguntaCard";
 
-export const ListaPreguntasByUserName = ({ name }: { name: string }) => {
-  const { uid } = useAppSelector((state) => state.auth);
+export const ListaPreguntasByUserProfile = () => {
+  const { uid, nickName } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    uid && dispatch(startLoadingPreguntasByUserName({ name: name }));
+    uid && dispatch(startLoadingPreguntasByUserName({ name: nickName }));
   }, [uid]);
 
   const { preguntasByUserName } = useAppSelector((state) => state.entries);

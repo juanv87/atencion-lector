@@ -29,7 +29,7 @@ const UserNickName = ({ name }: Props) => {
       <main className={styles.nameContainer}>
         <div className={styles.nameContainer__left}></div>
         <div className={styles.nameContainer__main}>
-          <ListaPreguntasByUserName />
+          <ListaPreguntasByUserName name={name} />
         </div>
         <div className={styles.nameContainer__right}>
           <ListaSavedPreguntas status={status} />
