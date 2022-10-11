@@ -40,11 +40,18 @@ export const entriesSlice = createSlice({
         respuestas: [],
       },
     ],
-    
+
     active: null,
   },
   reducers: {
     // Funciones que modifican el state global de la aplicacion.
+    setValidarPregunta: (state, action) => {
+      console.log("setValidarPregunta", action);
+      const index = state.preguntas.findIndex(
+        (pregunta) => pregunta.id === action.payload.id
+      );
+      state.preguntas[index].validada = action.payload.validar;
+    },
     savingNewPregunta: (state, action) => {
       state.isSaving = true;
     },
@@ -112,7 +119,7 @@ export const entriesSlice = createSlice({
         (pregunta) => pregunta.id === action.payload
       );
       state.preguntas[index].likes += 1;
-    }
+    },
   },
 });
 export const {
@@ -131,5 +138,6 @@ export const {
   setSaving,
   updatePregunta,
   updatingNewPregunta,
-  likePregunta
+  likePregunta,
+  setValidarPregunta,
 } = entriesSlice.actions;

@@ -8,14 +8,6 @@ import { doc, getDoc } from "firebase/firestore/lite";
 
 export const useCheckAuth = () => {
   const { status, nickName, email } = useAppSelector((state) => state.auth);
-  console.log(
-    "🚀 ~ file: useCheckAuth.tsx ~ line 10 ~ useCheckAuth ~ email",
-    email
-  );
-  console.log(
-    "🚀 ~ file: useCheckAuth.tsx ~ line 10 ~ useCheckAuth ~ nickName",
-    nickName
-  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -31,6 +23,7 @@ export const useCheckAuth = () => {
           email,
           photoURL,
           uid,
+          admin: uid === "bu5sLZrkzrZtgVhwgs94CZgJzaM2" || uid === "q3emq7VZ2JPxYLhXL3qLTSIEUwl2" ? true : false,
           nickName: userInfo?.nickName,
         })
       );
