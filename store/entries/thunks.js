@@ -9,7 +9,7 @@ import {
   updateDoc,
   where,
   increment,
-  getDoc
+  getDoc,
 } from "firebase/firestore/lite";
 import { loadPreguntas } from "../../helpers/loadPreguntas";
 import { loadPreguntasByUserName } from "../../helpers/loadPreguntasByUserName";
@@ -148,28 +148,31 @@ export const startRemovingSavedPregunta = ({ pregunta }) => {
   };
 };
 
-export const updateLikes = ( id ) => {  // Actualiza los likes de la pregunta
+export const updateLikes = (id) => {
+  // Actualiza los likes de la pregunta
   return async (dispatch, getState) => {
     const newDoc = doc(collection(FirebaseDB, "preguntas"), id);
     await updateDoc(newDoc, { likes: increment(1) });
   };
-}
-export const addToLikedByUser = ( id , pregunta) => {  // Añade al array de likes del usuario en FireStore
+};
+export const addToLikedByUser = (id, pregunta) => {
+  // Añade al array de likes del usuario en FireStore
   return async (dispatch, getState) => {
-    dispatch(addToLiked(pregunta))                    // Agrega la pregunta al array de likeadas en Redux Store
+    dispatch(addToLiked(pregunta)); // Agrega la pregunta al array de likeadas en Redux Store
     const newDoc = doc(collection(FirebaseDB, "usuarios"), id);
     await updateDoc(newDoc, { preguntasLikeadas: arrayUnion(pregunta) });
   };
-}
-export const getLikedByUser = ( id ) => {  // Busca las likeadas del usuario desde FireStore
+};
+export const getLikedByUser = (id) => {
+  // Busca las likeadas del usuario desde FireStore
   return async (dispatch, getState) => {
     const newDoc = doc(collection(FirebaseDB, "usuarios"), id);
     const data = await getDoc(newDoc);
-    const preguntasLikeadas = data.data().preguntasLikeadas
-    console.log('preguntasLikeadas', preguntasLikeadas)
-    preguntasLikeadas.map( liked => {
-      dispatch(addToLiked(liked))
-    })
-    return preguntasLikeadas
+    const preguntasLikeadas = data.data().preguntasLikeadas;
+    console.log("preguntasLikeadas", preguntasLikeadas);
+    preguntasLikeadas?.map((liked) => {
+      dispatch(addToLiked(liked));
+    });
+    return preguntasLikeadas;
   };
-}
+};
