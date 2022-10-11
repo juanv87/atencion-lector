@@ -19,6 +19,7 @@ interface Props {
 
 const UserNickName = ({ name }: Props) => {
   const status = useCheckAuth();
+
   return (
     <>
       <Head>

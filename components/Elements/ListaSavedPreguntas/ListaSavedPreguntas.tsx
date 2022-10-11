@@ -18,6 +18,9 @@ export const ListaSavedPreguntas = ({ status }: Props) => {
   );
   const { uid, email } = useAppSelector((state) => state.auth);
 
+  console.log('uid', uid)
+
+
   useEffect(() => {
     status === "authenticated" && dispatch(startLoadingSavedPreguntasByUser());
     updatedSaved && dispatch(setUpdatedSaved(updatedSaved));
