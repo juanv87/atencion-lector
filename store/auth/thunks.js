@@ -12,14 +12,6 @@ export const checkingAuthentication = () => {
   };
 };
 
-export const startChangeNickName = (newNickName) => {
-  return async (dispatch, getState) => {
-    const { uid } = getState().auth;
-    const docRef = doc(FirebaseDB, "usuarios", uid);
-    await setDoc(docRef, { nickName: newNickName }, { merge: true });
-  };
-};
-
 export const startGoogleSignIn = () => {
   return async (dispatch) => {
     dispatch(checkingCredentials());

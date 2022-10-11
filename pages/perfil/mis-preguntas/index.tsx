@@ -5,6 +5,7 @@ import { ListaPreguntasByUserName } from "../../../components/Elements/ListaPreg
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { startLoadingPreguntasByUserName } from "../../../store/entries";
 import { ListaPreguntasByUserProfile } from "../../../components/Elements/ListaPreguntasByUserProfile/ListaPreguntasByUserProfile";
+import { AddPregunta } from "../../../components/User/AddPregunta/AddPregunta";
 
 const MisPreguntas = () => {
   return (
