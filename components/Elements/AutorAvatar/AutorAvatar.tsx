@@ -20,7 +20,7 @@ export const AutorAvatar = ({ autor, avatarSize = "30" }: Props) => {
               <img
                 className={styles.autorAvatar__imgAutor}
                 width={avatarSize}
-                src={photoURL || "https://i.pravatar.cc/80"}
+                src={photoURL || "/img/avatar.jpg"}
                 alt={displayName || "Lector/a anónimo/a"}
               />
             </picture>

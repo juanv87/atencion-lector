@@ -8,12 +8,28 @@
   padding: 20px 50px;
   background-color: #fff;
 
+  .tools {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    gap: 10px;
+    .editButton {
+      cursor: pointer;
+    }
+    .validada {
+      cursor: pointer;
+    }
+    .buttonSave {
+      cursor: pointer;
+    }
+  }
+
   .titleEditContainer {
     display: flex;
     flex-direction: column;
     .inputEdit {
       width: 100%;
-      height: auto;
+      min-height: 200px;
       font-size: 1.2rem;
       padding: 10px;
       font-family: $primary-font;
@@ -21,29 +37,27 @@
       background-color: transparent;
       border-radius: 10px;
     }
-    .btnEdit {
-      margin: 10px auto;
-      height: auto;
-      font-size: 1rem;
-      padding: 10px;
-      border: 1px solid $blue;
-      background-color: $blue;
-      border-radius: 20px;
-      color: #fff;
-      cursor: pointer;
+    .btnsContainer {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+      .btnEdit {
+        margin: 10px 0;
+        height: auto;
+        font-size: 1rem;
+        padding: 10px;
+        border: 1px solid $blue;
+        background-color: $blue;
+        border-radius: 20px;
+        color: #fff;
+        cursor: pointer;
+        &:hover {
+          background-color: transparent;
+          color: $blue;
+        }
+      }
     }
-  }
-
-  .editButton {
-    cursor: pointer;
-    position: absolute;
-    right: 75px;
-    top: 22px;
-  }
-
-  .validada {
-    cursor: pointer;
-    display: inline-block;
   }
 
   .title {
@@ -66,12 +80,7 @@
     font-weight: 400;
     margin-top: 10px;
   }
-  .buttonSave {
-    cursor: pointer;
-    position: absolute;
-    top: 25px;
-    right: 50px;
-  }
+
   .buttonShowRespuestas {
     cursor: pointer;
     display: block;
