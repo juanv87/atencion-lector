@@ -8,6 +8,39 @@
   padding: 20px 50px;
   background-color: #fff;
 
+  .titleEditContainer {
+    display: flex;
+    flex-direction: column;
+    .inputEdit {
+      width: 100%;
+      height: auto;
+      font-size: 1.2rem;
+      padding: 10px;
+      font-family: $primary-font;
+      color: $blue;
+      background-color: transparent;
+      border-radius: 10px;
+    }
+    .btnEdit {
+      margin: 10px auto;
+      height: auto;
+      font-size: 1rem;
+      padding: 10px;
+      border: 1px solid $blue;
+      background-color: $blue;
+      border-radius: 20px;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
+  .editButton {
+    cursor: pointer;
+    position: absolute;
+    right: 75px;
+    top: 22px;
+  }
+
   .validada {
     cursor: pointer;
     display: inline-block;
