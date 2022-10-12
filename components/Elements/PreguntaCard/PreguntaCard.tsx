@@ -6,6 +6,7 @@ import {
   startRemovingSavedPregunta,
   startSavingPregunta,
   updateLikes,
+  updateValidada,
 } from "../../../store/entries";
 import styles from "./Pregunta.module.scss";
 import { IPregunta } from "../../../types/IPregunta";
@@ -23,33 +24,37 @@ import useDelete from "../../../hooks/useDelete";
 import useSave from "../../../hooks/useSave";
 import IconLike from "../../Icons/IconLike";
 import { addToLiked } from "../../../store/likedByUser/likedByUser";
+import { IconValidateOn } from "../../Icons/IconValidateOn";
+import { IconValidateOf } from "../../Icons/IconValidateOf";
 
 interface Props {
   pregunta: IPregunta;
 }
 
 export const PreguntaCard = ({ pregunta }: Props) => {
-  const dispatch = useAppDispatch()
-  const { updatedSaved , savedPreguntasByUser } = useAppSelector((state) => state.savedByUser);
-  const { user: {likedPreguntas} } = useAppSelector((state) => state.likedByUser);
-
-  console.log('likedPreguntas', likedPreguntas)
+  const dispatch = useAppDispatch();
+  const { updatedSaved, savedPreguntasByUser } = useAppSelector(
+    (state) => state.savedByUser
+  );
+  const {
+    user: { likedPreguntas },
+  } = useAppSelector((state) => state.likedByUser);
 
   const [showRespuestas, setShowRespuestas] = useState(false);
   const [savingPregunta, setSavingPregunta] = useState(false);
   const [savedPregunta, setSavedPregunta] = useState(false);
-  const [ activeLike, setActiveLike ] = useState(false)
+  const [activeLike, setActiveLike] = useState(false);
 
-  const { uid } = useAppSelector((state) => state.auth);
+  const { uid, admin } = useAppSelector((state) => state.auth);
 
-  const { id, titulo, autor, respuestas } = pregunta;  
+  const { id, titulo, autor, respuestas, validada } = pregunta;
 
   const { onDeleteSavedPregunta } = useDelete({
     pregunta,
     setSavedPregunta,
     setUpdatedSaved,
     updatedSaved,
-    savedPregunta
+    savedPregunta,
   });
   const { onSavePregunta } = useSave({
     pregunta,
@@ -70,37 +75,49 @@ export const PreguntaCard = ({ pregunta }: Props) => {
 
   const handleLike = () => {
     // setActiveLike(!activeLike)
-    let alreadyLiked = likedPreguntas.filter( liked => liked === pregunta.id).length > 0
-    if(!alreadyLiked){
-      dispatch(likePregunta(pregunta.id)) // Agrega los likes de la preg. al store de Redux
-      dispatch(updateLikes(pregunta.id)) // Agrega los likes de la preg. a Firestore
-      dispatch(addToLikedByUser(uid, pregunta.id))
+    let alreadyLiked =
+      likedPreguntas.filter((liked) => liked === pregunta.id).length > 0;
+    if (!alreadyLiked) {
+      dispatch(likePregunta(pregunta.id)); // Agrega los likes de la preg. al store de Redux
+      dispatch(updateLikes(pregunta.id)); // Agrega los likes de la preg. a Firestore
+      dispatch(addToLikedByUser(uid, pregunta.id));
     }
-  }
+  };
+
+  const handleValidar = () => {
+    dispatch(updateValidada(pregunta.id, !validada));
+  };
 
   useEffect(() => {
     uid && checkIfSaved();
     setShowRespuestas(true);
   }, [savedPreguntasByUser]);
 
-  useEffect(()=>{
-    let alreadyLiked = likedPreguntas.filter( liked => liked === pregunta.id).length > 0
-    alreadyLiked && setActiveLike(true)
-  }, [likedPreguntas])
-  
+  useEffect(() => {
+    let alreadyLiked =
+      likedPreguntas.filter((liked) => liked === pregunta.id).length > 0;
+    alreadyLiked && setActiveLike(true);
+  }, [likedPreguntas]);
 
   return (
     <>
       <article
         className={`${styles.tarjetaPregunta} animate__fadeInUp animate__animated animate__faster`}
       >
+        {admin && (
+          <div onClick={handleValidar} className={styles.validada}>
+            {validada ? <IconValidateOn color="green" /> : <IconValidateOf />}
+          </div>
+        )}
         <AutorAvatar autor={autor} />
         <h2 className={styles.title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} />
-        <button onClick={handleLike}>
-          <IconLike size={18} activeLike={activeLike}/>
-        </button>
-        <span>{pregunta.likes}</span>
+        <div className={styles.likes}>
+          <button onClick={handleLike}>
+            <IconLike size={18} activeLike={activeLike} />
+          </button>
+          <span>{pregunta.likes}</span>
+        </div>
         {uid && (
           <button
             className={styles.buttonSave}

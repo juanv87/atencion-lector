@@ -17,14 +17,9 @@ export const ListaSavedPreguntas = ({ status }: Props) => {
     (state) => state.savedByUser
   );
   const { uid, email } = useAppSelector((state) => state.auth);
-
-  console.log('uid', uid)
-
-
   useEffect(() => {
     status === "authenticated" && dispatch(startLoadingSavedPreguntasByUser());
     updatedSaved && dispatch(setUpdatedSaved(updatedSaved));
-    console.log("updatedSaved", updatedSaved);
   }, [status, updatedSaved]);
 
   return (
@@ -32,7 +27,6 @@ export const ListaSavedPreguntas = ({ status }: Props) => {
       <section className={styles.listaSavedPreguntas}>
         {savedPreguntasByUser && savedPreguntasByUser[0]?.id.length > 0 ? (
           savedPreguntasByUser.map((pregunta) => {
-            console.log('pregunta', pregunta)
             return <SavedPregunta key={pregunta.id} pregunta={pregunta} />;
           })
         ) : (

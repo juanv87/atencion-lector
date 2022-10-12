@@ -32,6 +32,17 @@ export const MenuPerfil = () => {
             <a>Preguntas guardadas</a>
           </Link>
         </li>
+        <li
+          className={
+            router.pathname == "/perfil/preguntas-a-validar"
+              ? styles.active
+              : ""
+          }
+        >
+          <Link href="/perfil/preguntas-a-validar">
+            <a>Preguntas a validar</a>
+          </Link>
+        </li>
       </ul>
     </nav>
   );

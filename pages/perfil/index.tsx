@@ -1,32 +1,19 @@
-import { ChangeEvent, MouseEvent, useState } from "react";
 import ContainerPerfil from "../../components/Containers/ContainerPerfil/ContainerPerfil";
-import { useAppSelector, useAppDispatch } from "../../hooks";
-import { newNickname, startChangeNickName } from "../../store/auth";
-
+import { useAppSelector } from "../../hooks";
+import styles from "./Perfil.module.scss";
 const Perfil = () => {
-  const [newNickName, setNewNickName] = useState("");
-  const { nickName } = useAppSelector((state) => state.auth);
-  console.log("🚀 ~ file: index.tsx ~ line 9 ~ Perfil ~ nickName", nickName);
-  const dispatch = useAppDispatch();
-  const handleNickName = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewNickName(e.target.value);
-  };
-  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    dispatch(newNickname(newNickName));
-    dispatch(startChangeNickName(newNickName));
-  };
+  const { displayName, email, nickName } = useAppSelector((state) => state.auth);
   return (
     <>
       <ContainerPerfil>
-        <input
-          onChange={handleNickName}
-          type="text"
-          placeholder={nickName || ""}
-          name=""
-          id=""
-        />
-        <button onClick={handleSubmit}>Cambiar NickName</button>
+        <h1>Mis datos</h1>
+        <div className={styles.datos}>
+          <div className={styles.item}>
+            <p>Nombre: {displayName}</p>
+            <p>Email: {email}</p>
+            <p>Nombre de usuario: {nickName}</p>
+          </div>
+        </div>
       </ContainerPerfil>
     </>
   );

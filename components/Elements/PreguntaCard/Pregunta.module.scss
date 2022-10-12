@@ -8,6 +8,11 @@
   padding: 20px 50px;
   background-color: #fff;
 
+  .validada {
+    cursor: pointer;
+    display: inline-block;
+  }
+
   .title {
     color: darken($blue, 10%);
     font-family: $secondary-font;
@@ -41,7 +46,7 @@
     font-size: 1rem;
     display: flex;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 15px;
     gap: 5px;
     color: #000;
     span {
@@ -53,6 +58,16 @@
     color: $blue;
     margin-top: 20px;
     text-align: center;
+  }
+  .likes {
+    display: flex;
+    justify-content: center;
+    padding: 15px 0 0;
+    align-items: center;
+    & button {
+      margin: 0 5px;
+      cursor: pointer;
+    }
   }
 }
 

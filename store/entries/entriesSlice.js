@@ -40,11 +40,24 @@ export const entriesSlice = createSlice({
         respuestas: [],
       },
     ],
-    
+
     active: null,
   },
   reducers: {
     // Funciones que modifican el state global de la aplicacion.
+    setValidarPregunta: (state, action) => {
+      const indexPreguntas = state.preguntas.findIndex(
+        (pregunta) => pregunta.id === action.payload.id
+      );
+      state.preguntas[indexPreguntas].validada = action.payload.validar;
+    },
+    // setValidarFromPreguntasByUserName: (state, action) => {
+    //   const indexPreguntasByUserName = state.preguntasByUserName.findIndex(
+    //     (pregunta) => pregunta.id === action.payload.id
+    //   );
+    //   state.preguntasByUserName[indexPreguntasByUserName].validada =
+    //     action.payload.validar;
+    // },
     savingNewPregunta: (state, action) => {
       state.isSaving = true;
     },
@@ -112,7 +125,7 @@ export const entriesSlice = createSlice({
         (pregunta) => pregunta.id === action.payload
       );
       state.preguntas[index].likes += 1;
-    }
+    },
   },
 });
 export const {
@@ -131,5 +144,7 @@ export const {
   setSaving,
   updatePregunta,
   updatingNewPregunta,
-  likePregunta
+  likePregunta,
+  setValidarPregunta,
+  // setValidarFromPreguntasByUserName,
 } = entriesSlice.actions;
