@@ -108,10 +108,12 @@ export const PreguntaCard = ({ pregunta }: Props) => {
         <AutorAvatar autor={autor} />
         <h2 className={styles.title}>{titulo}</h2>
         <AddRespuesta idPregunta={id} />
-        <button onClick={handleLike}>
-          <IconLike size={18} activeLike={activeLike}/>
-        </button>
-        <span>{pregunta.likes}</span>
+        <div className={styles.likes}>
+          <button onClick={handleLike}>
+            <IconLike size={18} activeLike={activeLike}/>
+          </button>
+          <span>{pregunta.likes}</span>
+        </div>
         {uid && (
           <button
             className={styles.buttonSave}
