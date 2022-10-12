@@ -47,10 +47,15 @@ export const entriesSlice = createSlice({
     // Funciones que modifican el state global de la aplicacion.
     setValidarPregunta: (state, action) => {
       console.log("setValidarPregunta", action);
-      const index = state.preguntas.findIndex(
+      const indexPreguntas = state.preguntas.findIndex(
         (pregunta) => pregunta.id === action.payload.id
       );
-      state.preguntas[index].validada = action.payload.validar;
+      const indexPreguntasByUserName = state.preguntasByUserName.findIndex(
+        (pregunta) => pregunta.id === action.payload.id
+      );
+      state.preguntas[indexPreguntas].validada = action.payload.validar;
+      state.preguntasByUserName[indexPreguntasByUserName].validada =
+        action.payload.validar;
     },
     savingNewPregunta: (state, action) => {
       state.isSaving = true;
