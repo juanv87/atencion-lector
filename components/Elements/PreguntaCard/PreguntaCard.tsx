@@ -1,13 +1,10 @@
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import {
-  addToLikedByUser,
-  getLikedByUser,
-  likePregunta,
+import {    
   startRemovingSavedPregunta,
-  startSavingPregunta,
-  updateLikes,
+  startSavingPregunta,  
   updateValidada,
 } from "../../../store/entries";
+import { updateLikes } from '../../../store/likedByUser'
 import styles from "./Pregunta.module.scss";
 import { IPregunta } from "../../../types/IPregunta";
 import { AddRespuesta } from "../../User/AddRespuesta/AddRespuesta";
@@ -73,15 +70,8 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     setSavedPregunta(isSaved ? true : false);
   };
 
-  const handleLike = () => {
-    // setActiveLike(!activeLike)
-    let alreadyLiked =
-      likedPreguntas.filter((liked) => liked === pregunta.id).length > 0;
-    if (!alreadyLiked) {
-      dispatch(likePregunta(pregunta.id)); // Agrega los likes de la preg. al store de Redux
-      dispatch(updateLikes(pregunta.id)); // Agrega los likes de la preg. a Firestore
-      dispatch(addToLikedByUser(uid, pregunta.id));
-    }
+  const handleLike = () => {    
+      dispatch(updateLikes(pregunta.id, likedPreguntas, uid)); // Agrega los likes de la preg. a Firestore y al store de Redux
   };
 
   const handleValidar = () => {
@@ -93,10 +83,9 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     setShowRespuestas(true);
   }, [savedPreguntasByUser]);
 
-  useEffect(() => {
-    let alreadyLiked =
-      likedPreguntas.filter((liked) => liked === pregunta.id).length > 0;
-    alreadyLiked && setActiveLike(true);
+  useEffect(() => {  // Setea el svg del like en pintado o no
+    let alreadyLiked = likedPreguntas.filter((liked) => liked === pregunta.id).length > 0;
+    alreadyLiked ? setActiveLike(true) : setActiveLike(false)
   }, [likedPreguntas]);
 
   return (
