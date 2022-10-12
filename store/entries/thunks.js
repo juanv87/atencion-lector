@@ -26,6 +26,7 @@ import {
   setPreguntasByUserName,
   setValidarPregunta,
   // setSavedPreguntasByUser,
+  likePregunta
 } from "./entriesSlice";
 import { setSavedPreguntasByUser } from "../savedByUser/savedByUserSlice";
 import { addToLiked } from "../likedByUser/likedByUser";
@@ -152,30 +153,4 @@ export const updateValidada = (id, validar) => {
   };
 };
 
-export const updateLikes = (id) => {
-  // Actualiza los likes de la pregunta
-  return async (dispatch, getState) => {
-    const newDoc = doc(collection(FirebaseDB, "preguntas"), id);
-    await updateDoc(newDoc, { likes: increment(1) });
-  };
-};
-export const addToLikedByUser = (id, pregunta) => {
-  // Añade al array de likes del usuario en FireStore
-  return async (dispatch, getState) => {
-    dispatch(addToLiked(pregunta)); // Agrega la pregunta al array de likeadas en Redux Store
-    const newDoc = doc(collection(FirebaseDB, "usuarios"), id);
-    await updateDoc(newDoc, { preguntasLikeadas: arrayUnion(pregunta) });
-  };
-};
-export const getLikedByUser = (id) => {
-  // Busca las likeadas del usuario desde FireStore
-  return async (dispatch, getState) => {
-    const newDoc = doc(collection(FirebaseDB, "usuarios"), id);
-    const data = await getDoc(newDoc);
-    const preguntasLikeadas = data.data().preguntasLikeadas;
-    preguntasLikeadas?.map((liked) => {
-      dispatch(addToLiked(liked));
-    });
-    return preguntasLikeadas;
-  };
-};
+

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { getLikedByUser } from "../../../store/entries/thunks";
+import { getLikedByUser } from "../../../store/likedByUser";
 import { IPregunta } from "../../../types/IPregunta";
 import LoadingSpinner from "../../Loaders/LoadingSpinner/LoadingSpinner";
 import { PreguntaCard } from "../PreguntaCard/PreguntaCard";
