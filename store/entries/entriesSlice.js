@@ -46,17 +46,18 @@ export const entriesSlice = createSlice({
   reducers: {
     // Funciones que modifican el state global de la aplicacion.
     setValidarPregunta: (state, action) => {
-      console.log("setValidarPregunta", action);
       const indexPreguntas = state.preguntas.findIndex(
         (pregunta) => pregunta.id === action.payload.id
       );
-      const indexPreguntasByUserName = state.preguntasByUserName.findIndex(
-        (pregunta) => pregunta.id === action.payload.id
-      );
       state.preguntas[indexPreguntas].validada = action.payload.validar;
-      state.preguntasByUserName[indexPreguntasByUserName].validada =
-        action.payload.validar;
     },
+    // setValidarFromPreguntasByUserName: (state, action) => {
+    //   const indexPreguntasByUserName = state.preguntasByUserName.findIndex(
+    //     (pregunta) => pregunta.id === action.payload.id
+    //   );
+    //   state.preguntasByUserName[indexPreguntasByUserName].validada =
+    //     action.payload.validar;
+    // },
     savingNewPregunta: (state, action) => {
       state.isSaving = true;
     },
@@ -145,4 +146,5 @@ export const {
   updatingNewPregunta,
   likePregunta,
   setValidarPregunta,
+  // setValidarFromPreguntasByUserName,
 } = entriesSlice.actions;
