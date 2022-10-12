@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
@@ -24,7 +25,11 @@ export const UserAvatar = ({
     <section className={styles.userAvatar}>
       {showName && (
         <div className={styles.userAvatar__name}>
-          <p>{nickName}</p>
+          <Link href="/perfil/">
+            <a>
+              <p>{nickName}</p>
+            </a>
+          </Link>
         </div>
       )}
       <div className={styles.userAvatar__image}>
