@@ -126,6 +126,12 @@ export const entriesSlice = createSlice({
       );
       state.preguntas[index].likes += 1;
     },
+    disLikePregunta: (state, action) => {
+      const index = state.preguntas.findIndex(
+        (pregunta) => pregunta.id === action.payload
+      );
+      state.preguntas[index].likes -= 1;
+    },
   },
 });
 export const {
@@ -145,6 +151,7 @@ export const {
   updatePregunta,
   updatingNewPregunta,
   likePregunta,
+  disLikePregunta,
   setValidarPregunta,
   // setValidarFromPreguntasByUserName,
 } = entriesSlice.actions;
