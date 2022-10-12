@@ -26,7 +26,8 @@ import {
   setPreguntasByUserName,
   setValidarPregunta,
   // setSavedPreguntasByUser,
-  likePregunta
+  likePregunta,
+  setUpdateTitle,
 } from "./entriesSlice";
 import { setSavedPreguntasByUser } from "../savedByUser/savedByUserSlice";
 import { addToLiked } from "../likedByUser/likedByUser";
@@ -153,4 +154,10 @@ export const updateValidada = (id, validar) => {
   };
 };
 
-
+export const updateTitle = (id, updatedTitle) => {
+  return async (dispatch, getState) => {
+    dispatch(setUpdateTitle({ id, updatedTitle }));
+    const docRef = doc(collection(FirebaseDB, "preguntas"), id);
+    await updateDoc(docRef, { titulo: updatedTitle });
+  };
+};

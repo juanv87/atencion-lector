@@ -1,10 +1,11 @@
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import {    
+import {
   startRemovingSavedPregunta,
-  startSavingPregunta,  
+  startSavingPregunta,
+  updateTitle,
   updateValidada,
 } from "../../../store/entries";
-import { updateLikes } from '../../../store/likedByUser'
+import { updateLikes } from "../../../store/likedByUser";
 import styles from "./Pregunta.module.scss";
 import { IPregunta } from "../../../types/IPregunta";
 import { AddRespuesta } from "../../User/AddRespuesta/AddRespuesta";
@@ -23,6 +24,7 @@ import IconLike from "../../Icons/IconLike";
 import { addToLiked } from "../../../store/likedByUser/likedByUser";
 import { IconValidateOn } from "../../Icons/IconValidateOn";
 import { IconValidateOf } from "../../Icons/IconValidateOf";
+import IconEdit from "../../Icons/IconEdit";
 
 interface Props {
   pregunta: IPregunta;
@@ -36,15 +38,16 @@ export const PreguntaCard = ({ pregunta }: Props) => {
   const {
     user: { likedPreguntas },
   } = useAppSelector((state) => state.likedByUser);
+  const { id, titulo, autor, respuestas, validada } = pregunta;
 
   const [showRespuestas, setShowRespuestas] = useState(false);
   const [savingPregunta, setSavingPregunta] = useState(false);
   const [savedPregunta, setSavedPregunta] = useState(false);
   const [activeLike, setActiveLike] = useState(false);
+  const [updatedTitle, setUpdateTitle] = useState(titulo);
+  const [showEdit, setShowEdit] = useState(false);
 
   const { uid, admin } = useAppSelector((state) => state.auth);
-
-  const { id, titulo, autor, respuestas, validada } = pregunta;
 
   const { onDeleteSavedPregunta } = useDelete({
     pregunta,
@@ -70,12 +73,16 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     setSavedPregunta(isSaved ? true : false);
   };
 
-  const handleLike = () => {    
-      dispatch(updateLikes(pregunta.id, likedPreguntas, uid)); // Agrega los likes de la preg. a Firestore y al store de Redux
+  const handleLike = () => {
+    dispatch(updateLikes(pregunta.id, likedPreguntas, uid)); // Agrega los likes de la preg. a Firestore y al store de Redux
   };
 
   const handleValidar = () => {
     dispatch(updateValidada(pregunta.id, !validada));
+  };
+
+  const handleEditTitle = () => {
+    dispatch(updateTitle(pregunta.id, updatedTitle));
   };
 
   useEffect(() => {
@@ -83,9 +90,11 @@ export const PreguntaCard = ({ pregunta }: Props) => {
     setShowRespuestas(true);
   }, [savedPreguntasByUser]);
 
-  useEffect(() => {  // Setea el svg del like en pintado o no
-    let alreadyLiked = likedPreguntas.filter((liked) => liked === pregunta.id).length > 0;
-    alreadyLiked ? setActiveLike(true) : setActiveLike(false)
+  useEffect(() => {
+    // Setea el svg del like en pintado o no
+    let alreadyLiked =
+      likedPreguntas.filter((liked) => liked === pregunta.id).length > 0;
+    alreadyLiked ? setActiveLike(true) : setActiveLike(false);
   }, [likedPreguntas]);
 
   return (
@@ -100,6 +109,22 @@ export const PreguntaCard = ({ pregunta }: Props) => {
         )}
         <AutorAvatar autor={autor} />
         <h2 className={styles.title}>{titulo}</h2>
+        {showEdit && (
+          <>
+            <div className={styles.titleEditContainer}>
+              <textarea
+                onChange={(e) => setUpdateTitle(e.target.value)}
+                name="titulo"
+                value={updatedTitle || titulo}
+                id=""
+                className={styles.inputEdit}
+              />
+              <button className={styles.btnEdit} onClick={handleEditTitle}>
+                Aceptar edición
+              </button>
+            </div>
+          </>
+        )}
         <AddRespuesta idPregunta={id} />
         <div className={styles.likes}>
           <button onClick={handleLike}>
@@ -107,6 +132,14 @@ export const PreguntaCard = ({ pregunta }: Props) => {
           </button>
           <span>{pregunta.likes}</span>
         </div>
+        {admin && (
+          <button
+            onClick={() => setShowEdit(!showEdit)}
+            className={styles.editButton}
+          >
+            <IconEdit />
+          </button>
+        )}
         {uid && (
           <button
             className={styles.buttonSave}
@@ -119,7 +152,6 @@ export const PreguntaCard = ({ pregunta }: Props) => {
             )}
           </button>
         )}
-
         {respuestas.length > 0 ? (
           <button
             className={styles.buttonShowRespuestas}
@@ -135,7 +167,6 @@ export const PreguntaCard = ({ pregunta }: Props) => {
         ) : (
           <p className={styles.sinRespuestas}>Todavía no hay respuestas</p>
         )}
-
         {showRespuestas && id && <ListaRespuestas respuestas={respuestas} />}
       </article>
     </>

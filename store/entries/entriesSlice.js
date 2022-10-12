@@ -51,6 +51,12 @@ export const entriesSlice = createSlice({
       );
       state.preguntas[indexPreguntas].validada = action.payload.validar;
     },
+    setUpdateTitle: (state, action) => {
+      const indexPregunta = state.preguntas.findIndex(
+        (pregunta) => pregunta.id === action.payload.id
+      );
+      state.preguntas[indexPregunta].titulo = action.payload.updatedTitle;
+    },
     // setValidarFromPreguntasByUserName: (state, action) => {
     //   const indexPreguntasByUserName = state.preguntasByUserName.findIndex(
     //     (pregunta) => pregunta.id === action.payload.id
@@ -153,5 +159,6 @@ export const {
   likePregunta,
   disLikePregunta,
   setValidarPregunta,
+  setUpdateTitle,
   // setValidarFromPreguntasByUserName,
 } = entriesSlice.actions;
