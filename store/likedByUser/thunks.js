@@ -21,7 +21,7 @@ import {
   import { addToLiked, removeFromLiked } from "../likedByUser/likedByUser";
 
   export const updateLikes = (id, likedPreguntas, uid) => {    
-    console.log('liked desde ', likedPreguntas)
+    console.log("🚀 ~ file: thunks.js ~ line 24 ~ updateLikes ~ likedPreguntas", likedPreguntas)
     let alreadyLiked = likedPreguntas.filter( x => x === id).length > 0
     return async (dispatch, getState) => {
         if(!alreadyLiked){
