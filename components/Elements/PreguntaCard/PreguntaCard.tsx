@@ -102,11 +102,33 @@ export const PreguntaCard = ({ pregunta }: Props) => {
       <article
         className={`${styles.tarjetaPregunta} animate__fadeInUp animate__animated animate__faster`}
       >
-        {admin && (
-          <div onClick={handleValidar} className={styles.validada}>
-            {validada ? <IconValidateOn color="green" /> : <IconValidateOf />}
-          </div>
-        )}
+        <div className={styles.tools}>
+          {admin && (
+            <div onClick={handleValidar} className={styles.validada}>
+              {validada ? <IconValidateOn color="green" /> : <IconValidateOf />}
+            </div>
+          )}
+          {admin && (
+            <button
+              onClick={() => setShowEdit(!showEdit)}
+              className={styles.editButton}
+            >
+              <IconEdit />
+            </button>
+          )}
+          {uid && (
+            <button
+              className={styles.buttonSave}
+              onClick={!savedPregunta ? onSavePregunta : onDeleteSavedPregunta}
+            >
+              {savedPregunta ? (
+                <IconBtnSaved />
+              ) : (
+                <IconBtnSave color={savingPregunta ? "red" : "black"} />
+              )}
+            </button>
+          )}
+        </div>
         <AutorAvatar autor={autor} />
         <h2 className={styles.title}>{titulo}</h2>
         {showEdit && (
@@ -119,9 +141,17 @@ export const PreguntaCard = ({ pregunta }: Props) => {
                 id=""
                 className={styles.inputEdit}
               />
-              <button className={styles.btnEdit} onClick={handleEditTitle}>
-                Aceptar edición
-              </button>
+              <div className={styles.btnsContainer}>
+                <button className={styles.btnEdit} onClick={handleEditTitle}>
+                  Aceptar edición
+                </button>
+                <button
+                  className={styles.btnEdit}
+                  onClick={() => setShowEdit(!showEdit)}
+                >
+                  Cancelar edición
+                </button>
+              </div>
             </div>
           </>
         )}
@@ -132,26 +162,7 @@ export const PreguntaCard = ({ pregunta }: Props) => {
           </button>
           <span>{pregunta.likes}</span>
         </div>
-        {admin && (
-          <button
-            onClick={() => setShowEdit(!showEdit)}
-            className={styles.editButton}
-          >
-            <IconEdit />
-          </button>
-        )}
-        {uid && (
-          <button
-            className={styles.buttonSave}
-            onClick={!savedPregunta ? onSavePregunta : onDeleteSavedPregunta}
-          >
-            {savedPregunta ? (
-              <IconBtnSaved />
-            ) : (
-              <IconBtnSave color={savingPregunta ? "red" : "black"} />
-            )}
-          </button>
-        )}
+
         {respuestas.length > 0 ? (
           <button
             className={styles.buttonShowRespuestas}

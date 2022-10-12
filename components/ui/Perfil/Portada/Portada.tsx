@@ -21,7 +21,7 @@ export const Portada = () => {
               <img
                 height="80"
                 width="80"
-                src={photoURL || "https://i.pravatar.cc/80"}
+                src={photoURL || "/img/avatar.jpg"}
                 alt={displayName !== null ? displayName : ""}
               />
               <span>{nickName}</span>

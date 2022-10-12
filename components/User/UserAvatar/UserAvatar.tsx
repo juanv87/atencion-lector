@@ -35,7 +35,7 @@ export const UserAvatar = ({
       <div className={styles.userAvatar__image}>
         <img
           width={size}
-          src={photoURL || "https://i.pravatar.cc/80"}
+          src={photoURL || "/img/avatar.jpg"}
           alt={displayName !== null ? displayName : ""}
         />
       </div>
