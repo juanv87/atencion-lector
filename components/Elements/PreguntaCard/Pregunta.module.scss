@@ -42,21 +42,6 @@
       gap: 10px;
       justify-content: center;
       margin-bottom: 20px;
-      .btnEdit {
-        margin: 10px 0;
-        height: auto;
-        font-size: 1rem;
-        padding: 10px;
-        border: 1px solid $blue;
-        background-color: $blue;
-        border-radius: 20px;
-        color: #fff;
-        cursor: pointer;
-        &:hover {
-          background-color: transparent;
-          color: $blue;
-        }
-      }
     }
   }
 

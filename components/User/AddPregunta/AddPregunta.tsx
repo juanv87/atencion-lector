@@ -1,6 +1,7 @@
 import React, { ChangeEvent, MouseEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { startNewPregunta } from "../../../store/entries";
+import { ButtonPrimary } from "../../StyledComponents/ButtonPrimary.styled";
 import { UserAvatar } from "../UserAvatar/UserAvatar";
 import styles from "./AddPregunta.module.scss";
 export const AddPregunta = () => {
@@ -32,13 +33,10 @@ export const AddPregunta = () => {
               <p>{titlePregunta.length} / 200</p>
             </div>
           </div>
-          <button
-            disabled={isSaving}
-            onClick={(e) => onClickNewPregunta(e)}
-            className={styles.addPregunta__form__button}
-          >
+          <ButtonPrimary onClick={(e: MouseEvent<HTMLButtonElement>) => onClickNewPregunta(e)} disabled={isSaving} >
             {isSaving ? "Enviando..." : "Enviar"}
-          </button>
+          </ButtonPrimary>
+
         </form>
       </div>
     </>

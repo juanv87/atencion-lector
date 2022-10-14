@@ -25,6 +25,7 @@ import { addToLiked } from "../../../store/likedByUser/likedByUser";
 import { IconValidateOn } from "../../Icons/IconValidateOn";
 import { IconValidateOf } from "../../Icons/IconValidateOf";
 import IconEdit from "../../Icons/IconEdit";
+import { ButtonPrimary } from "../../StyledComponents/ButtonPrimary.styled";
 
 interface Props {
   pregunta: IPregunta;
@@ -142,15 +143,12 @@ export const PreguntaCard = ({ pregunta }: Props) => {
                 className={styles.inputEdit}
               />
               <div className={styles.btnsContainer}>
-                <button className={styles.btnEdit} onClick={handleEditTitle}>
+                <ButtonPrimary onClick={handleEditTitle}>
                   Aceptar edición
-                </button>
-                <button
-                  className={styles.btnEdit}
-                  onClick={() => setShowEdit(!showEdit)}
-                >
+                </ButtonPrimary>
+                <ButtonPrimary onClick={() => setShowEdit(!showEdit)}>
                   Cancelar edición
-                </button>
+                </ButtonPrimary>
               </div>
             </div>
           </>
