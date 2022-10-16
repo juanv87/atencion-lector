@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
+import React, { MutableRefObject, useRef } from 'react'
 import styles from './PreguntasSearch.module.scss'
 
 const PreguntasSearch = ({ setQuery }:any) => {
 
-    const search = useRef<HTMLInputElement>(null);
+    const search = useRef() as MutableRefObject<HTMLInputElement>;
 
     const handleQuerySearch = (e:any) => {
 		setQuery(e.target.value)
