@@ -2,7 +2,7 @@ import * as React from "react"
 
 interface IconLikeProps {
     size: number,
-    activeLike: boolean
+    activeLike?: boolean
 }
 
 const IconLike = ({ size, activeLike }:IconLikeProps) => (

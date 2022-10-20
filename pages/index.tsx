@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { ListaPreguntas } from "../components/Elements/ListaPreguntas/ListaPreguntas";
 import { ListaSavedPreguntas } from "../components/Elements/ListaSavedPreguntas/ListaSavedPreguntas";
+import MostLiked from "../components/Elements/MostLiked/MostLiked";
 import PreguntasSearch from "../components/Elements/preguntasSearch/PreguntasSearch";
 import { Header } from "../components/ui/Header/Header";
 import { AddPregunta } from "../components/User/AddPregunta/AddPregunta";
@@ -31,7 +32,9 @@ const Home: NextPage = () => {
       <Header />
       <main>
         <div className={styles.homeContainer}>
-          <div className={styles.homeContainer__left}></div>
+          <div className={styles.homeContainer__left}>
+            <MostLiked/>
+          </div>
           <div className={styles.homeContainer__main}>
             <AddPregunta />
             <PreguntasSearch setQuery={setQuery}/>
