@@ -6,6 +6,7 @@ import { SavedPregunta } from "../SavedPregunta/SavedPregunta";
 import styles from "./ListaSavedPreguntas.module.scss";
 import { loadSavedPreguntasByUser } from "../../../services/loadSavedPreguntasByUser";
 import { setUpdatedSaved } from "../../../store/savedByUser/savedByUserSlice";
+import { SideCard } from "../SideCard/SideCard";
 
 interface Props {
   status: string;
@@ -30,7 +31,7 @@ export const ListaSavedPreguntas = ({ status }: Props) => {
       <section className={styles.listaSavedPreguntas}>
         {savedPreguntasByUser && savedPreguntasByUser[0]?.id.length > 0 ? (
           savedPreguntasByUser.map((pregunta) => {
-            return <SavedPregunta key={pregunta.id} pregunta={pregunta} />;
+            return <SideCard key={pregunta.id} pregunta={pregunta} mostLiked={false} saved={true}/>;
           })
         ) : (
           <p>No hay preguntas guardadas</p>
