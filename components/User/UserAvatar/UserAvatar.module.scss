@@ -1,9 +1,11 @@
+@import "../../../styles/BreakPoints.scss";
 .userAvatar {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: auto;
   gap: 10px;
+
   &__image {
     // width: 40px;
     // height: 40px;
@@ -30,4 +32,13 @@
     border: none;
     cursor: pointer;
   }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .userAvatar {
+    &__name { display: none; }
+    &__logOutButton {
+      display: none;
+    }
+  }  
 }

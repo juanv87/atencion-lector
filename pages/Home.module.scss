@@ -55,10 +55,10 @@
     grid-template-columns: repeat(3, 1fr);
   }
   .homeContainer__left {
-    grid-column: span 3;
+    display: none;
   }
   .homeContainer__right {
-    grid-column: span 3;
+    display: none;
   }
   .homeContainer__main {
     grid-column: span 3;

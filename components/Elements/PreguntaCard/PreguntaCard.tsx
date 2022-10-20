@@ -103,34 +103,37 @@ export const PreguntaCard = ({ pregunta }: Props) => {
       <article
         className={`${styles.tarjetaPregunta} animate__fadeInUp animate__animated animate__faster`}
       >
-        <div className={styles.tools}>
-          {admin && (
-            <div onClick={handleValidar} className={styles.validada}>
-              {validada ? <IconValidateOn color="green" /> : <IconValidateOf />}
-            </div>
-          )}
-          {admin && (
-            <button
-              onClick={() => setShowEdit(!showEdit)}
-              className={styles.editButton}
-            >
-              <IconEdit />
-            </button>
-          )}
-          {uid && (
-            <button
-              className={styles.buttonSave}
-              onClick={!savedPregunta ? onSavePregunta : onDeleteSavedPregunta}
-            >
-              {savedPregunta ? (
-                <IconBtnSaved />
-              ) : (
-                <IconBtnSave color={savingPregunta ? "red" : "black"} />
-              )}
-            </button>
-          )}
+        <div className={styles.header}>
+          <AutorAvatar autor={autor} />
+          <div className={styles.tools}>
+            {admin && (
+              <div onClick={handleValidar} className={styles.validada}>
+                {validada ? <IconValidateOn color="green" /> : <IconValidateOf />}
+              </div>
+            )}
+            {admin && (
+              <button
+                onClick={() => setShowEdit(!showEdit)}
+                className={styles.editButton}
+              >
+                <IconEdit />
+              </button>
+            )}
+            {uid && (
+              <button
+                className={styles.buttonSave}
+                onClick={!savedPregunta ? onSavePregunta : onDeleteSavedPregunta}
+              >
+                {savedPregunta ? (
+                  <IconBtnSaved />
+                ) : (
+                  <IconBtnSave color={savingPregunta ? "red" : "black"} />
+                )}
+              </button>
+            )}
+          </div>
+          
         </div>
-        <AutorAvatar autor={autor} />
         <h2 className={styles.title}>{titulo}</h2>
         {showEdit && (
           <>

@@ -1,0 +1,45 @@
+.sideCard {
+    //max-width: 300px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.1);
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      margin-top: 10px;
+    }
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      span {
+        cursor: pointer;
+      }
+    }
+    .buttonShowRespuestas {
+      cursor: pointer;
+      display: block;
+      margin: auto;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      margin-top: 30px;
+      gap: 5px;
+      color: #000;
+      span {
+        font-size: 0.9rem;
+      }
+    }
+    .likes {
+      display: flex;
+      justify-content: center;
+      padding: 15px 0 0;
+      align-items: center;
+      & button {
+        margin: 0 5px;
+        cursor: pointer;
+      }
+    }
+  }

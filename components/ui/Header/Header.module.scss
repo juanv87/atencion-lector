@@ -1,5 +1,6 @@
 @import "../../../styles/Colors.scss";
 @import "../../../styles/Sizes.scss";
+@import "../../../styles/BreakPoints.scss";
 .header {
   background-color: $blue;
   padding: 10px;
@@ -7,8 +8,8 @@
   top: 0;
   z-index: 10;
   &__logo {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 80px;
     background-color: #fff;
   }
   &__container {
@@ -17,4 +18,8 @@
     max-width: $widthContainer;
     margin: 0 auto;
   }
+}
+
+@media (max-width: $breakpoint-mobile) {
+
 }
