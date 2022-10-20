@@ -8,21 +8,27 @@
   padding: 20px 50px;
   background-color: #fff;
 
-  .tools {
+  .header {
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    gap: 10px;
-    .editButton {
-      cursor: pointer;
-    }
-    .validada {
-      cursor: pointer;
-    }
-    .buttonSave {
-      cursor: pointer;
+    justify-content: space-between;
+    .tools {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+      .editButton {
+        cursor: pointer;
+      }
+      .validada {
+        cursor: pointer;
+      }
+      .buttonSave {
+        cursor: pointer;
+      }
     }
   }
+
 
   .titleEditContainer {
     display: flex;

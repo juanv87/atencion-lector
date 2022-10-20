@@ -33,11 +33,15 @@ export const UserAvatar = ({
         </div>
       )}
       <div className={styles.userAvatar__image}>
-        <img
-          width={size}
-          src={photoURL || "/img/avatar.jpg"}
-          alt={displayName !== null ? displayName : ""}
-        />
+        <Link href="/perfil/">
+          <a>
+            <img
+              width={size}
+              src={photoURL || "/img/avatar.jpg"}
+              alt={displayName !== null ? displayName : ""}
+            />
+          </a>
+        </Link>
       </div>
       {showLogOut && (
         <div onClick={onLogOut} className={styles.userAvatar__logOutButton}>
