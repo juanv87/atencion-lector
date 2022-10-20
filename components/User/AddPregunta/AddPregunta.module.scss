@@ -1,12 +1,12 @@
 @import "../../../styles/Colors.scss";
 @import "../../../styles/Fonts.scss";
 @import "../../../styles/Buttons.scss";
+@import "../../../styles/BreakPoints.scss";
 
 .addPregunta {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 10px 20px;
   background-color: #fff;
   &__form {
@@ -49,5 +49,15 @@
     text-indent: 10px;
     position: absolute;
     bottom: -20px;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .addPregunta {
+
+    textarea {
+      font-size: 0.8rem;
+      height: 60px;
+    }
   }
 }

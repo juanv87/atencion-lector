@@ -1,25 +1,21 @@
+@import "../../../styles/Fonts.scss";
 .preguntasSearch {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #19274a;
-  padding: 15px;
-  & span {
-    margin: 0 10px;
-    font-family: "quicksand";
-    color: white;
-  }
-  & input {
+  padding: 8px 15px;
+  position: relative;
+  input {
     border-radius: 5px;
-    border: 1px solid;
-    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    width: 100%;
+    font-family: $primary-font;
   }
-  & button {
-    margin: 0 10px;
-    border: 1px solid black;
-    border-radius: 50%;
-    padding: 3px 6px;
-    background: #ffffff;
-    color: #19274a;
+  button {
+    position: absolute;
+    right: 25px;
+    top: 18px;
+    cursor: pointer;
   }
 }

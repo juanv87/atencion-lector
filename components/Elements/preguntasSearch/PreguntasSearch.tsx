@@ -1,4 +1,5 @@
 import React, { MutableRefObject, useRef } from 'react'
+import { IconClose } from '../../Icons/IconClose';
 import styles from './PreguntasSearch.module.scss'
 
 const PreguntasSearch = ({ setQuery }:any) => {
@@ -17,19 +18,19 @@ const PreguntasSearch = ({ setQuery }:any) => {
 
   return (
     <div className={styles.preguntasSearch}>
-        <span>Buscá en la lista</span>
 		<input  
-			type="search"
+			type="text"
 			onChange={(e) => handleQuerySearch(e)}
 			id="search"
+			placeholder="Buscá en la lista"
 			className="search"
-            ref={search}
-			/>
+			ref={search}
+		/>
 		<button
 			className="borrar"
 			onClick={handleBorrar}
 		>
-			X
+			<IconClose color="black" size="1.5em" />
 		</button>
 	</div>
   )
