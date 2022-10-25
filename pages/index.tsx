@@ -16,8 +16,7 @@ const Home: NextPage = () => {
   const dispatch = useAppDispatch();
   const status = useCheckAuth();
 
-  const [ query, setQuery ] = useState('')
-
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     dispatch(startLoadingPreguntas());
@@ -33,12 +32,12 @@ const Home: NextPage = () => {
       <main>
         <div className={styles.homeContainer}>
           <div className={styles.homeContainer__left}>
-            <MostLiked/>
+            <MostLiked />
           </div>
           <div className={styles.homeContainer__main}>
             <AddPregunta />
-            <PreguntasSearch setQuery={setQuery}/>
-            <ListaPreguntas query={query}/>
+            <PreguntasSearch setQuery={setQuery} />
+            <ListaPreguntas query={query} />
           </div>
           <div className={styles.homeContainer__right}>
             <ListaSavedPreguntas status={status} />

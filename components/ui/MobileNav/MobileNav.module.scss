@@ -1,0 +1,23 @@
+@import "../../../styles/Colors.scss";
+
+.mobileNav {
+  margin-top: 20px;
+  ul {
+    display: flex;
+    justify-content: space-evenly;
+    li {
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        border: 1px solid darken($gray-light, 50%);
+        border-radius: 20%;
+        aspect-ratio: 1/1;
+        svg {
+          width: 70%;
+        }
+      }
+    }
+  }
+}
