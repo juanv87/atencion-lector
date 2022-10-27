@@ -1,15 +1,20 @@
-import React, { MutableRefObject, useRef } from "react";
+import React, {
+  ChangeEvent,
+  MouseEvent,
+  MutableRefObject,
+  useRef,
+} from "react";
 import { IconClose } from "../../Icons/IconClose";
 import styles from "./PreguntasSearch.module.scss";
 
 const PreguntasSearch = ({ setQuery }: { setQuery: Function }) => {
   const search = useRef() as MutableRefObject<HTMLInputElement>;
 
-  const handleQuerySearch = (e: any) => {
+  const handleQuerySearch = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
-  const handleBorrar = (e: any) => {
+  const handleBorrar = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setQuery("");
     search.current.value = "";

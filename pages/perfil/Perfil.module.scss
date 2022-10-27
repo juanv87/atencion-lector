@@ -1,5 +1,6 @@
 @import "../../styles/Sizes.scss";
 @import "../../styles/Colors.scss";
+@import "../../styles/BreakPoints.scss";
 
 .container_dashboard {
   width: $widthContainer;
@@ -22,5 +23,17 @@
       display: block;
      }
    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .container_dashboard {
+    width: 100%;
+    aside {
+      display: none;
+    }
+    .dashboard {
+      grid-column: span 12;
+    }
   }
 }

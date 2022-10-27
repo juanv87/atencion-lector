@@ -6,6 +6,7 @@ import { ListaSavedPreguntas } from "../components/Elements/ListaSavedPreguntas/
 import MostLiked from "../components/Elements/MostLiked/MostLiked";
 import PreguntasSearch from "../components/Elements/preguntasSearch/PreguntasSearch";
 import { Header } from "../components/ui/Header/Header";
+import { MobileNav } from "../components/ui/MobileNav/MobileNav";
 import { AddPregunta } from "../components/User/AddPregunta/AddPregunta";
 import { useAppDispatch } from "../hooks";
 import { useCheckAuth } from "../hooks/useCheckAuth";
@@ -16,8 +17,7 @@ const Home: NextPage = () => {
   const dispatch = useAppDispatch();
   const status = useCheckAuth();
 
-  const [ query, setQuery ] = useState('')
-
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     dispatch(startLoadingPreguntas());
@@ -33,12 +33,12 @@ const Home: NextPage = () => {
       <main>
         <div className={styles.homeContainer}>
           <div className={styles.homeContainer__left}>
-            <MostLiked/>
+            <MostLiked />
           </div>
           <div className={styles.homeContainer__main}>
             <AddPregunta />
-            <PreguntasSearch setQuery={setQuery}/>
-            <ListaPreguntas query={query}/>
+            <PreguntasSearch setQuery={setQuery} />
+            <ListaPreguntas query={query} />
           </div>
           <div className={styles.homeContainer__right}>
             <ListaSavedPreguntas status={status} />

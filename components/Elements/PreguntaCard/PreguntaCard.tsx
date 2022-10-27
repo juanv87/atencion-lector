@@ -108,7 +108,11 @@ export const PreguntaCard = ({ pregunta }: Props) => {
           <div className={styles.tools}>
             {admin && (
               <div onClick={handleValidar} className={styles.validada}>
-                {validada ? <IconValidateOn color="green" /> : <IconValidateOf />}
+                {validada ? (
+                  <IconValidateOn color="green" />
+                ) : (
+                  <IconValidateOf />
+                )}
               </div>
             )}
             {admin && (
@@ -122,7 +126,9 @@ export const PreguntaCard = ({ pregunta }: Props) => {
             {uid && (
               <button
                 className={styles.buttonSave}
-                onClick={!savedPregunta ? onSavePregunta : onDeleteSavedPregunta}
+                onClick={
+                  !savedPregunta ? onSavePregunta : onDeleteSavedPregunta
+                }
               >
                 {savedPregunta ? (
                   <IconBtnSaved />
@@ -132,7 +138,6 @@ export const PreguntaCard = ({ pregunta }: Props) => {
               </button>
             )}
           </div>
-          
         </div>
         <h2 className={styles.title}>{titulo}</h2>
         {showEdit && (
