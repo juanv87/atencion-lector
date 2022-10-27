@@ -6,6 +6,7 @@ import { ListaSavedPreguntas } from "../components/Elements/ListaSavedPreguntas/
 import MostLiked from "../components/Elements/MostLiked/MostLiked";
 import PreguntasSearch from "../components/Elements/preguntasSearch/PreguntasSearch";
 import { Header } from "../components/ui/Header/Header";
+import { MobileNav } from "../components/ui/MobileNav/MobileNav";
 import { AddPregunta } from "../components/User/AddPregunta/AddPregunta";
 import { useAppDispatch } from "../hooks";
 import { useCheckAuth } from "../hooks/useCheckAuth";
