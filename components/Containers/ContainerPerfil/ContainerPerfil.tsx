@@ -6,6 +6,7 @@ import styles from "../../../pages/perfil/Perfil.module.scss";
 import { useCheckAuth } from "../../../hooks/useCheckAuth";
 import { useRedirectNonUsers } from "../../../hooks/useRedirectNonUsers";
 import { Portada } from "../../ui/Perfil/Portada/Portada";
+import { MenuMobilePerfil } from "../../ui/Perfil/MenuMobile/MenuMobilePerfil";
 
 interface Props {
   children: React.ReactNode;
@@ -28,6 +29,7 @@ const ContainerPerfil = ({ children }: Props) => {
         </aside>
         <section className={styles.dashboard}>{children}</section>
       </main>
+      <MenuMobilePerfil />
     </>
   );
 };

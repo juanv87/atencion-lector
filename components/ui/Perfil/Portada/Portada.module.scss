@@ -1,5 +1,6 @@
 @import "../../../../styles/Colors.scss";
 @import "../../../../styles/Sizes.scss";
+@import "../../../../styles/BreakPoints.scss";
 .portada {
   height: 200px;
   background: $primary-color
@@ -28,6 +29,25 @@
         font-size: 1.8rem;
         font-weight: 500;
         color: #fff;
+      }
+    }
+  }
+}
+@media (max-width: $breakpoint-mobile) {
+  .portada {
+    height: 150px;
+    .container_portada {
+      width: 100%;
+      .avatar {
+        justify-content: center;
+        span {
+          font-size: 1rem;
+        }
+        img {
+          width: 50px;
+          height: 50px;
+          border-width: 2px;
+        }
       }
     }
   }

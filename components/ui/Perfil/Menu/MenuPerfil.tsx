@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useAppSelector } from "../../../../hooks";
 import styles from "./MenuPerfil.module.scss";
 
 export const MenuPerfil = () => {
   const router = useRouter();
+  const { admin } = useAppSelector((state) => state.auth);
   return (
     <nav className={styles.nav}>
       <ul>
@@ -32,17 +34,19 @@ export const MenuPerfil = () => {
             <a>Preguntas guardadas</a>
           </Link>
         </li>
-        <li
-          className={
-            router.pathname == "/perfil/preguntas-a-validar"
-              ? styles.active
-              : ""
-          }
-        >
-          <Link href="/perfil/preguntas-a-validar">
-            <a>Preguntas a validar</a>
-          </Link>
-        </li>
+        {admin && (
+          <li
+            className={
+              router.pathname == "/perfil/preguntas-a-validar"
+                ? styles.active
+                : ""
+            }
+          >
+            <Link href="/perfil/preguntas-a-validar">
+              <a>Preguntas a validar</a>
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );
