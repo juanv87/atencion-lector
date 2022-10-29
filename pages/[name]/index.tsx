@@ -32,9 +32,7 @@ const UserNickName = ({ name }: Props) => {
         <div className={styles.nameContainer__main}>
           <ListaPreguntasByUserName name={name} />
         </div>
-        <div className={styles.nameContainer__right}>
-          <ListaSavedPreguntas status={status} />
-        </div>
+        <div className={styles.nameContainer__right}></div>
       </main>
     </>
   );
