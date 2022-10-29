@@ -1,5 +1,6 @@
 import React, { ChangeEvent, MouseEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { startGoogleSignIn } from "../../../store/auth";
 import { startNewPregunta } from "../../../store/entries";
 import { ButtonPrimary } from "../../StyledComponents/ButtonPrimary.styled";
 import { UserAvatar } from "../UserAvatar/UserAvatar";
@@ -8,12 +9,17 @@ export const AddPregunta = () => {
   const [titlePregunta, setTitlePregunta] = useState("");
   const dispatch = useAppDispatch();
 
+  const { status } = useAppSelector((state) => state.auth);
   const { isSaving } = useAppSelector((state) => state.entries);
 
   const onClickNewPregunta = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // titlePregunta.length > 0 && dispatch(startNewPregunta({ titlePregunta }));
-    titlePregunta.length > 0 && dispatch(startNewPregunta({ titlePregunta }));
+    status === "authenticated"
+      ? titlePregunta.length > 0 &&
+        dispatch(startNewPregunta({ titlePregunta }))
+      : dispatch(startGoogleSignIn());
+
     setTitlePregunta("");
   };
   return (
@@ -33,10 +39,14 @@ export const AddPregunta = () => {
               <p>{titlePregunta.length} / 200</p>
             </div>
           </div>
-          <ButtonPrimary onClick={(e: MouseEvent<HTMLButtonElement>) => onClickNewPregunta(e)} disabled={isSaving} >
+          <ButtonPrimary
+            onClick={(e: MouseEvent<HTMLButtonElement>) =>
+              onClickNewPregunta(e)
+            }
+            disabled={isSaving}
+          >
             {isSaving ? "Enviando..." : "Enviar"}
           </ButtonPrimary>
-
         </form>
       </div>
     </>
