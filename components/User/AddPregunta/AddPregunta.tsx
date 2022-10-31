@@ -5,6 +5,8 @@ import { startNewPregunta } from "../../../store/entries";
 import { ButtonPrimary } from "../../StyledComponents/ButtonPrimary.styled";
 import { UserAvatar } from "../UserAvatar/UserAvatar";
 import styles from "./AddPregunta.module.scss";
+import { Toast } from "../../StyledComponents/Toast.styled";
+
 export const AddPregunta = () => {
   const [titlePregunta, setTitlePregunta] = useState("");
   const dispatch = useAppDispatch();
@@ -12,19 +14,35 @@ export const AddPregunta = () => {
   const { status } = useAppSelector((state) => state.auth);
   const { isSaving } = useAppSelector((state) => state.entries);
 
+  const [messagePost, setMessagePost] = useState("");
+
   const onClickNewPregunta = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // titlePregunta.length > 0 && dispatch(startNewPregunta({ titlePregunta }));
     status === "authenticated"
       ? titlePregunta.length > 0 &&
-        dispatch(startNewPregunta({ titlePregunta }))
+        dispatch(startNewPregunta({ titlePregunta })).then(() => {
+          setMessagePost(
+            "Pregunta enviada y lista para revisar, en breve podrás verla publicada."
+          );
+          setTitlePregunta("");
+        })
       : dispatch(startGoogleSignIn());
-
-    setTitlePregunta("");
+    setTimeout(() => {
+      setMessagePost("");
+    }, 4500);
   };
   return (
     <>
       <div className={styles.addPregunta}>
+        {messagePost.length > 0 && (
+          <Toast
+            className="animate__animated animate__fadeInUp animate__faster"
+            color="success"
+          >
+            {messagePost}
+          </Toast>
+        )}
         <form className={styles.addPregunta__form}>
           <div className={styles.addPregunta__form__avatarTextArea}>
             <UserAvatar showName={false} showLogOut={false} />
