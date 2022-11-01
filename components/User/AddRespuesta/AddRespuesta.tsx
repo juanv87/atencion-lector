@@ -3,6 +3,7 @@ import styles from "./AddRespuesta.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { startNewRespuesta } from "../../../store/entries";
 import { IconSendRespuesta } from "../../Icons/IconSendRespuesta";
+import { startGoogleSignIn } from "../../../store/auth";
 
 interface Props {
   idPregunta: string;
@@ -14,10 +15,12 @@ export const AddRespuesta = ({ idPregunta }: Props) => {
   const dispatch = useAppDispatch();
 
   const { isUpdating } = useAppSelector((state) => state.entries);
+  const { status } = useAppSelector((state) => state.auth);
 
   const handleAddRespuesta = () => {
-    titleRespuesta.length > 0 &&
-      dispatch(startNewRespuesta(titleRespuesta, idPregunta));
+    status === "authenticated" && titleRespuesta.length > 0
+      ? dispatch(startNewRespuesta(titleRespuesta, idPregunta))
+      : dispatch(startGoogleSignIn());
     setTitleRespuesta("");
   };
   return (
