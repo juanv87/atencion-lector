@@ -5,7 +5,12 @@ export const userMessages = createSlice({
   initialState: {
     user: {
         id:"",
-        mensajes: []
+        mensajes: [
+          {
+            autor: '',
+            texto: ''
+          }
+        ]
     }
   },
   reducers: {
