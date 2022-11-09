@@ -3,13 +3,15 @@ import { authSlice } from "./auth";
 import { entriesSlice } from "./entries";
 import { savedByUserSlice } from './savedByUser/savedByUserSlice'
 import { likedByUser } from './likedByUser/likedByUser'
+import { userMessages } from './userMessages/userMessagesSlice'
 
 export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     entries: entriesSlice.reducer,
     savedByUser: savedByUserSlice.reducer,
-    likedByUser: likedByUser.reducer
+    likedByUser: likedByUser.reducer,
+    userMessages: userMessages.reducer
   },
 });
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { Header } from "../../components/ui/Header/Header";
+import { BiMessageDetail } from 'react-icons/bi'
 import Head from "next/head";
 
 import styles from "./Name.module.scss";
@@ -13,6 +14,8 @@ import { ListaSavedPreguntas } from "../../components/Elements/ListaSavedPregunt
 import { IPregunta } from "../../types/IPregunta";
 import { ListaPreguntasByUserName } from "../../components/Elements/ListaPreguntasByUserName/ListaPreguntasByUserName";
 import { loadUserIdByUserName } from "../../helpers/LoadUserIdByUserName";
+import Modal from "../../components/ui/Modal/Modal";
+import { Toast } from "../../components/StyledComponents/Toast.styled";
 
 interface Props {
   name: string;
@@ -50,6 +53,13 @@ const UserNickName = ({ name, dataUser }: Props) => {
     preguntasLikeadas,
   } = dataUser;
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+
+  const handleSendMessage = () => {
+    setIsOpen(true)
+  }
+
   return (
     <>
       <Head>
@@ -66,7 +76,21 @@ const UserNickName = ({ name, dataUser }: Props) => {
         <div className={styles.nameContainer__main}>
           <ListaPreguntasByUserName name={name} />
         </div>
-        <div className={styles.nameContainer__right}></div>
+        <div className={styles.nameContainer__right}>
+          <button onClick={handleSendMessage}>Enviar mensaje <BiMessageDetail/></button>
+        </div>
+        {isOpen && <Modal 
+                      setIsOpen={setIsOpen} 
+                      uid={uid} 
+                      messageTo={displayName}
+                      setShowToast={setShowToast}
+                    />}
+        {showToast && <Toast
+            className="animate__animated animate__fadeInUp animate__faster"
+            color="success"
+          >
+            ¡Mensaje enviado!
+          </Toast>}
       </main>
     </>
   );
