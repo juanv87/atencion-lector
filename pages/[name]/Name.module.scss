@@ -14,6 +14,16 @@
 .nameContainer__right {
   grid-column: span 4;
   background-color: $gray-light;
+  & button {
+    margin: 10%;
+    border: 1px solid black;
+    padding: 2%;
+    font-family: quicksand;
+    font-weight: 600;
+    background: white;
+    box-shadow: 2px 3px 4px 1px rgb(0 0 0 / 20%);
+    cursor:pointer;
+  }
 }
 .nameContainer__main {
   grid-column: span 4;

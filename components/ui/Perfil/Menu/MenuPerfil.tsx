@@ -34,6 +34,11 @@ export const MenuPerfil = () => {
             <a>Preguntas guardadas</a>
           </Link>
         </li>
+        <li className={router.pathname == "/perfil/mis-mensajes" ? styles.active : ""}>
+          <Link href="/perfil/mis-mensajes">
+            <a>Mis mensajes</a>
+          </Link>
+        </li>
         {admin && (
           <li
             className={

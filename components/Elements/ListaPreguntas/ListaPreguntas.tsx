@@ -13,6 +13,9 @@ export const ListaPreguntas = ({ query }: { query: String }) => {
   );
   const { uid } = useAppSelector((state) => state.auth);
 
+  const { mensajes } = useAppSelector( (state) => state.auth );
+    console.log('msgs',mensajes)
+
   const [validadas, setValidadas] = useState(preguntas);
   const [filtradas, setFiltradas] = useState(validadas);
 

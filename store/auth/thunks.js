@@ -5,6 +5,7 @@ import { checkingCredentials, logout, login, newNickname } from ".";
 import { clearEntriesLogout } from "../entries";
 import { FirebaseDB } from "../../lib/firebase/firebase";
 import { getAdditionalUserInfo, getAuth } from "firebase/auth";
+import { loadMessages } from "../../services/services";
 
 export const checkingAuthentication = () => {
   return async (dispatch) => {
@@ -35,3 +36,5 @@ export const startLogout = () => {
     dispatch(logout());
   };
 };
+
+
