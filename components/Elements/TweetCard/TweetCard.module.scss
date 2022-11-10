@@ -1,0 +1,81 @@
+@import "../../../styles/Colors.scss";
+@import "../../../styles/Fonts.scss";
+@import "../../../styles/Buttons.scss";
+
+.tarjetaTweet {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  width: 100%;
+  padding: 20px 50px;
+  background-color: #fff;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    .tools {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+      .editButton {
+        cursor: pointer;
+      }
+      .validada {
+        cursor: pointer;
+      }
+      .buttonSave {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .titleEditContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    .inputEdit {
+      width: 100%;
+      min-height: 200px;
+      font-size: 1rem;
+      padding: 10px;
+      font-family: $primary-font;
+      color: $blue;
+      background-color: transparent;
+      border-radius: 10px;
+    }
+    .btnsContainer {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+  }
+
+  .body {
+    color: darken($blue, 10%);
+    font-family: $primary-font;
+    font-size: 1rem;
+    line-height: 1.3em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    word-break: break-word;
+    font-weight: 400;
+    &::selection {
+      background-color: $primary-color;
+      color: $blue;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .tarjetaPregunta {
+    padding: 20px 10px;
+    .title {
+      font-size: 1.5rem;
+    }
+    .buttonSave {
+      top: 20px;
+      right: 10px;
+    }
+  }
+}
