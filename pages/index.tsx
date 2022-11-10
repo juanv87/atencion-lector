@@ -7,6 +7,7 @@ import MostLiked from "../components/Elements/MostLiked/MostLiked";
 import PreguntasSearch from "../components/Elements/preguntasSearch/PreguntasSearch";
 import { Header } from "../components/ui/Header/Header";
 import { MobileNav } from "../components/ui/MobileNav/MobileNav";
+import Modal from "../components/ui/Modal/Modal";
 import { AddPregunta } from "../components/User/AddPregunta/AddPregunta";
 import { useAppDispatch } from "../hooks";
 import { useCheckAuth } from "../hooks/useCheckAuth";
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
   const status = useCheckAuth();
 
   const [query, setQuery] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     dispatch(startLoadingPreguntas());
@@ -43,6 +45,9 @@ const Home: NextPage = () => {
           <div className={styles.homeContainer__right}>
             <ListaSavedPreguntas status={status} />
           </div>
+        </div>
+        <div>
+          {isOpen && <Modal setIsOpen={setIsOpen} />}
         </div>
       </main>
     </>

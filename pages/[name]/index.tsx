@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { Header } from "../../components/ui/Header/Header";
+import { BiMessageDetail } from 'react-icons/bi'
 import Head from "next/head";
 
 import styles from "./Name.module.scss";
@@ -12,13 +13,52 @@ import { useCheckAuth } from "../../hooks/useCheckAuth";
 import { ListaSavedPreguntas } from "../../components/Elements/ListaSavedPreguntas/ListaSavedPreguntas";
 import { IPregunta } from "../../types/IPregunta";
 import { ListaPreguntasByUserName } from "../../components/Elements/ListaPreguntasByUserName/ListaPreguntasByUserName";
+import { loadUserIdByUserName } from "../../helpers/LoadUserIdByUserName";
+import Modal from "../../components/ui/Modal/Modal";
+import { Toast } from "../../components/StyledComponents/Toast.styled";
 
 interface Props {
   name: string;
+  dataUser: {
+    uid: string;
+    admin: string;
+    displayName: string;
+    email: string;
+    id: string;
+    mensajes: string;
+    nickName: string;
+    photoURL: string;
+    preguntasGuardadas: [object];
+    preguntasLikeadas: [string];
+  };
 }
 
-const UserNickName = ({ name }: Props) => {
+const UserNickName = ({ name, dataUser }: Props) => {
+  console.log(
+    "🚀 ~ file: index.tsx ~ line 25 ~ UserNickName ~ dataUser",
+    dataUser
+  );
   const status = useCheckAuth();
+
+  const {
+    uid,
+    admin,
+    displayName,
+    email,
+    id,
+    mensajes,
+    nickName,
+    photoURL,
+    preguntasGuardadas,
+    preguntasLikeadas,
+  } = dataUser;
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+
+  const handleSendMessage = () => {
+    setIsOpen(true)
+  }
 
   return (
     <>
@@ -28,11 +68,29 @@ const UserNickName = ({ name }: Props) => {
       </Head>
       <Header />
       <main className={styles.nameContainer}>
-        <div className={styles.nameContainer__left}></div>
+        <div className={styles.nameContainer__left}>
+          email: {email} <br />
+          UID: {uid} <br />
+          display: {displayName} <br />
+        </div>
         <div className={styles.nameContainer__main}>
           <ListaPreguntasByUserName name={name} />
         </div>
-        <div className={styles.nameContainer__right}></div>
+        <div className={styles.nameContainer__right}>
+          <button onClick={handleSendMessage}>Enviar mensaje <BiMessageDetail/></button>
+        </div>
+        {isOpen && <Modal 
+                      setIsOpen={setIsOpen} 
+                      uid={uid} 
+                      messageTo={displayName}
+                      setShowToast={setShowToast}
+                    />}
+        {showToast && <Toast
+            className="animate__animated animate__fadeInUp animate__faster"
+            color="success"
+          >
+            ¡Mensaje enviado!
+          </Toast>}
       </main>
     </>
   );
@@ -40,9 +98,11 @@ const UserNickName = ({ name }: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { name } = params as { name: string };
+  const dataUser = await loadUserIdByUserName({ name });
   return {
     props: {
       name,
+      dataUser,
     },
   };
 };

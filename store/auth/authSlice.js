@@ -13,6 +13,7 @@ export const authSlice = createSlice({
     errorMessage: null,
     preguntasGuardadas: [],
     preguntasLikeadas: [],
+    mensajes: [],
   },
   reducers: {
     login: (state, { payload }) => {
@@ -26,6 +27,7 @@ export const authSlice = createSlice({
       state.errorMessage = null;
       state.preguntasGuardadas = payload.preguntasGuardadas;
       state.preguntasLikeadas = payload.preguntasLikeadas;
+      state.mensajes = payload.mensajes;
     },
     logout: (state, { payload }) => {
       state.status = "not-authenticated";
@@ -37,6 +39,7 @@ export const authSlice = createSlice({
       state.errorMessage = payload?.errorMessage;
       state.preguntasGuardadas = [];
       state.preguntasLikeadas = [];
+      state.mensajes = [];
     },
     checkingCredentials: (state) => {
       state.status = "checking";
