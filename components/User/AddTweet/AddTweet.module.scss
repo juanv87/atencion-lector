@@ -1,0 +1,66 @@
+@import "../../../styles/Colors.scss";
+@import "../../../styles/Fonts.scss";
+@import "../../../styles/Buttons.scss";
+@import "../../../styles/BreakPoints.scss";
+
+.addPregunta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    &__avatarTextArea {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+    }
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 1rem;
+      font-family: $primary-font;
+      color: $blue;
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+  }
+}
+.textAreaContainer {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  gap: 10px;
+  position: relative;
+  p {
+    margin: 0;
+    font-size: 0.7rem;
+    text-indent: 10px;
+    position: absolute;
+    bottom: -20px;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .addPregunta {
+
+    textarea {
+      font-size: 0.8rem;
+      height: 60px;
+      &:focus {
+        font-size: 16px;
+      }
+    }
+  }
+}
