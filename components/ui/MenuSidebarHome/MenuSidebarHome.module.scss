@@ -1,0 +1,21 @@
+.container {
+  background-color: #fff;
+  margin: auto;
+  width: 70%;
+  border-radius: 20px;
+  .userAvatar {
+    display: flex;
+    justify-content: flex-start;
+    section {
+      margin-top: 20px;
+      margin-left: 20px;
+    }
+  }
+  ul {
+    padding: 20px;
+    li {
+      a {
+      }
+    }
+  }
+}

@@ -5,17 +5,22 @@
 .mostLikedTitle {
   font-family: "quicksand", "sans-serif";
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   & h2 {
     font-family: "quicksand", "sans-serif";
     font-weight: 500;
-    color: white;
-    background-color: #123794;
+    color: #000;
     padding: 10px;
     border-radius: 15px;
-    font-weight: 500;
+    font-size: 1.2rem;
   }
 }
 .mostLikedContainer {
   padding: 0 15%;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -6,18 +6,26 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   min-height: 100vh;
+  max-width: 1300px;
+  margin: auto;
 }
 .homeContainer__left {
-  grid-column: span 4;
+  grid-column: span 3;
   background-color: $gray-light;
-}
-.homeContainer__right {
-  grid-column: span 4;
-  background-color: $gray-light;
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 .homeContainer__main {
-  grid-column: span 4;
-  background-color: #fff;
+  grid-column: span 6;
+  padding: 0 20px;
+}
+.homeContainer__right {
+  grid-column: span 3;
+  background-color: $gray-light;
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 
 @media (max-width: $breakpoint-laptop) {

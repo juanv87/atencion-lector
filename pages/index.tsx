@@ -6,6 +6,7 @@ import { ListaSavedPreguntas } from "../components/Elements/ListaSavedPreguntas/
 import MostLiked from "../components/Elements/MostLiked/MostLiked";
 import PreguntasSearch from "../components/Elements/preguntasSearch/PreguntasSearch";
 import { Header } from "../components/ui/Header/Header";
+import { MenuSidebarHome } from "../components/ui/MenuSidebarHome/MenuSidebarHome";
 import { MobileNav } from "../components/ui/MobileNav/MobileNav";
 import Modal from "../components/ui/Modal/Modal";
 import { AddPregunta } from "../components/User/AddPregunta/AddPregunta";
@@ -35,10 +36,13 @@ const Home: NextPage = () => {
       <main>
         <div className={styles.homeContainer}>
           <div className={styles.homeContainer__left}>
+            <MenuSidebarHome />
             <MostLiked />
           </div>
           <div className={styles.homeContainer__main}>
-            <AddPregunta />
+            <div className={styles.addPregunta}>
+              <AddPregunta />
+            </div>
             <PreguntasSearch setQuery={setQuery} />
             <ListaPreguntas query={query} />
           </div>
@@ -46,9 +50,7 @@ const Home: NextPage = () => {
             <ListaSavedPreguntas status={status} />
           </div>
         </div>
-        <div>
-          {isOpen && <Modal setIsOpen={setIsOpen} />}
-        </div>
+        <div>{isOpen && <Modal setIsOpen={setIsOpen} />}</div>
       </main>
     </>
   );
