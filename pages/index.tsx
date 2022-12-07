@@ -10,14 +10,14 @@ import { MenuSidebarHome } from "../components/ui/MenuSidebarHome/MenuSidebarHom
 import { MobileNav } from "../components/ui/MobileNav/MobileNav";
 import Modal from "../components/ui/Modal/Modal";
 import { AddPregunta } from "../components/User/AddPregunta/AddPregunta";
-import { useAppDispatch } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import { startLoadingPreguntas } from "../store/entries";
 import styles from "./Home.module.scss";
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch();
-  const status = useCheckAuth();
+  const { status } = useAppSelector((state) => state.auth);
 
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -36,8 +36,7 @@ const Home: NextPage = () => {
       <main>
         <div className={styles.homeContainer}>
           <div className={styles.homeContainer__left}>
-            <MenuSidebarHome />
-            <MostLiked />
+            { status === "authenticated" && <MenuSidebarHome /> }
           </div>
           <div className={styles.homeContainer__main}>
             <div className={styles.addPregunta}>
@@ -47,7 +46,6 @@ const Home: NextPage = () => {
             <ListaPreguntas query={query} />
           </div>
           <div className={styles.homeContainer__right}>
-            <ListaSavedPreguntas status={status} />
           </div>
         </div>
         <div>{isOpen && <Modal setIsOpen={setIsOpen} />}</div>

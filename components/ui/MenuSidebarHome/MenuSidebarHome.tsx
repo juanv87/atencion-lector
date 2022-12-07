@@ -15,34 +15,27 @@ export const MenuSidebarHome = () => {
         <UserAvatar showName={false} showLogOut={false} />
       </div>
       <ul>
+        
         <li>
-          <Link href="/">
+          <Link href="/perfil/mis-preguntas">
             <a>
-              <IconLike size={18} />
-              <span>Preguntas mas likeadas</span>
-            </a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/">
-            <a>
-              <IconBtnSaved />
-              <span>Preguntas guardadas</span>
-            </a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/">
-            <a>
-              <IconPregunta size="1.2em" />
+              <IconPregunta size="1.4em" />
               <span>Tus preguntas</span>
             </a>
           </Link>
         </li>
         <li>
-          <Link href="/">
+          <Link href="/perfil/preguntas-guardadas">
             <a>
-              <TbMessage2 />
+              <IconBtnSaved size="1.3em" />
+              <span>Preguntas guardadas</span>
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/perfil/mis-mensajes">
+            <a>
+              <TbMessage2 size={25} />
               <span>Mensajes</span>
             </a>
           </Link>
