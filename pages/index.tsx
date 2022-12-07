@@ -6,17 +6,18 @@ import { ListaSavedPreguntas } from "../components/Elements/ListaSavedPreguntas/
 import MostLiked from "../components/Elements/MostLiked/MostLiked";
 import PreguntasSearch from "../components/Elements/preguntasSearch/PreguntasSearch";
 import { Header } from "../components/ui/Header/Header";
+import { MenuSidebarHome } from "../components/ui/MenuSidebarHome/MenuSidebarHome";
 import { MobileNav } from "../components/ui/MobileNav/MobileNav";
 import Modal from "../components/ui/Modal/Modal";
 import { AddPregunta } from "../components/User/AddPregunta/AddPregunta";
-import { useAppDispatch } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import { startLoadingPreguntas } from "../store/entries";
 import styles from "./Home.module.scss";
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch();
-  const status = useCheckAuth();
+  const { status } = useAppSelector((state) => state.auth);
 
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -35,20 +36,19 @@ const Home: NextPage = () => {
       <main>
         <div className={styles.homeContainer}>
           <div className={styles.homeContainer__left}>
-            <MostLiked />
+            { status === "authenticated" && <MenuSidebarHome /> }
           </div>
           <div className={styles.homeContainer__main}>
-            <AddPregunta />
+            <div className={styles.addPregunta}>
+              <AddPregunta />
+            </div>
             <PreguntasSearch setQuery={setQuery} />
             <ListaPreguntas query={query} />
           </div>
           <div className={styles.homeContainer__right}>
-            <ListaSavedPreguntas status={status} />
           </div>
         </div>
-        <div>
-          {isOpen && <Modal setIsOpen={setIsOpen} />}
-        </div>
+        <div>{isOpen && <Modal setIsOpen={setIsOpen} />}</div>
       </main>
     </>
   );

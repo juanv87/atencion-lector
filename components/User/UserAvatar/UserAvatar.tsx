@@ -40,6 +40,7 @@ export const UserAvatar = ({
               src={photoURL || "/img/avatar.jpg"}
               alt={displayName !== null ? displayName : ""}
             />
+            <span>{displayName}</span>
           </a>
         </Link>
       </div>

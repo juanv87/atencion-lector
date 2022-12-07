@@ -1,0 +1,26 @@
+.container {
+  margin: 30px auto;
+  width: 70%;
+  border-radius: 20px;
+  .userAvatar {
+    display: flex;
+    justify-content: flex-start;
+    section {
+      margin-top: 20px;
+      margin-left: 20px;
+    }
+  }
+  ul {
+    padding: 20px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    li {
+      a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+  }
+}
