@@ -3,9 +3,9 @@
 @import "../../../styles/Buttons.scss";
 
 .tarjetaPregunta {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   width: 100%;
-  padding: 20px 50px;
+  border-radius: 20px;
+  padding: 20px;
   background-color: #fff;
 
   .header {
@@ -28,7 +28,6 @@
       }
     }
   }
-
 
   .titleEditContainer {
     display: flex;

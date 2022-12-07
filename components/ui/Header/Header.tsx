@@ -9,9 +9,7 @@ export const Header = () => {
   const { status } = useAppSelector((state) => state.auth);
   return (
     <header className={styles.header}>
-      <div
-        className={`${styles.header__container} animate__animated animate__fadeInDown animate__faster`}
-      >
+      <div className={styles.header__container}>
         <div className={styles.header__logo}>
           <Link href="/">
             <a>Inicio</a>
