@@ -11,9 +11,9 @@ import { TbMessage2 } from "react-icons/tb";
 export const MenuSidebarHome = () => {
   return (
     <section className={styles.container}>
-      <div className={styles.userAvatar}>
+      {/* <div className={styles.userAvatar}>
         <UserAvatar showName={true} showLogOut={false} />
-      </div>
+      </div> */}
       <ul>
         <li>
           <Link href="/perfil/mis-preguntas">
