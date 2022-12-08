@@ -23,24 +23,15 @@ export const UserAvatar = ({
 
   return (
     <section className={styles.userAvatar}>
-      {showName && (
-        <div className={styles.userAvatar__name}>
-          <Link href="/perfil/">
-            <a>
-              <p>{nickName}</p>
-            </a>
-          </Link>
-        </div>
-      )}
       <div className={styles.userAvatar__image}>
         <Link href="/perfil/">
           <a>
             <img
               width={size}
               src={photoURL || "/img/avatar.jpg"}
-              alt={displayName !== null ? displayName : ""}
+              alt={nickName !== null ? nickName : ""}
             />
-            {showName && <span>{displayName}</span>}
+            {showName && <span>{nickName}</span>}
           </a>
         </Link>
       </div>
