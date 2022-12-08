@@ -12,10 +12,9 @@ export const MenuSidebarHome = () => {
   return (
     <section className={styles.container}>
       <div className={styles.userAvatar}>
-        <UserAvatar showName={false} showLogOut={false} />
+        <UserAvatar showName={true} showLogOut={false} />
       </div>
       <ul>
-        
         <li>
           <Link href="/perfil/mis-preguntas">
             <a>

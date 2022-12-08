@@ -9,6 +9,11 @@
   &__image {
     // width: 40px;
     // height: 40px;
+    a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
     img {
       // width: 100%;
       // height: 100%;
@@ -36,9 +41,11 @@
 
 @media (max-width: $breakpoint-mobile) {
   .userAvatar {
-    &__name { display: none; }
+    &__name {
+      display: none;
+    }
     &__logOutButton {
       display: none;
     }
-  }  
+  }
 }
