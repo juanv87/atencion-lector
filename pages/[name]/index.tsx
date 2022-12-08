@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { Header } from "../../components/ui/Header/Header";
-import { BiMessageDetail } from 'react-icons/bi'
+import { BiMessageDetail } from "react-icons/bi";
 import Head from "next/head";
 
 import styles from "./Name.module.scss";
@@ -34,10 +34,6 @@ interface Props {
 }
 
 const UserNickName = ({ name, dataUser }: Props) => {
-  console.log(
-    "🚀 ~ file: index.tsx ~ line 25 ~ UserNickName ~ dataUser",
-    dataUser
-  );
   const status = useCheckAuth();
 
   const {
@@ -57,8 +53,8 @@ const UserNickName = ({ name, dataUser }: Props) => {
   const [showToast, setShowToast] = useState(false);
 
   const handleSendMessage = () => {
-    setIsOpen(true)
-  }
+    setIsOpen(true);
+  };
 
   return (
     <>
@@ -77,20 +73,26 @@ const UserNickName = ({ name, dataUser }: Props) => {
           <ListaPreguntasByUserName name={name} />
         </div>
         <div className={styles.nameContainer__right}>
-          <button onClick={handleSendMessage}>Enviar mensaje <BiMessageDetail/></button>
+          <button onClick={handleSendMessage}>
+            Enviar mensaje <BiMessageDetail />
+          </button>
         </div>
-        {isOpen && <Modal 
-                      setIsOpen={setIsOpen} 
-                      uid={uid} 
-                      messageTo={displayName}
-                      setShowToast={setShowToast}
-                    />}
-        {showToast && <Toast
+        {isOpen && (
+          <Modal
+            setIsOpen={setIsOpen}
+            uid={uid}
+            messageTo={displayName}
+            setShowToast={setShowToast}
+          />
+        )}
+        {showToast && (
+          <Toast
             className="animate__animated animate__fadeInUp animate__faster"
             color="success"
           >
             ¡Mensaje enviado!
-          </Toast>}
+          </Toast>
+        )}
       </main>
     </>
   );

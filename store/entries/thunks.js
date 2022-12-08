@@ -146,7 +146,6 @@ export const startRemovingSavedPregunta = ({ pregunta }) => {
 };
 
 export const updateValidada = (id, validar) => {
-  console.log("🚀 ~ file: thunks.js ~ validar", validar);
   return async (dispatch, getState) => {
     dispatch(setValidarPregunta({ id, validar }));
     const docRef = doc(collection(FirebaseDB, "preguntas"), id);

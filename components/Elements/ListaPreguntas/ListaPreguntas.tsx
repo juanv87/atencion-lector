@@ -13,13 +13,10 @@ export const ListaPreguntas = ({ query }: { query: String }) => {
   );
   const { uid } = useAppSelector((state) => state.auth);
 
-  const { mensajes } = useAppSelector( (state) => state.auth );
-    console.log('msgs',mensajes)
+  const { mensajes } = useAppSelector((state) => state.auth);
 
   const [validadas, setValidadas] = useState(preguntas);
   const [filtradas, setFiltradas] = useState(validadas);
-
-  console.log("filtradas", filtradas);
 
   useEffect(() => {
     uid && dispatch(getLikedByUser(uid));

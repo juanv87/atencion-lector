@@ -19,6 +19,5 @@ export const loadPreguntasByUserName = async ({ name }: Props) => {
   docs.forEach((doc) => {
     preguntas.push({ id: doc.id, ...doc.data() });
   });
-  console.log("loadPreguntasByUserName", preguntas);
   return preguntas;
 };

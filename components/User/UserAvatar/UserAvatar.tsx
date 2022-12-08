@@ -8,7 +8,7 @@ import styles from "./UserAvatar.module.scss";
 
 export const UserAvatar = ({
   size = "40",
-  showName = true,
+  showName = false,
   showLogOut = true,
 }) => {
   const { displayName, email, nickName, photoURL, status } = useAppSelector(
@@ -40,7 +40,7 @@ export const UserAvatar = ({
               src={photoURL || "/img/avatar.jpg"}
               alt={displayName !== null ? displayName : ""}
             />
-            <span>{displayName}</span>
+            {showName && <span>{displayName}</span>}
           </a>
         </Link>
       </div>
