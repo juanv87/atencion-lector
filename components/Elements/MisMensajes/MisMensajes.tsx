@@ -15,7 +15,7 @@ const MisMensajes = () => {
   return (
     <>
       <div className={styles.mensajes}>
-        { mensajes.length > 0 ? mensajes.map( msg => {
+        { mensajes?.length > 0 ? mensajes.map( msg => {
             return (
             <>
             <div className={styles.mensajes_up}>
