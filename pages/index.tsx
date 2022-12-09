@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { ListaAllTweets } from "../components/Elements/ListaAllTweets/ListaAllTweets";
 import { ListaPreguntas } from "../components/Elements/ListaPreguntas/ListaPreguntas";
 import { ListaSavedPreguntas } from "../components/Elements/ListaSavedPreguntas/ListaSavedPreguntas";
 import MostLiked from "../components/Elements/MostLiked/MostLiked";
@@ -38,7 +39,9 @@ const Home: NextPage = () => {
       <main>
         <div className={styles.homeContainer}>
           <div className={styles.homeContainer__left}>
-            { status === "authenticated" && <MenuSidebarHome /> }
+            <div className={styles.listAllTweets}>
+              <ListaAllTweets />
+            </div>
           </div>
           <div className={styles.homeContainer__main}>
             <div className={styles.addPregunta}>
