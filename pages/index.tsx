@@ -25,6 +25,8 @@ const Home: NextPage = () => {
   useEffect(() => {
     dispatch(startLoadingPreguntas());
   }, []);
+  
+  useCheckAuth();
   return (
     <>
       <Head>

@@ -23,7 +23,7 @@ export const useCheckAuth = () => {
           email,
           photoURL,
           uid,
-          admin: uid === "bu5sLZrkzrZtgVhwgs94CZgJzaM2" || uid === "q3emq7VZ2JPxYLhXL3qLTSIEUwl2" ? true : false,
+          admin: uid === "bu5sLZrkzrZtgVhwgs94CZgJzaM2" || uid === "q3emq7VZ2JPxYLhXL3qLTSIEUwl2" || uid === "grDiaYzTo6aya5L7ASu50ApZxAf1" ? true : false,
           nickName: userInfo?.nickName,
         })
       );
