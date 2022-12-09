@@ -12,9 +12,9 @@
 .homeContainer__left {
   grid-column: span 3;
   background-color: $gray-light;
-  position: sticky;
+  /* position: sticky;
   top: 40px;
-  height: 100vh;
+  height: 100vh; */
 }
 .homeContainer__main {
   grid-column: span 6;
@@ -26,6 +26,12 @@
   position: sticky;
   top: 0;
   height: 100vh;
+}
+
+.listAllTweets {
+  margin-top: 30px;
+  height: 600px;
+  overflow-y: scroll;
 }
 
 @media (max-width: $breakpoint-laptop) {
