@@ -1,9 +1,15 @@
-import { collection, getDocs } from "firebase/firestore/lite";
+import { collection, getDocs, limit, query } from "firebase/firestore/lite";
 import { FirebaseDB } from "../lib/firebase/firebase";
 
-export const loadTweets = async () => {
-  const collectionRef = collection(FirebaseDB, "tweets");
-  const docs = await getDocs(collectionRef);
+export const loadTweets = async (limitTweets: number) => {
+
+  const ref = collection(FirebaseDB, "tweets");
+
+  const collectionQuery = query(
+    ref, limit(limitTweets),
+  );
+
+  const docs = await getDocs(collectionQuery);
   let tweets = [] as Array<{}>;
   docs.forEach((doc) => {
     tweets = [...tweets, { id: doc.id, ...doc.data() }];
