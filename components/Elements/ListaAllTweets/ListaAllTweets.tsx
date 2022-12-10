@@ -10,11 +10,7 @@ export const ListaAllTweets = () => {
   const { uid, nickName } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    const interval = setInterval(() => {
-      uid && dispatch(startLoadingTweets());
-      console.log("intervalo")
-    }, 10000);
-    return () => clearInterval(interval);
+      uid && dispatch(startLoadingTweets(5));
   }, [uid]);
   
   const { tweets } = useAppSelector((state) => state.tweets);

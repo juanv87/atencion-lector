@@ -51,10 +51,10 @@ export const startNewTweet = ({ bodyTweet }) => {
   };
 };
 
-export const startLoadingTweets = (id) => {
+export const startLoadingTweets = (limitTweets) => {
   return async (dispatch, getState) => {
     dispatch(loadingTweets());
-    const tweets = await loadTweets();
+    const tweets = await loadTweets(limitTweets);
     dispatch(setTweets(tweets));
   };
 };
