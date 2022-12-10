@@ -40,7 +40,7 @@ const Home: NextPage = () => {
         <div className={styles.homeContainer}>
           <div className={styles.homeContainer__left}>
             <div className={styles.listAllTweets}>
-              <ListaAllTweets />
+              {/* <ListaAllTweets /> */}
             </div>
           </div>
           <div className={styles.homeContainer__main}>
