@@ -4,8 +4,36 @@
   flex-direction: column;
   gap: 30px;
   align-items: center;
+  & button {
+    cursor: pointer;    
+  }  
   & span {
     font-family: "Quicksand";
     font-weight: 500;
+  }
+  & .verMasMenos {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;    
+  }  
+  & .buttonVerMas  {    
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-family: 'raleway';    
+    background: linear-gradient(180deg, rgba(25,39,74,1) 0%, rgba(37,60,115,1) 50%, rgba(55,86,163,1) 100%);
+    box-shadow: 9px 7px 19px 0px rgba(143,143,143,1);
+    color: white;   
+  }
+  & .buttonVerMenos {    
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-family: 'raleway';    
+    background: linear-gradient(180deg, rgba(25,39,74,1) 0%, rgba(37,60,115,1) 50%, rgba(55,86,163,1) 100%);
+    box-shadow: 9px 7px 19px 0px rgba(143,143,143,1);
+    color: white;   
   }
 }
