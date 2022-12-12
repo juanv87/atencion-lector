@@ -7,6 +7,18 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  & nav {
+    margin-left: auto;
+  }
+  &__linkPerfil {
+    padding: 3px 7px;
+    border-radius: 10px;
+    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: 'mukta';
+    cursor: pointer;
+  }
   &__logo {
     height: 40px;
     width: 80px;
@@ -16,7 +28,8 @@
     display: flex;
     align-items: center;
     max-width: $widthContainer;
-    margin: 0 auto;
+    margin: 0 auto;    
+    justify-content: space-between;
   }
 }
 
