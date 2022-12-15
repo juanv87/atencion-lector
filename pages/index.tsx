@@ -42,6 +42,7 @@ const Home: NextPage = () => {
             <div className={styles.listAllTweets}>
               <ListaAllTweets />
             </div>
+            <MostLiked />
           </div>
           <div className={styles.homeContainer__main}>
             <div className={styles.addPregunta}>

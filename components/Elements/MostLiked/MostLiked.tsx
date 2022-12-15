@@ -23,7 +23,7 @@ const MostLiked = () => {
       <section className={styles.mostLiked}>
         <div className={styles.mostLikedContainer}>
           <div className={styles.mostLikedTitle}>
-            <h2>Top 5 de preguntas</h2>
+            <h2>Las preguntas más likeadas</h2>
           </div>
           {isLoadingPreguntas && (
             <>
