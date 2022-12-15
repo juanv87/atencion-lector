@@ -34,14 +34,43 @@ export const ListaPreguntas = ({ query }: { query: String }) => {
       )
     );
   }, [query, validadas]);
+
+  const [ paginate, setPaginate ] = useState(6)
+
+  const handlePaginatePlus = () => {
+    setPaginate( prev => prev + 6)
+  }
+  const handlePaginateMinus = () => {
+    setPaginate( prev => prev - 6)
+  }
+
   return (
     <>
       <section className={styles.listaPreguntas}>
         {isLoadingPreguntas && <LoadingSpinner />}
         {filtradas.length > 0 ? (
-          filtradas.map((pregunta: IPregunta) => (
-            <PreguntaCard key={pregunta.id} pregunta={pregunta} />
-          ))
+          <>
+          {  filtradas.slice(0, paginate).map((pregunta: IPregunta) => (           
+                <PreguntaCard key={pregunta.id} pregunta={pregunta} />           
+            ))}
+            <div className={styles.verMasMenos}>
+              {
+                paginate <= filtradas.length && (
+                  <button 
+                  className={styles.buttonVerMas}
+                  onClick={handlePaginatePlus}
+                  >Ver Más</button>
+                )
+              }
+              {
+                paginate > 6 &&
+              <button 
+              className={styles.buttonVerMenos}
+              onClick={handlePaginateMinus}
+              >Ver Menos</button>
+              }
+            </div>
+          </>
         ) : (
           <span>No se encontraron resultados para tu búsqueda</span>
         )}

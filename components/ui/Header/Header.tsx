@@ -7,6 +7,7 @@ import styles from "./Header.module.scss";
 
 export const Header = () => {
   const { status } = useAppSelector((state) => state.auth);
+  console.log('status',status)
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
@@ -15,6 +16,11 @@ export const Header = () => {
             <a>Inicio</a>
           </Link>
         </div>
+        <nav>
+          <Link href="/perfil" >
+              <span className={styles.header__linkPerfil}>Mi Perfil</span>
+          </Link>
+        </nav>
         {status === "authenticated" ? <UserAvatar /> : <LoginWithGoogle />}
       </div>
     </header>
