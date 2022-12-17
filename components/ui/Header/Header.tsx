@@ -16,11 +16,14 @@ export const Header = () => {
             <a>Inicio</a>
           </Link>
         </div>
-        <nav>
-          <Link href="/perfil" >
-              <span className={styles.header__linkPerfil}>Mi Perfil</span>
-          </Link>
-        </nav>
+        {
+          status === 'authenticated' && 
+          <nav>
+            <Link href="/perfil" >
+                <span className={styles.header__linkPerfil}>Mi Perfil</span>
+            </Link>
+          </nav>
+        }
         {status === "authenticated" ? <UserAvatar /> : <LoginWithGoogle />}
       </div>
     </header>
