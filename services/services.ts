@@ -28,3 +28,17 @@ import {
     const collectionRef = doc(FirebaseDB, "usuarios", uid);   
     await updateDoc(collectionRef, { mensajes: arrayUnion(message) });
   };
+
+  export const getUsersList = async () => {
+    const collectionRef = collection(FirebaseDB, "usuarios");
+    const docs = await getDocs(collectionRef);
+    let usersList:any = []
+    await docs.forEach( doc => {
+      let list = doc.data()
+      usersList.push(list.nickName)
+    })
+    return usersList
+    // const userInfo = docs.data();
+    // const messages = userInfo?.mensajes;
+    // return messages;
+  };

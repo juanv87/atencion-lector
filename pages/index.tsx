@@ -6,6 +6,7 @@ import { ListaPreguntas } from "../components/Elements/ListaPreguntas/ListaPregu
 import { ListaSavedPreguntas } from "../components/Elements/ListaSavedPreguntas/ListaSavedPreguntas";
 import MostLiked from "../components/Elements/MostLiked/MostLiked";
 import PreguntasSearch from "../components/Elements/preguntasSearch/PreguntasSearch";
+import UsersList from "../components/Elements/UsersList/UsersList";
 import { Header } from "../components/ui/Header/Header";
 import { MenuSidebarHome } from "../components/ui/MenuSidebarHome/MenuSidebarHome";
 import { MobileNav } from "../components/ui/MobileNav/MobileNav";
@@ -13,6 +14,7 @@ import Modal from "../components/ui/Modal/Modal";
 import { AddPregunta } from "../components/User/AddPregunta/AddPregunta";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { useCheckAuth } from "../hooks/useCheckAuth";
+import { getUsersList } from "../services/services";
 import { startLoadingPreguntas } from "../store/entries";
 import styles from "./Home.module.scss";
 
@@ -22,10 +24,14 @@ const Home: NextPage = () => {
 
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [usersList, setUsersList] = useState([]);
 
   useEffect(() => {
     dispatch(startLoadingPreguntas());
+    getUsersList().then( res => setUsersList( prev => prev = res))    
   }, []);
+
+  console.log('asd usersList',usersList)
   
   useCheckAuth();
   return (
@@ -51,6 +57,7 @@ const Home: NextPage = () => {
             <ListaPreguntas query={query} />
           </div>
           <div className={styles.homeContainer__right}>
+            <UsersList usersList={usersList}/>
           </div>
         </div>
         <div>{isOpen && <Modal setIsOpen={setIsOpen} />}</div>
