@@ -3,15 +3,16 @@ import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { startLoadingTweets } from "../../../store/tweets";
 import { IPregunta } from "../../../types/IPregunta";
 import { ITweet } from "../../../types/ITweet";
+import LoadingSpinner from "../../Loaders/LoadingSpinner/LoadingSpinner";
 import { PreguntaCard } from "../PreguntaCard/PreguntaCard";
 import { TweetCard } from "../TweetCard/TweetCard";
+import styles from "./ListaAllTweets.module.scss";
 
 export const ListaAllTweets = () => {
-  const { uid, nickName } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   useEffect(() => {
-      uid && dispatch(startLoadingTweets(5));
-  }, [uid]);
+      dispatch(startLoadingTweets(5));
+  }, []);
   
   const { tweets } = useAppSelector((state) => state.tweets);
   const sorted = [...tweets];
@@ -20,10 +21,10 @@ export const ListaAllTweets = () => {
     return b.createdAt - a.createdAt;
   });
   return (
-    <>
-      {tweetsSorted.map((tweet: ITweet) => {
+    <section className={styles.listaTweets}>
+      {tweets.length <= 1 ? <LoadingSpinner /> : tweetsSorted.map((tweet: ITweet) => {
         return <TweetCard key={tweet.id} tweet={tweet} />;
       })}
-    </>
+    </section>
   );
 };
