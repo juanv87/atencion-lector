@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./auth";
 import { entriesSlice } from "./entries";
+import { usersSlice } from "./users";
 import { tweetsSlice } from "./tweets/tweetsSlice";
 import { savedByUserSlice } from "./savedByUser/savedByUserSlice";
 import { likedByUser } from "./likedByUser/likedByUser";
@@ -14,6 +15,7 @@ export const store = configureStore({
     savedByUser: savedByUserSlice.reducer,
     likedByUser: likedByUser.reducer,
     userMessages: userMessages.reducer,
+    users: usersSlice.reducer,
   },
 });
 // Infer the `RootState` and `AppDispatch` types from the store itself
