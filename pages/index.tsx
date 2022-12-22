@@ -6,6 +6,7 @@ import { ListaPreguntas } from "../components/Elements/ListaPreguntas/ListaPregu
 import { ListaSavedPreguntas } from "../components/Elements/ListaSavedPreguntas/ListaSavedPreguntas";
 import MostLiked from "../components/Elements/MostLiked/MostLiked";
 import PreguntasSearch from "../components/Elements/preguntasSearch/PreguntasSearch";
+import UsersList from "../components/Elements/UsersList/UsersList";
 import { Header } from "../components/ui/Header/Header";
 import { MenuSidebarHome } from "../components/ui/MenuSidebarHome/MenuSidebarHome";
 import { MobileNav } from "../components/ui/MobileNav/MobileNav";
@@ -26,7 +27,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     dispatch(startLoadingPreguntas());
   }, []);
-  
+
   useCheckAuth();
   return (
     <>
@@ -52,6 +53,7 @@ const Home: NextPage = () => {
             <ListaPreguntas query={query} />
           </div>
           <div className={styles.homeContainer__right}>
+            <UsersList />
           </div>
         </div>
         <div>{isOpen && <Modal setIsOpen={setIsOpen} />}</div>
