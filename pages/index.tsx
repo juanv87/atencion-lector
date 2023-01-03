@@ -41,7 +41,7 @@ const Home: NextPage = () => {
         <div className={styles.homeContainer}>
           <div className={styles.homeContainer__left}>
             <div className={styles.listAllTweets}>
-              <ListaAllTweets />
+              <ListaAllTweets limit={10} />
             </div>
             <MostLiked />
           </div>
