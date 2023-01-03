@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
-  tweets: Array<{}>;
+  preguntas: Array<{}>;
 };
 
 import {
@@ -18,18 +18,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const ref = collection(FirebaseDB, "tweets");
-
-  const collectionQuery = query(
-    ref,
-    limit(req.query.limit as unknown as number),
-    where("autor.userName", "==", req.query.name as unknown as string)
-  );
-
-  const docs = await getDocs(collectionQuery);
-  let tweets = [] as Array<{}>;
+  const ref = collection(FirebaseDB, "preguntas");
+  const docs = await getDocs(ref);
+  let preguntas = [] as Array<{}>;
   docs.forEach((doc) => {
-    tweets = [...tweets, { id: doc.id, ...doc.data() }];
+    preguntas = [...preguntas, { id: doc.id, ...doc.data() }];
   });
-  res.status(200).json({ tweets });
+  res.status(200).json({ preguntas });
 }

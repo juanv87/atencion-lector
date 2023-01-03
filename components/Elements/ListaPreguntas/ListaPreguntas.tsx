@@ -5,17 +5,20 @@ import { IPregunta } from "../../../types/IPregunta";
 import LoadingSpinner from "../../Loaders/LoadingSpinner/LoadingSpinner";
 import { PreguntaCard } from "../PreguntaCard/PreguntaCard";
 import styles from "./ListaPreguntas.module.scss";
+import { useQuery } from "react-query";
 
 export const ListaPreguntas = ({ query }: { query: String }) => {
   const dispatch = useAppDispatch();
-  const { preguntas, isLoadingPreguntas } = useAppSelector(
-    (state) => state.entries
+
+  const { isLoading, error, data } = useQuery("listPreguntas", () =>
+    fetch(`${process.env.NEXT_PUBLIC_URL_PROD}/api/preguntas`).then((res) =>
+      res.json()
+    )
   );
+
   const { uid } = useAppSelector((state) => state.auth);
 
-  const { mensajes } = useAppSelector((state) => state.auth);
-
-  const [validadas, setValidadas] = useState(preguntas);
+  const [validadas, setValidadas] = useState(data?.preguntas);
   const [filtradas, setFiltradas] = useState(validadas);
 
   useEffect(() => {
@@ -23,57 +26,54 @@ export const ListaPreguntas = ({ query }: { query: String }) => {
   }, [uid]);
 
   useEffect(() => {
-    let validated = preguntas.filter((pregunta) => pregunta.validada === true);
+    let validated = data?.preguntas.filter(
+      (pregunta: IPregunta) => pregunta.validada === true
+    );
     setValidadas(validated);
-  }, [preguntas]);
+  }, [data?.preguntas]);
 
   useEffect(() => {
     setFiltradas(
-      validadas.filter((preg) =>
+      validadas?.filter((preg: IPregunta) =>
         preg.titulo.toLowerCase().includes(query.toLowerCase())
       )
     );
   }, [query, validadas]);
 
-  const [ paginate, setPaginate ] = useState(6)
+  const [paginate, setPaginate] = useState(6);
 
   const handlePaginatePlus = () => {
-    setPaginate( prev => prev + 6)
-  }
+    setPaginate((prev) => prev + 6);
+  };
   const handlePaginateMinus = () => {
-    setPaginate( prev => prev - 6)
-  }
+    setPaginate((prev) => prev - 6);
+  };
 
   return (
     <>
       <section className={styles.listaPreguntas}>
-        {isLoadingPreguntas && <LoadingSpinner />}
-        {filtradas.length > 0 ? (
-          <>
-          {  filtradas.slice(0, paginate).map((pregunta: IPregunta) => (           
-                <PreguntaCard key={pregunta.id} pregunta={pregunta} />           
-            ))}
-            <div className={styles.verMasMenos}>
-              {
-                paginate <= filtradas.length && (
-                  <button 
-                  className={styles.buttonVerMas}
-                  onClick={handlePaginatePlus}
-                  >Ver Más</button>
-                )
-              }
-              {
-                paginate > 6 &&
-              <button 
+        {isLoading && <LoadingSpinner />}
+        {filtradas?.slice(0, paginate).map((pregunta: IPregunta) => (
+          <PreguntaCard key={pregunta.id} pregunta={pregunta} />
+        ))}
+        <div className={styles.verMasMenos}>
+          {paginate <= filtradas?.length && (
+            <button
+              className={styles.buttonVerMas}
+              onClick={handlePaginatePlus}
+            >
+              Ver Más
+            </button>
+          )}
+          {paginate > 6 && (
+            <button
               className={styles.buttonVerMenos}
               onClick={handlePaginateMinus}
-              >Ver Menos</button>
-              }
-            </div>
-          </>
-        ) : (
-          <span>No se encontraron resultados para tu búsqueda</span>
-        )}
+            >
+              Ver Menos
+            </button>
+          )}
+        </div>
       </section>
     </>
   );
