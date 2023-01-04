@@ -11,8 +11,8 @@ import { useQuery } from "react-query";
 
 export const ListaAllTweets = ({ limit }: { limit: number }) => {
   const { isLoading, error, data } = useQuery("listTweets", () =>
-    fetch(`http://localhost:3000/api/tweets?limit=${limit}`).then((res) =>
-      res.json()
+    fetch(`${process.env.NEXT_PUBLIC_URL_PROD}/api/tweets?limit=${limit}`).then(
+      (res) => res.json()
     )
   );
 
