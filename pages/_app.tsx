@@ -5,7 +5,21 @@ import { store } from "../store/";
 
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+      cacheTime: 1 * 60 * 1000,
+      retry: 3,
+      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+      refetchInterval: false,
+      refetchIntervalInBackground: false,
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: true,
+    },
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

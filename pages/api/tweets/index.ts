@@ -9,6 +9,7 @@ import {
   collection,
   getDocs,
   limit,
+  orderBy,
   query,
   where,
 } from "firebase/firestore/lite";
@@ -22,7 +23,8 @@ export default async function handler(
 
   const collectionQuery = query(
     ref,
-    limit(req.query.limit as unknown as number)
+    limit(req.query.limit as unknown as number),
+    orderBy("createdAt", "desc")
   );
 
   const docs = await getDocs(collectionQuery);

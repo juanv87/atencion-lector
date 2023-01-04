@@ -8,8 +8,8 @@ import { useQuery } from "react-query";
 
 const MostLiked = () => {
   const { isLoading, error, data } = useQuery("listPreguntas", () =>
-    fetch(`${process.env.NEXT_PUBLIC_URL_PROD}/api/preguntas/likes`).then(
-      (res) => res.json()
+    fetch(`${process.env.NEXT_PUBLIC_URL_PROD}/preguntas/likes`).then((res) =>
+      res.json()
     )
   );
 
