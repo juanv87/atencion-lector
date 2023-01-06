@@ -28,3 +28,8 @@ import {
     const collectionRef = doc(FirebaseDB, "usuarios", uid);   
     await updateDoc(collectionRef, { mensajes: arrayUnion(message) });
   };
+
+  export const saveAboutMe = async (uid:string, texto:string) => {
+    const collectionRef = doc(FirebaseDB, "usuarios", uid);   
+    await updateDoc(collectionRef, { aboutMe: texto });
+  };
