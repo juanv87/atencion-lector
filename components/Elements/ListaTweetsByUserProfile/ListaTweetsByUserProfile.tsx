@@ -8,8 +8,7 @@ import LoadingSpinner from "../../Loaders/LoadingSpinner/LoadingSpinner";
 import { PreguntaCard } from "../PreguntaCard/PreguntaCard";
 import { TweetCard } from "../TweetCard/TweetCard";
 
-export const ListaTweetsByUserProfile = () => {
-  const { nickName } = useAppSelector((state) => state.auth);
+export const ListaTweetsByUserProfile = ({nickName}: {nickName: string}) => {
   const { isLoading, error, data } = useQuery("tweetsByName", () =>
     fetch(`${process.env.NEXT_PUBLIC_URL_PROD}/api/tweets/${nickName}`).then((res) =>
       res.json()

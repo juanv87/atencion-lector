@@ -17,6 +17,7 @@ import { loadUserIdByUserName } from "../../helpers/LoadUserIdByUserName";
 import Modal from "../../components/ui/Modal/Modal";
 import { Toast } from "../../components/StyledComponents/Toast.styled";
 import { UserAvatar } from "../../components/User/UserAvatar/UserAvatar";
+import UserBoxByNickName from "../../components/User/UserBoxByNickName/UserBoxByNickName";
 
 interface Props {
   name: string;
@@ -69,7 +70,7 @@ const UserNickName = ({ name, dataUser }: Props) => {
         </div>
         <div className={styles.nameContainer__main}>
           <div className={styles.userAvatar}>
-            <UserAvatar showLogOut={false} showName={true} />
+            <UserBoxByNickName size={40} photoURL={photoURL} nickName={nickName} />
             <button onClick={handleSendMessage}>
               <BiMessageDetail size={25} />
             </button>
