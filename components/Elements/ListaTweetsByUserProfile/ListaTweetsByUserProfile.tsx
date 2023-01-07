@@ -23,7 +23,7 @@ export const ListaTweetsByUserProfile = ({nickName}: {nickName: string}) => {
           <div>Algo anduvo mal.</div>
         ) : null
       }
-      {data?.tweets.map((tweet: ITweet) => {
+      {data?.tweets?.map((tweet: ITweet) => {
         return <TweetCard key={tweet.id} tweet={tweet} />;
       })}
     </>
