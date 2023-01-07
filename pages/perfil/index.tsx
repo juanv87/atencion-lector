@@ -21,7 +21,7 @@ const Perfil = () => {
           </div>
           <AboutMe />
           <AddTweet />
-          <ListaTweetsByUserProfile />
+          <ListaTweetsByUserProfile nickName={nickName || ""} />
         </div>
       </ContainerPerfil>
     </>
