@@ -16,6 +16,7 @@ import { ListaPreguntasByUserName } from "../../components/Elements/ListaPregunt
 import { loadUserIdByUserName } from "../../helpers/LoadUserIdByUserName";
 import Modal from "../../components/ui/Modal/Modal";
 import { Toast } from "../../components/StyledComponents/Toast.styled";
+import { UserAvatar } from "../../components/User/UserAvatar/UserAvatar";
 
 interface Props {
   name: string;
@@ -65,17 +66,20 @@ const UserNickName = ({ name, dataUser }: Props) => {
       <Header />
       <main className={styles.nameContainer}>
         <div className={styles.nameContainer__left}>
-          email: {email} <br />
-          UID: {uid} <br />
-          display: {displayName} <br />
         </div>
         <div className={styles.nameContainer__main}>
-          <ListaPreguntasByUserName name={name} />
+          <div className={styles.userAvatar}>
+            <UserAvatar showLogOut={false} showName={true} />
+            <button onClick={handleSendMessage}>
+              <BiMessageDetail size={25} />
+            </button>
+          </div>
+          <div className={styles.listaPreguntas}>
+            <ListaPreguntasByUserName name={name} />
+          </div>
         </div>
         <div className={styles.nameContainer__right}>
-          <button onClick={handleSendMessage}>
-            Enviar mensaje <BiMessageDetail />
-          </button>
+          
         </div>
         {isOpen && (
           <Modal
