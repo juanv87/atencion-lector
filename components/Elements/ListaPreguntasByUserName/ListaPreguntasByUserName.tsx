@@ -22,7 +22,7 @@ export const ListaPreguntasByUserName = ({ name }: { name: string }) => {
       {
         error && "Algo salió mal"
       }
-      {data?.preguntas.map((pregunta: IPregunta) => {
+      {data?.preguntas?.map((pregunta: IPregunta) => {
         return <PreguntaCard key={pregunta.id} pregunta={pregunta} />;
       })}
     </>
