@@ -47,6 +47,7 @@ export const PreguntaCard = ({ pregunta }: Props) => {
   const [activeLike, setActiveLike] = useState(false);
   const [updatedTitle, setUpdateTitle] = useState(titulo);
   const [showEdit, setShowEdit] = useState(false);
+  const [changeLike, setChangeLike] = useState(false);
 
   const { uid, admin } = useAppSelector((state) => state.auth);
 
@@ -75,6 +76,7 @@ export const PreguntaCard = ({ pregunta }: Props) => {
   };
 
   const handleLike = () => {
+    setChangeLike(true)
     dispatch(updateLikes(pregunta.id, likedPreguntas, uid)); // Agrega los likes de la preg. a Firestore y al store de Redux
   };
 
@@ -94,9 +96,10 @@ export const PreguntaCard = ({ pregunta }: Props) => {
   useEffect(() => {
     // Setea el svg del like en pintado o no
     let alreadyLiked =
-      likedPreguntas.filter((liked) => liked === pregunta.id).length > 0;
+    likedPreguntas.filter((liked) => liked === pregunta.id).length > 0;
     alreadyLiked ? setActiveLike(true) : setActiveLike(false);
-  }, [likedPreguntas]);
+    console.log("🚀 ~ file: PreguntaCard.tsx:99 ~ useEffect ~ alreadyLiked", alreadyLiked)
+  }, [likedPreguntas, changeLike]);
 
   return (
     <>
